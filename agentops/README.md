@@ -37,18 +37,18 @@ Operate remain distinct practices but are delivered together.
 
 ## Materials
 
-| Component | Module | Location | Status |
-| --- | --- | --- | --- |
-| Workshop one-pager | Complete VBD | [`agentops-vbd-one-pager.pdf`](workshop/one-pager/agentops-vbd-one-pager.pdf) | Placeholder |
-| Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) | Placeholder |
-| Workshop lab | Evaluate | [`lab.md`](workshop/labs/evaluate/lab.md) | Placeholder |
-| Workshop deck | Ship | [`agentops-ship-workshop.pptx`](workshop/decks/ship/agentops-ship-workshop.pptx) | Placeholder |
-| Workshop lab | Ship | [`lab.md`](workshop/labs/ship/lab.md) | Placeholder |
-| Workshop deck | Observe and Operate | [`agentops-observe-operate-workshop.pptx`](workshop/decks/observe-operate/agentops-observe-operate-workshop.pptx) | Placeholder |
-| Workshop lab | Observe and Operate | [`lab.md`](workshop/labs/observe-operate/lab.md) | Placeholder |
-| Implementation guidance | Evaluate | [`implementation-guidance/evaluate.md`](implementation-guidance/evaluate.md) | Draft in review |
-| Implementation guidance | Ship | [`implementation-guidance/ship.md`](implementation-guidance/ship.md) | Draft |
-| Implementation guidance | Observe and Operate | [`implementation-guidance/observe-operate.md`](implementation-guidance/observe-operate.md) | Draft |
+| Component | Module | Location |
+| --- | --- | --- |
+| Workshop one-pager | Complete VBD | [`agentops-vbd-one-pager.pdf`](workshop/one-pager/agentops-vbd-one-pager.pdf) |
+| Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) |
+| Workshop lab | Evaluate | [`lab.md`](workshop/labs/evaluate/lab.md) |
+| Workshop deck | Ship | [`agentops-ship-workshop.pptx`](workshop/decks/ship/agentops-ship-workshop.pptx) |
+| Workshop lab | Ship | [`lab.md`](workshop/labs/ship/lab.md) |
+| Workshop deck | Observe and Operate | [`agentops-observe-operate-workshop.pptx`](workshop/decks/observe-operate/agentops-observe-operate-workshop.pptx) |
+| Workshop lab | Observe and Operate | [`lab.md`](workshop/labs/observe-operate/lab.md) |
+| Implementation guidance | Evaluate | [`implementation-guidance/evaluate.md`](implementation-guidance/evaluate.md) |
+| Implementation guidance | Ship | [`implementation-guidance/ship.md`](implementation-guidance/ship.md) |
+| Implementation guidance | Observe and Operate | [`implementation-guidance/observe-operate.md`](implementation-guidance/observe-operate.md) |
 
 All materials are maintained in GitHub during the current development phase.
 
