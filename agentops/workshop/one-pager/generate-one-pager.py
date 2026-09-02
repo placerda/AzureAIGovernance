@@ -66,6 +66,9 @@ def parse_source(path: Path) -> tuple[dict[str, str], dict[str, list[str]]]:
 
 def inline_markup(text: str) -> str:
     escaped = html.escape(text)
+    escaped = escaped.replace("&lt;br/&gt;", "<br/>").replace(
+        "&lt;br&gt;", "<br/>"
+    )
     escaped = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", escaped)
     escaped = re.sub(
         r"\[(.+?)\]\((https?://.+?)\)",
@@ -127,7 +130,7 @@ CALLOUT = ParagraphStyle(
     borderWidth=0,
     borderPadding=(1.5 * mm, 2 * mm, 1.5 * mm, 3 * mm),
     backColor=PALE,
-    spaceBefore=3 * mm,
+    spaceBefore=5.5 * mm,
     spaceAfter=3.5 * mm,
 )
 TABLE_HEADER = ParagraphStyle(
@@ -144,6 +147,24 @@ TABLE_BODY = ParagraphStyle(
     fontSize=7.25,
     leading=8.35,
     spaceAfter=0,
+)
+TABLE_LABEL = ParagraphStyle(
+    "TableLabel",
+    parent=TABLE_BODY,
+    fontName="Helvetica-Bold",
+    textColor=BLUE,
+)
+READINESS_BODY = ParagraphStyle(
+    "ReadinessBody",
+    parent=TABLE_BODY,
+    fontSize=6.6,
+    leading=7.5,
+)
+READINESS_LABEL = ParagraphStyle(
+    "ReadinessLabel",
+    parent=READINESS_BODY,
+    fontName="Helvetica-Bold",
+    textColor=BLUE,
 )
 
 
@@ -256,33 +277,67 @@ def section_story(name: str, lines: list[str]) -> list[object]:
                 )
         elif kind == "table":
             rows = value
+            is_readiness_table = rows[0][0] == "Area"
+            is_access_table = rows[0][0] == "Identity"
+            is_grouped_table = is_readiness_table or is_access_table
             table_data = []
             for row_index, row in enumerate(rows):
-                style = TABLE_HEADER if row_index == 0 else TABLE_BODY
-                table_data.append(
-                    [Paragraph(inline_markup(cell), style) for cell in row]
-                )
+                table_row = []
+                for column_index, cell in enumerate(row):
+                    if row_index == 0:
+                        style = TABLE_HEADER
+                    elif is_grouped_table and column_index == 0:
+                        style = READINESS_LABEL
+                    elif is_grouped_table:
+                        style = READINESS_BODY
+                    else:
+                        style = TABLE_BODY
+                    table_row.append(Paragraph(inline_markup(cell), style))
+                table_data.append(table_row)
             table = Table(
                 table_data,
-                colWidths=[22 * mm, 30 * mm, COLUMN_WIDTH - (52 * mm)],
+                colWidths=(
+                    [25 * mm, COLUMN_WIDTH - (25 * mm)]
+                    if len(rows[0]) == 2
+                    else [21 * mm, 27 * mm, COLUMN_WIDTH - (48 * mm)]
+                    if is_access_table
+                    else [22 * mm, 30 * mm, COLUMN_WIDTH - (52 * mm)]
+                ),
                 repeatRows=1,
                 hAlign="LEFT",
             )
-            table.setStyle(
-                TableStyle(
+            table_style = [
+                ("BACKGROUND", (0, 0), (-1, 0), BLUE),
+                ("BACKGROUND", (0, 1), (-1, -1), colors.HexColor("#F4F7FA")),
+                ("TEXTCOLOR", (0, 0), (-1, 0), WHITE),
+                ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#C9D5DF")),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LEFTPADDING", (0, 0), (-1, -1), 1.4 * mm),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 1.4 * mm),
+                ("TOPPADDING", (0, 0), (-1, -1), 1.1 * mm),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 1.1 * mm),
+            ]
+            if is_grouped_table:
+                table_style.extend(
                     [
-                        ("BACKGROUND", (0, 0), (-1, 0), BLUE),
-                        ("BACKGROUND", (0, 1), (-1, -1), colors.HexColor("#F4F7FA")),
-                        ("TEXTCOLOR", (0, 0), (-1, 0), WHITE),
-                        ("GRID", (0, 0), (-1, -1), 0.35, colors.HexColor("#C9D5DF")),
-                        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                        ("LEFTPADDING", (0, 0), (-1, -1), 1.4 * mm),
-                        ("RIGHTPADDING", (0, 0), (-1, -1), 1.4 * mm),
-                        ("TOPPADDING", (0, 0), (-1, -1), 1.1 * mm),
-                        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.1 * mm),
+                        ("TOPPADDING", (0, 1), (-1, -1), 0.7 * mm),
+                        ("BOTTOMPADDING", (0, 1), (-1, -1), 0.7 * mm),
                     ]
                 )
-            )
+                group_start = 1
+                for row_index in range(2, len(rows) + 1):
+                    group_ended = (
+                        row_index == len(rows)
+                        or rows[row_index][0] != rows[group_start][0]
+                    )
+                    if group_ended:
+                        group_end = row_index - 1
+                        if group_end > group_start:
+                            table_style.append(
+                                ("SPAN", (0, group_start), (0, group_end))
+                            )
+                        group_start = row_index
+            table.setStyle(TableStyle(table_style))
             story.extend([table, Spacer(1, 1.3 * mm)])
 
     return story
@@ -362,11 +417,12 @@ def add_column(
     x: float,
     section_names: list[str],
     sections: dict[str, list[str]],
+    section_gap: float = 5.5 * mm,
 ) -> None:
     story: list[object] = []
     for index, name in enumerate(section_names):
         if index:
-            story.append(Spacer(1, 5.5 * mm))
+            story.append(Spacer(1, section_gap))
         story.extend(section_story(name, sections[name]))
 
     frame = Frame(
@@ -392,17 +448,15 @@ def generate() -> None:
     metadata, sections = parse_source(SOURCE)
     required_sections = {
         "Description",
-        "Objectives",
         "Outcomes",
         "Methodology",
         "Scope",
-        "Audience",
         "Prerequisites",
         "Pre-workshop provisioning",
+        "Reference implementation",
         "Agenda",
         "Delivery options",
         "Preparation and delivery",
-        "Reference implementation",
     }
     missing = required_sections.difference(sections)
     if missing:
@@ -422,13 +476,12 @@ def generate() -> None:
         MARGIN,
         [
             "Description",
-            "Objectives",
             "Outcomes",
-            "Audience",
             "Prerequisites",
             "Pre-workshop provisioning",
         ],
         sections,
+        section_gap=5.5 * mm,
     )
     add_column(
         pdf,
@@ -442,6 +495,7 @@ def generate() -> None:
             "Reference implementation",
         ],
         sections,
+        section_gap=2.8 * mm,
     )
 
     pdf.showPage()

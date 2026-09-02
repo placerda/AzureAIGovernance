@@ -39,7 +39,7 @@ Operate remain distinct practices but are delivered together.
 
 | Component | Module | Location |
 | --- | --- | --- |
-| Workshop one-pager | Complete VBD | [`agentops-vbd-one-pager.pdf`](workshop/one-pager/agentops-vbd-one-pager.pdf) |
+| Workshop one-pager | All modules | [`agentops-vbd-one-pager.pdf`](workshop/one-pager/agentops-vbd-one-pager.pdf) |
 | Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) |
 | Workshop lab | Evaluate | [`lab.md`](workshop/labs/evaluate/lab.md) |
 | Workshop deck | Ship | [`agentops-ship-workshop.pptx`](workshop/decks/ship/agentops-ship-workshop.pptx) |

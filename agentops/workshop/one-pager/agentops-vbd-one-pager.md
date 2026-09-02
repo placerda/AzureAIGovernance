@@ -1,8 +1,8 @@
 ---
 title: "AgentOps Value Based Delivery Workshop"
 subtitle: "Evaluate, Ship, Observe, and Operate Microsoft Foundry agents"
-duration: "6 hours with prerequisites met"
-structure: "3 modules, 2 hours each"
+duration: "6h hands-on; 4h demo"
+structure: "Select one mode before delivery"
 difficulty: "300: Advanced"
 delivery: "Remote or onsite"
 ---
@@ -11,28 +11,23 @@ delivery: "Remote or onsite"
 
 ## Description
 
-AgentOps is the discipline of evaluating, releasing, observing, and operating AI
-agents through repeatable practices. This workshop applies those practices to
-Microsoft Foundry agents across the agent lifecycle.
-
-## Objectives
-
-- Understand the four AgentOps practices: Evaluate, Ship, Observe, and Operate.
-- Identify lifecycle evidence and controls.
-- Apply the practices through Microsoft Foundry demonstrations and labs.
+Apply Evaluate, Ship, Observe, and Operate to Microsoft Foundry agents through
+one preselected mode: participant hands-on labs or instructor-led
+demonstrations. Intended for teams that govern, build, release, and operate AI
+agents.
 
 ## Outcomes
 
-- Shared AgentOps terminology and lifecycle understanding.
-- Evaluation criteria and release readiness controls.
-- Observability and operations priorities.
-- Documented gaps, decisions, and next actions.
+- Explain the four AgentOps practices and how they connect.
+- Recognize evaluation evidence and release readiness controls.
+- Interpret runtime signals and operational responses.
+- Relate the practices to guided Microsoft Foundry scenarios.
 
 ## Methodology
 
 - **Learn:** presentations, demos, and discussion.
-- **Apply:** guided labs using Microsoft Foundry.
-- **Act:** documented outputs for the implementation guidance.
+- **Apply:** guided labs or instructor walkthroughs in Microsoft Foundry.
+- **Reinforce:** review results and connect the four practices.
 
 ## Scope
 
@@ -44,48 +39,69 @@ Microsoft Foundry agents across the agent lifecycle.
 > Observe and Operate are distinct practices delivered together in one content
 > module because their workflows and evidence are closely connected.
 
-## Audience
-
-Teams responsible for governing, building, releasing, and operating AI agents.
-
 ## Prerequisites
 
-- An Azure subscription with sufficient model quota in a supported region.
-- Permissions to create Microsoft Foundry resources and projects and deploy the
-  required models.
+- **Hands-on:** a GitHub account, [lab repository access](https://github.com/placerda/AzureAIGovernance/tree/placerda-agentops-module/agentops/workshop/labs),
+  one Foundry project per participant, and sufficient model quota.
+- **Demo:** a validated instructor environment; no participant Azure access.
 
 ## Pre-workshop provisioning
 
-> Module timing assumes a ready environment. Provisioning and troubleshooting
-> are outside workshop time.
+> For hands-on delivery, assign every Participant access entry to each
+> participant before the session. Setup and troubleshooting are outside workshop
+> time.
 
-- Create and test the Foundry project, model deployment, and lab agent.
-- Grant participants access and validate evaluation and tracing permissions.
-- Validate lab data, tools, connections, telemetry, and agent responses.
+### Environment readiness
 
-See [Foundry environment setup](https://learn.microsoft.com/azure/foundry/agents/environment-setup)
-and [agent tracing](https://learn.microsoft.com/azure/foundry/observability/concepts/trace-agent-concept).
+| Area | Ready when |
+| --- | --- |
+| Foundry project | One assigned project per participant |
+| Model capacity | Quota and unique name assigned; participant creates the deployment in the lab |
+| Observability | Application Insights connected; test trace confirmed |
+| Tooling | [AgentOps Accelerator installation](https://azure.github.io/agentops/) completed |
+
+### Access assignments
+
+| Identity | Scope | Role or access |
+| --- | --- | --- |
+| Participant | GitHub | Account and [lab repository access](https://github.com/placerda/AzureAIGovernance/tree/placerda-agentops-module/agentops/workshop/labs) |
+| Participant | Foundry project | Foundry User |
+| Participant | Foundry resource | Reader |
+| Participant | Model deployment | Cognitive Services Contributor on the Foundry account |
+| Participant | Application Insights | Log Analytics Reader |
+| Participant | Evaluator model | Cognitive Services OpenAI User on its AI Services resource |
+| Project managed identity | Foundry resource | Foundry User |
+
+See [Foundry RBAC](https://learn.microsoft.com/azure/foundry/concepts/rbac-foundry),
+[deployment permissions](https://learn.microsoft.com/azure/foundry/concepts/rbac-foundry#deployment-type-specific-permissions),
+and [tracing setup](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup).
 
 ## Agenda
 
-| Module | Duration | Practical output |
+| Module | Duration | Learning artifact |
 | --- | --- | --- |
-| Evaluate | 2 hours | Evaluation requirements |
-| Ship | 2 hours | Release controls |
-| Observe and Operate | 2 hours | Operational priorities |
+| Evaluate | 2h hands-on<br/>1h 20m demo | Sample evaluation criteria |
+| Ship | 2h hands-on<br/>1h 20m demo | Sample release checklist |
+| Observe and Operate | 2h hands-on<br/>1h 20m demo | Sample runtime signal review |
 
 ## Delivery options
 
-Deliver all three modules in one day or schedule them separately across multiple
-days. Preserve one hour for presentation and one hour for the lab per module.
+- **Hands-on (preferred):** participants execute the lab. Allow one hour for
+  presentation and one hour for the lab.
+- **Demo (fallback):** the instructor executes the lab. Allow one hour for
+  presentation and 20 minutes for the demo.
+
+Choose the mode before delivery. Do not provision environments during the
+workshop.
 
 ## Preparation and delivery
 
 1. Confirm participants, selected modules, and outcomes.
 2. Rehearse demonstrations and labs before the session.
-3. Capture decisions, gaps, owners, and next actions.
+3. Capture questions, takeaways, and follow-up learning resources.
 
 ## Reference implementation
 
-[AgentOps Accelerator](https://aka.ms/agentops-accelerator) is an open-source
-jumpstart used alongside native Microsoft Foundry capabilities.
+Labs use [AgentOps Accelerator](https://aka.ms/agentops-accelerator) as a
+practical reference implementation alongside native Microsoft Foundry
+capabilities.
