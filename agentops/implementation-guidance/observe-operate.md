@@ -1,15 +1,11 @@
-# AgentOps Observability and Operations Guide
+# AgentOps Observe and Operate Implementation Guidance
 
 ## Purpose and intended audience
 
-This guide helps Microsoft field teams establish observability and Day-2
-operations for AI agents. It is intended for architects, agent engineers,
-Copilot Studio makers, site reliability and operations teams, service owners,
-security teams, Responsible AI practitioners, support teams, and delivery leads
-working with:
-
-- Microsoft Foundry agents
-- Microsoft Copilot Studio agents
+This implementation guide helps Microsoft field teams establish observability and Day-2
+operations for Microsoft Foundry agents. It is intended for architects, agent
+engineers, site reliability and operations teams, service owners, security
+teams, Responsible AI practitioners, support teams, and implementation leads.
 
 Use it to define operational outcomes and signals, select tooling, prepare
 telemetry and response procedures, execute monitoring and operational readiness,
@@ -18,21 +14,20 @@ and establish a continuous improvement loop.
 This is practical execution guidance. It is not a Statement of Work, a
 commercial scope, a Definition of Use, or a detailed product runbook.
 
-## Supported platforms and boundaries
+## Microsoft Foundry observability boundary
 
-| Area | Microsoft Foundry | Microsoft Copilot Studio |
-| --- | --- | --- |
-| Native operational view | Foundry traces and Agent Monitoring Dashboard connected to Azure Monitor/Application Insights | Copilot Studio Analytics and Monitor experiences for sessions, runs, reactions, tool use, response quality, and outcomes |
-| Extended telemetry | OpenTelemetry and Application Insights for application, model, tool, dependency, and custom operational signals | Optional agent-level Application Insights telemetry and customer analytics over approved transcript or Dataverse data |
-| Quality in production | Scheduled or continuous evaluation where supported, correlated with traces | Recurring test sets plus analytics-derived scenarios; native analytics and evaluation are distinct evidence sources |
-| Incident learning | Trace and evaluation evidence can be promoted into regression coverage | Sessions, transcripts, themes, reactions, failures, and support cases can become new Copilot Studio test cases |
-| AgentOps Accelerator | Foundry-specific reference for reading Foundry/Application Insights signals, readiness findings, and evidence packaging | Not a Copilot Studio observability product or implementation path |
+| Area | Guidance |
+| --- | --- |
+| Native operational view | Foundry traces and Agent Monitoring Dashboard connected to Azure Monitor Application Insights |
+| Extended telemetry | OpenTelemetry and Application Insights for application, model, tool, dependency, and custom operational signals |
+| Quality in production | Scheduled or continuous evaluation where supported, correlated with traces and agent versions |
+| Incident learning | Reviewed trace and evaluation evidence promoted into regression coverage |
+| AgentOps Accelerator | Foundry-specific reference for reading Foundry and Application Insights signals, readiness findings, and evidence packaging |
 
-Do not build a single dashboard that hides platform differences. Preserve the
-native operational source, identity, retention, and access model for each
-platform, then aggregate only the signals needed for customer decisions.
+Preserve the native operational source, agent and version identity, retention,
+and access model. Aggregate only the signals needed for customer decisions.
 
-## Engagement outcomes
+## Implementation outcomes
 
 By the end of the workstream, the customer should have:
 
@@ -47,16 +42,16 @@ By the end of the workstream, the customer should have:
    improvements.
 7. Named customer owners for platform, service, quality, safety, and support.
 
-## Delivery outline
+## Implementation outline
 
-| Phase | Delivery question | Expected evidence |
+| Phase | Implementation question | Expected evidence |
 | --- | --- | --- |
 | 1. Discover outcomes and signals | What must operators know to protect users and business outcomes? | Operational charter, service objectives, signal catalog |
 | 2. Select tooling | Which native and extended telemetry surfaces provide trustworthy, supportable evidence? | Tooling decision record, data-flow and access design |
 | 3. Prepare telemetry, alerts, and runbooks | Is the agent diagnosable and are responders ready before production? | Instrumentation plan, dashboards, alert design, runbook outlines |
 | 4. Execute observability and operations | Do signals arrive, alerts work, and responders resolve realistic failures? | Verification record, alert tests, incident rehearsal |
 | 5. Continuously improve | How will production learning change tests, controls, and releases? | Review cadence, feedback loop, prioritized improvements |
-| 6. End the project and transfer knowledge | Can the customer operate the service without the delivery team? | Handoff pack, operator rehearsal, owner acceptance |
+| 6. End the project and transfer knowledge | Can the customer operate the service without the implementation team? | Handoff pack, operator rehearsal, owner acceptance |
 
 ## Phase 1 - Discover operational outcomes and signals
 
@@ -138,7 +133,7 @@ the list of available dashboards.
 Select the minimum set of native and extended tools needed to answer operational
 questions and support incident response.
 
-### Cross-platform selection criteria
+### Selection criteria
 
 - Native platform visibility and supportability
 - Required trace, session, transcript, dependency, and business context
@@ -162,24 +157,8 @@ questions and support incident response.
    operational signals.
 6. Treat the [AgentOps Accelerator](https://aka.ms/agentops-accelerator) as an
    optional **Foundry-specific** reference for reading Foundry/Application
-   Insights evidence and producing readiness findings. It is not a Copilot
-   Studio implementation path and does not replace Azure Monitor or Foundry.
-
-### Microsoft Copilot Studio implementation path
-
-1. Use Copilot Studio Analytics for performance, outcomes, themes, adoption,
-   satisfaction, and component usage appropriate to the agent experience.
-2. Use the Monitor experience for recent activity, sessions or runs, reactions,
-   response quality, tool use, and failures where available.
-3. Use transcripts and session detail only with approved roles and data handling.
-   Note the documented differences between analytics retention and transcript
-   availability.
-4. Configure agent-level Application Insights telemetry only when native
-   analytics is insufficient and the additional data is approved.
-5. Use Dataverse or approved reporting patterns for longer-term or custom
-   analytics when required.
-6. Use recurring Copilot Studio evaluations to validate changes; do not treat
-   analytics alone as a release-quality test.
+   Insights evidence and producing readiness findings. It does not replace
+   Azure Monitor or native Foundry capabilities.
 
 ### Expected outputs and evidence
 
@@ -254,11 +233,13 @@ escalation, rollback or disablement options, communications, and the evidence to
 preserve. Link to product runbooks rather than duplicating every product step in
 this field guide.
 
-### Platform-specific preparation
+### Microsoft Foundry preparation
 
-| Microsoft Foundry | Microsoft Copilot Studio |
-| --- | --- |
-| Connect Application Insights; verify traces and dashboard data; confirm Log Analytics access; instrument custom logic; define continuous/scheduled evaluation where appropriate | Publish to the intended nonproduction environment; verify Analytics and Monitor evidence; assign Analytics Viewer and transcript roles deliberately; configure optional Application Insights; document analytics and transcript availability |
+- Connect Application Insights to the Foundry project.
+- Verify server-side traces and Agent Monitoring Dashboard data.
+- Confirm Application Insights and Log Analytics access.
+- Add client-side OpenTelemetry instrumentation for custom logic where needed.
+- Define scheduled or continuous evaluation where supported and appropriate.
 
 ### Expected outputs and evidence
 
@@ -304,15 +285,6 @@ diagnose realistic failures.
 - Evaluation result or continuous-evaluation evidence when used
 - Release identity and deployment timestamp
 
-### Microsoft Copilot Studio evidence
-
-- Power Platform environment and agent identity
-- Copilot Studio session/run and publish identity
-- Analytics or Monitor view and relevant transcript/activity evidence
-- Tool/connector and channel context
-- Test-set run or regression evidence when used
-- Solution/release version and deployment timestamp
-
 ### Expected outputs and evidence
 
 - End-to-end telemetry verification record
@@ -337,8 +309,8 @@ controls, and operating practice.
    tool, and dependency.
 3. Sample and human-review quality or safety cases according to approved privacy
    rules.
-4. Promote reviewed incidents, failed sessions, themes, reactions, and edge
-   cases into evaluation datasets or Copilot Studio test sets.
+4. Promote reviewed incidents, failed traces, user feedback, and edge cases into
+   maintained evaluation datasets.
 5. Link improvements to the originating evidence and verify them with the same
    regression case.
 6. Tune alerts when they are noisy, late, unactionable, or blind to meaningful
@@ -349,11 +321,11 @@ controls, and operating practice.
 9. Conduct periodic service reviews across product, engineering, operations,
    quality, safety, and business stakeholders.
 
-### Platform-specific improvement loop
+### Microsoft Foundry improvement loop
 
-| Microsoft Foundry | Microsoft Copilot Studio |
-| --- | --- |
-| Review traces and monitoring, convert approved production evidence into evaluation coverage, rerun Foundry evaluations, and feed results into release gates | Review Analytics, Monitor, sessions/transcripts, themes and feedback, add approved cases to test sets, rerun evaluations, and promote changes through Power Platform ALM |
+Review traces and monitoring, convert approved production evidence into
+evaluation coverage, rerun Foundry evaluations, and feed the results into
+release gates.
 
 ### Expected outputs and evidence
 
@@ -388,7 +360,7 @@ Ensure customer teams can monitor, diagnose, respond, and improve independently.
 | Role | Primary responsibilities |
 | --- | --- |
 | Customer product or service owner | Defines service outcomes, priorities, and operational acceptance |
-| Agent engineer or Copilot Studio maker | Maintains instrumentation context, diagnoses behavior, and implements fixes |
+| Agent engineer | Maintains instrumentation context, diagnoses behavior, and implements fixes |
 | Platform/observability engineer | Owns telemetry resources, dashboards, alerts, access, retention, and cost controls |
 | Operations or SRE lead | Owns on-call, incident process, game days, reliability reviews, and runbooks |
 | Support lead | Triage user reports, collect evidence, and escalate with session/release context |
@@ -396,7 +368,7 @@ Ensure customer teams can monitor, diagnose, respond, and improve independently.
 | Responsible AI and safety lead | Reviews safety signals, harmful-output escalations, and adversarial learning |
 | Security, privacy, and compliance | Approves data collection, access, retention, export, and incident evidence |
 | Business owner | Reviews adoption, outcomes, satisfaction, and value indicators |
-| Microsoft field delivery team | Facilitates the method, demonstrates supported paths, and transfers knowledge |
+| Microsoft implementation team | Facilitates the method, demonstrates supported paths, and transfers knowledge |
 
 Incident command, production changes, and risk acceptance remain customer
 responsibilities.
@@ -407,7 +379,7 @@ The Observe and Operate workstream is complete when:
 
 - Critical journeys, service objectives, dependencies, and actionable signals
   are documented.
-- Foundry and Copilot Studio platform paths and data boundaries are explicit.
+- The Foundry observability path and data boundaries are explicit.
 - Telemetry, analytics, dashboards, and alerts are verified with controlled
   traffic.
 - Sensitive-data, access, sampling, retention, and export controls are approved.
@@ -451,13 +423,3 @@ The Observe and Operate workstream is complete when:
 - [Run cloud and trace evaluations](https://learn.microsoft.com/azure/foundry/how-to/develop/cloud-evaluation)
 - [Application Insights overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Azure Monitor alerts overview](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-overview)
-
-### Microsoft Copilot Studio
-
-- [Analytics overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)
-- [Monitor and analyze an agent](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/authoring-review-activity)
-- [Analyze conversational agent effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)
-- [Analyze autonomous agent health](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-health)
-- [Agent-level telemetry with Application Insights](https://learn.microsoft.com/microsoft-copilot-studio/advanced-bot-framework-composer-capture-telemetry)
-- [Download agent session transcripts](https://learn.microsoft.com/microsoft-copilot-studio/analytics-transcripts-studio)
-- [About agent evaluation](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-intro)

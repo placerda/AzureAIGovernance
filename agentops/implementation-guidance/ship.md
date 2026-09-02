@@ -1,14 +1,11 @@
-# AgentOps Shipping Guide
+# AgentOps Ship Implementation Guidance
 
 ## Purpose and intended audience
 
-This guide helps Microsoft field teams establish a controlled, repeatable release
-path for AI agents. It is intended for architects, agent engineers, Copilot
-Studio makers, platform engineers, release managers, security teams, testers,
-operations teams, and delivery leads working with:
-
-- Microsoft Foundry agents
-- Microsoft Copilot Studio agents
+This implementation guide helps Microsoft field teams establish a controlled, repeatable release
+path for Microsoft Foundry agents. It is intended for architects, agent
+engineers, platform engineers, release managers, security teams, testers,
+operations teams, and implementation leads.
 
 Use it to discover the release topology and controls, select supported platform
 and automation tools, prepare source and environments, execute release gates and
@@ -17,22 +14,22 @@ promotion, operationalize releases, and transfer ownership.
 This is practical execution guidance. It is not a Statement of Work, a
 commercial scope, a Definition of Use, or a step-by-step product runbook.
 
-## Supported platforms and boundaries
+## Microsoft Foundry release boundary
 
-| Area | Microsoft Foundry | Microsoft Copilot Studio |
-| --- | --- | --- |
-| Release unit | Identified agent source/configuration, infrastructure definition, agent version, model/tool dependencies, and evaluation evidence | Power Platform solution containing the agent and dependent components, plus environment-specific configuration and post-deployment settings |
-| Environment model | Separate Foundry projects/resources or governed environments for development, test, and production | Power Platform development, test, and production environments with Dataverse and solution-based ALM |
-| Deployment automation | Azure Developer CLI, GitHub Actions, Azure Pipelines, or customer-standard Azure deployment tooling as supported by the agent type | Power Platform pipelines, Power Platform Build Tools for Azure DevOps, GitHub Actions for Power Platform, or controlled solution import/export |
-| Quality gate | Foundry evaluation and smoke checks; optional repo-side release evidence | Copilot Studio test sets, solution checks, connector/configuration validation, and customer approval |
-| AgentOps Accelerator | Foundry-specific reference for repository-side evaluation gates, readiness checks, and release evidence | Not a Copilot Studio ALM implementation; use Copilot Studio and Power Platform release mechanisms |
+| Area | Guidance |
+| --- | --- |
+| Release unit | Identified agent source and configuration, infrastructure definition, agent version, model and tool dependencies, and evaluation evidence |
+| Environment model | Separate Foundry projects, Azure resources, or governed environments for development, test, and production |
+| Deployment automation | Azure Developer CLI, GitHub Actions, Azure Pipelines, or customer-standard Azure deployment tooling supported by the agent type |
+| Quality gate | Foundry evaluation, safety checks, functional smoke checks, and authorized approval |
+| AgentOps Accelerator | Foundry-specific reference for repository-side evaluation gates, readiness checks, and release evidence |
 
-Do not force the same artifact or deployment mechanism across platforms. A
-Foundry agent version is not a Copilot Studio solution version, and an AgentOps
-Accelerator evidence pack is not a replacement for Power Platform solution and
-pipeline records.
+Keep the exact source, configuration, agent version, dependencies, evaluation
+evidence, and target environment traceable through the release. AgentOps
+Accelerator evidence supplements native Foundry and pipeline records; it does
+not replace them.
 
-## Engagement outcomes
+## Implementation outcomes
 
 By the end of the workstream, the customer should have:
 
@@ -45,9 +42,9 @@ By the end of the workstream, the customer should have:
 6. A rollback, hotfix, and post-release verification approach.
 7. Release operations ownership, documentation, and knowledge transfer.
 
-## Delivery outline
+## Implementation outline
 
-| Phase | Delivery question | Expected evidence |
+| Phase | Implementation question | Expected evidence |
 | --- | --- | --- |
 | 1. Discover topology and controls | What is released, through which environments, under which controls? | Release topology, control matrix, release-unit definition |
 | 2. Select tools and platform path | Which supported tools fit the agent type, customer engineering model, and governance needs? | Tooling decision record, architecture, prerequisites |
@@ -67,10 +64,9 @@ environments, evidence, approvals, and failure behavior explicit.
 
 #### Release unit and dependencies
 
-- Is the target a Foundry prompt agent, Foundry hosted agent, Copilot Studio
-  conversational agent, event-triggered agent, or a combination?
-- Which artifacts can change independently: instructions, code, topics,
-  knowledge, tools, actions, connectors, child agents, models, policies, or
+- Is the target a Foundry prompt agent, hosted agent, workflow, or combination?
+- Which artifacts can change independently: instructions, code, knowledge,
+  tools, actions, connections, child agents, models, policies, or
   infrastructure?
 - Where is the source of truth for each artifact?
 - Which dependencies are versioned, externally managed, or configured after
@@ -83,7 +79,7 @@ environments, evidence, approvals, and failure behavior explicit.
 - Which development, integration, test, preproduction, and production
   environments exist?
 - Are environments isolated by subscription, resource group, Foundry project,
-  Power Platform environment, tenant, region, or network?
+  tenant, region, or network?
 - Is promotion immutable, rebuilt from source, or manually reconfigured?
 - Which knowledge sources, connections, endpoints, environment variables, and
   policies differ by environment?
@@ -129,7 +125,7 @@ environments, evidence, approvals, and failure behavior explicit.
 Select supported release mechanisms that align with the target platform,
 customer skills, source-control system, and governance model.
 
-### Cross-platform selection criteria
+### Selection criteria
 
 - Agent type and supported deployment mechanism
 - Customer source-control and pipeline standards
@@ -159,27 +155,10 @@ customer skills, source-control system, and governance model.
    that its branch and environment assumptions fit the customer rather than
    adopting them unchanged.
 
-### Microsoft Copilot Studio implementation path
-
-1. Use custom Power Platform solutions as the carrier for agents and dependent
-   solution-aware components.
-2. Establish development, test, and production Power Platform environments with
-   Dataverse and appropriate security groups.
-3. Choose among Power Platform pipelines, Power Platform Build Tools for Azure
-   DevOps, GitHub Actions for Power Platform, or controlled solution operations.
-4. Use environment variables and connection references for values that change
-   across environments.
-5. Track Copilot Studio settings that are not solution-aware and require
-   downstream configuration, including items identified by current Microsoft
-   ALM guidance such as Application Insights, authentication, channel security,
-   deployed channels, and sharing.
-6. Use Copilot Studio test sets and, where needed, the Power Platform API for
-   automated release validation.
-
 ### Expected outputs and evidence
 
 - Tooling decision record
-- Platform-specific release architecture
+- Foundry release architecture
 - Pipeline identity and permission model
 - Source control and artifact retention decision
 - Preview, licensing, region, and support constraints
@@ -195,9 +174,10 @@ first pipeline execution.
 
 1. Inventory all source-controlled and externally managed agent components.
 2. Define the canonical version identity:
-   - repository commit and agent version for Foundry;
-   - solution unique name, publisher, semantic version, source commit, and
-     exported artifact identity for Copilot Studio.
+   - repository commit;
+   - agent name and version;
+   - deployment artifact identity; and
+   - infrastructure and configuration version.
 3. Protect main and release branches according to customer policy.
 4. Require review for instructions, prompts, tools, knowledge configuration,
    safety controls, and infrastructure changes.
@@ -220,11 +200,14 @@ first pipeline execution.
 8. Confirm quotas, capacity, licenses, connectors, policies, and regional
    support.
 
-### Platform-specific readiness
+### Microsoft Foundry readiness
 
-| Microsoft Foundry | Microsoft Copilot Studio |
-| --- | --- |
-| Project and agent type identified; deployment context resolved; model/tool connections available; evaluation target and trace destination configured; Azure and Foundry roles verified | Custom solution and publisher established; dependencies included; solution version set; target environments and Dataverse ready; environment variables and connection references mapped; non-solution-aware settings checklist created |
+- Project and agent type identified
+- Deployment context and target environment resolved
+- Model, tool, and knowledge connections available
+- Evaluation target and trace destination configured
+- Azure and Foundry roles verified
+- Prior known-good version or redeployable artifact identified
 
 ### Expected outputs and evidence
 
@@ -286,18 +269,6 @@ candidate promoted to the target environment.
   the Foundry and pipeline records; it does not replace customer approval,
   compliance, or platform deployment evidence.
 
-### Microsoft Copilot Studio considerations
-
-- Export or build the solution from development and deploy managed solutions to
-  downstream environments unless the customer has an approved alternative.
-- Run solution checks and validate dependencies before import.
-- Apply environment-variable and connection-reference values in the target.
-- Complete and evidence the non-solution-aware post-deployment steps.
-- Publish the agent and validate intended channels, sharing, authentication, and
-  connector access.
-- Run the approved Copilot Studio evaluation set and smoke tests against the
-  target configuration.
-
 ### Expected outputs and evidence
 
 - Successful pipeline or controlled release record
@@ -351,10 +322,8 @@ Ensure customer teams can operate, troubleshoot, and evolve the release path.
 3. Run a failure rehearsal, including a blocked gate and rollback decision.
 4. Have customer operators perform a nonproduction release using customer-owned
    identities.
-5. Review platform-specific maintenance:
-   - Foundry agent, deployment, evaluation, and tracing lifecycle;
-   - Copilot Studio solution versioning, dependencies, pipelines, and
-     non-solution-aware settings.
+5. Review the Foundry agent, deployment, evaluation, tracing, and dependency
+   lifecycle.
 6. Transfer pipeline, environment, and evidence access to customer-managed
    groups.
 7. Record owners, escalation paths, support boundaries, and the next control
@@ -365,13 +334,13 @@ Ensure customer teams can operate, troubleshoot, and evolve the release path.
 | Role | Primary responsibilities |
 | --- | --- |
 | Customer product owner | Approves release outcomes, user impact, and business acceptance |
-| Agent engineer or Copilot Studio maker | Maintains agent artifacts, dependencies, tests, and release fixes |
-| Platform engineer or administrator | Owns Foundry/Azure or Power Platform environments, identities, policies, and capacity |
+| Agent engineer | Maintains agent artifacts, dependencies, tests, and release fixes |
+| Platform engineer or administrator | Owns Foundry and Azure environments, identities, policies, and capacity |
 | Release manager | Owns promotion workflow, approvals, change records, schedules, and exceptions |
 | Evaluation and Responsible AI leads | Define and review quality, safety, and regression gates |
 | Security and compliance | Approve identity, secrets, supply-chain, data, audit, and policy controls |
 | Operations or service owner | Owns post-release verification, incidents, rollback, and release health |
-| Microsoft field delivery team | Facilitates design, demonstrates supported implementation paths, and transfers knowledge |
+| Microsoft implementation team | Facilitates design, demonstrates supported implementation paths, and transfers knowledge |
 
 The customer retains authority for production approval, policy exceptions, and
 risk acceptance.
@@ -382,8 +351,8 @@ The Ship workstream is complete when:
 
 - The release unit, source of truth, version identity, and environment path are
   documented.
-- The Foundry and Copilot Studio boundaries are explicit and the selected path
-  uses supported platform mechanisms.
+- The selected Foundry path and its capability boundaries are explicit and use
+  supported platform mechanisms.
 - Customer-owned identities and least-privilege permissions are in place.
 - Environment configuration and dependencies are reproducible or have explicit,
   controlled post-deployment steps.
@@ -401,8 +370,7 @@ The Ship workstream is complete when:
 - [ ] Pipeline identities and permissions are customer-managed
 - [ ] Environment variables, connection references, and secrets documented
 - [ ] Quality, safety, security, and approval gates explained
-- [ ] Foundry-specific and Copilot Studio-specific paths clearly separated
-- [ ] Copilot Studio non-solution-aware settings checklist transferred
+- [ ] Foundry agent type and supported deployment mechanism documented
 - [ ] Post-deployment verification and observation window rehearsed
 - [ ] Rollback, hotfix, and exception procedures rehearsed
 - [ ] Release evidence location and retention documented
@@ -426,13 +394,3 @@ The Ship workstream is complete when:
 - [Foundry agent development lifecycle](https://learn.microsoft.com/azure/foundry/agents/concepts/development-lifecycle)
 - [Run cloud evaluations with the Microsoft Foundry SDK](https://learn.microsoft.com/azure/foundry/how-to/develop/cloud-evaluation)
 - [Set up tracing in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup)
-
-### Microsoft Copilot Studio and Power Platform
-
-- [Establish a Copilot Studio ALM strategy](https://learn.microsoft.com/microsoft-copilot-studio/guidance/alm)
-- [Create and manage solutions in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-overview)
-- [Power Platform ALM overview](https://learn.microsoft.com/power-platform/alm/overview-alm)
-- [Set up pipelines in Power Platform](https://learn.microsoft.com/power-platform/alm/set-up-pipelines)
-- [Power Platform Build Tools for Azure DevOps](https://learn.microsoft.com/power-platform/alm/devops-build-tools)
-- [GitHub Actions for Power Platform](https://learn.microsoft.com/power-platform/alm/devops-github-actions)
-- [Automate Copilot Studio evaluations with Power Platform API](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-rest-api)

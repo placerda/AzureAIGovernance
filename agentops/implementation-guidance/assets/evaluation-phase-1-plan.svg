@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
-  <title id="title">Plan the evaluation</title>
-  <desc id="desc">A hand-drawn robot compares several targets while holding a ruler and a clipboard.</desc>
+  <title id="title">Plan an agent evaluation</title>
+  <desc id="desc">A hand-drawn robot plans an agent evaluation with a ruler and clipboard.</desc>
   <rect width="1200" height="300" rx="24" fill="#f3f8fc"/>
   <path d="M30 36 C210 24 400 42 590 31 S950 42 1170 28" fill="none" stroke="#c7e0f4" stroke-width="3"/>
   <path d="M31 268 C250 280 437 259 640 271 S1000 258 1170 273" fill="none" stroke="#c7e0f4" stroke-width="3"/>

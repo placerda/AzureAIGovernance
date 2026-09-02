@@ -1,21 +1,20 @@
-# AgentOps Evaluation Guide
+# AgentOps Evaluate Implementation Guidance
 
 ## Purpose and intended audience
 
-This guide helps architects, engineers, makers, data scientists, Responsible AI
-practitioners, operations teams, and delivery leads establish a repeatable
-evaluation practice for AI agents built with Microsoft Foundry or Microsoft
-Copilot Studio. It covers the full journey from defining what good looks like
-and selecting the right evaluation approach to preparing test data, interpreting
-results, and establishing operational ownership.
+This implementation guide helps architects, engineers, makers, data scientists, Responsible AI
+practitioners, operations teams, and implementation leads establish a repeatable
+evaluation practice for AI agents built with Microsoft Foundry. It covers the
+full journey from defining what good looks like and selecting the right
+evaluation approach to preparing test data, interpreting results, and
+establishing operational ownership.
 
 > Throughout this guide, a help desk agent is used as an end-to-end example. The
-> main walkthrough uses Microsoft Foundry to build an evaluation suite with the
-> right metrics, rubric and policy evaluators where needed, red teaming, tracing,
-> and continuous evaluation. Copilot Studio callouts show the equivalent path
-> where supported.
+> walkthrough uses Microsoft Foundry to build an evaluation suite with the right
+> metrics, rubric and policy evaluators where needed, red teaming, tracing, and
+> continuous evaluation.
 
-## Delivery outcomes
+## Implementation outcomes
 
 By the end of the workstream, the following outcomes should be in place:
 
@@ -27,9 +26,9 @@ By the end of the workstream, the following outcomes should be in place:
 6. A baseline with thresholds, findings, and improvement actions.
 7. Ongoing evaluation configured and owned.
 
-## Delivery outline
+## Implementation outline
 
-| Phase | Delivery question | Expected evidence |
+| Phase | Implementation question | Expected evidence |
 | --- | --- | --- |
 | 1. Plan the evaluation | What should be tested, and how will success be measured? | Evaluation plan, selected metrics, and test types |
 | 2. Set up the tools | What tools, access, and permissions are needed? | Configured tools, connections, roles, and permissions |
@@ -115,7 +114,7 @@ affect those outcomes.
 Choose the simplest supported evaluation path that provides trustworthy
 evidence and can be maintained by the designated owners.
 
-### Cross-platform selection criteria
+### Selection criteria
 
 - Agent platform and agent type
 - Required measures and input data
@@ -143,26 +142,12 @@ evidence and can be maintained by the designated owners.
 5. Treat the [AgentOps Accelerator](https://aka.ms/agentops-accelerator) as an
    optional **Foundry-specific** reference implementation for repo-side gates,
    safety checks, baselines, and evidence packs. It is not the product contract
-   and is not a Copilot Studio path.
-
-### Microsoft Copilot Studio implementation path
-
-1. Use test chat for exploratory behavior and agent evaluation test sets for
-   repeatable assessment.
-2. Select test methods that match the expected outcome. Native evaluation can
-   compare text or meaning and assess general quality where supported.
-3. Use test user profiles when behavior depends on identity, permissions, or
-   authenticated connectors. Validate test-account access and data exposure.
-4. Use the Power Platform API when evaluations must run in an automated
-   development or release workflow.
-5. Plan safety and Responsible AI validation separately. Microsoft documentation
-   states that Copilot Studio agent evaluation measures correctness and
-   performance and does not replace AI ethics or safety assessment.
+   and does not replace native Foundry evaluation capabilities.
 
 ### Expected outputs and evidence
 
 - Tooling decision record with rejected alternatives
-- Platform-specific architecture and execution path
+- Foundry evaluation architecture and execution path
 - Access, role, connection, licensing, region, and cost prerequisites
 - Data handling and result retention decision
 - Automation and release integration decision
@@ -214,15 +199,18 @@ baseline.
 7. Preserve the run identity, agent identity, dataset/test-set version, methods,
    thresholds, results, exceptions, and approval decision.
 
-### Platform-specific evidence
+### Microsoft Foundry evidence
 
-| Microsoft Foundry | Microsoft Copilot Studio |
-| --- | --- |
-| Foundry project and agent version, evaluator names and versions, dataset version, evaluation run, threshold decision, trace IDs where used | Environment and agent ID, test-set ID/version, selected test methods, user profile and connection state where used, run ID, result export or screenshots |
+- Foundry project and agent version
+- Evaluator names and versions
+- Dataset name and version
+- Evaluation run identity
+- Threshold and release decision
+- Trace or response IDs where used
 
 ### Expected outputs and evidence
 
-- Approved evaluation dataset or Copilot Studio test set
+- Approved evaluation dataset
 - Data dictionary and scenario coverage summary
 - Reproducible baseline run
 - Calibrated thresholds or human review rules
@@ -271,17 +259,6 @@ feedback loop.
   document which Accelerator artifacts are authoritative for the release
   process.
 
-### Microsoft Copilot Studio considerations
-
-- Use recurring flows and supported connectors or APIs to trigger existing test
-  sets and retrieve results when scheduled automation is required.
-- Use Copilot Studio analytics, Monitor, transcripts, themes, reactions, and
-  production outcomes to identify new test cases.
-- Revalidate authenticated test profiles and connections before relying on an
-  automated run.
-- Maintain a separate Responsible AI and safety review process; do not infer
-  safety readiness from a passing native evaluation.
-
 ### Expected outputs and evidence
 
 - Evaluation cadence and trigger matrix
@@ -300,7 +277,7 @@ evaluation system.
 
 ### Knowledge transfer activities
 
-1. Walk through the evaluation plan, measure rationale, platform path, and
+1. Walk through the evaluation plan, measure rationale, Foundry path, and
    known limitations.
 2. Demonstrate one complete run from data selection through decision and defect
    triage.
@@ -318,7 +295,7 @@ evaluation system.
 | --- | --- |
 | Product owner | Defines business outcomes, critical journeys, and acceptance decisions |
 | Business/domain subject matter expert | Supplies representative scenarios and validates expected behavior |
-| Agent engineer or maker | Identifies agent versions, implements fixes, and supports reproducible runs |
+| Agent engineer | Identifies agent versions, implements fixes, and supports reproducible runs |
 | Evaluation lead or data scientist | Designs measures, datasets, calibration, analysis, and trend review |
 | Responsible AI or safety lead | Owns harm analysis, safety test strategy, exceptions, and escalation |
 | Security, privacy, and compliance | Approves data use, retention, access, and regulated controls |
@@ -336,8 +313,8 @@ The evaluation workstream is complete when:
 
 - Business outcomes, critical scenarios, quality dimensions, and safety risks are
   documented and approved.
-- Platform boundaries and the selected Foundry or Copilot Studio path are clear.
-- The dataset or test set is representative, versioned, access-controlled, and
+- The selected Foundry evaluation path and its capability boundaries are clear.
+- The dataset is representative, versioned, access-controlled, and
   approved for use.
 - The baseline run is reproducible and tied to an identified agent version.
 - Thresholds, review rules, and handling of missing or invalid results are
@@ -379,11 +356,3 @@ The evaluation workstream is complete when:
 - [Monitor agents and set up continuous evaluation](https://learn.microsoft.com/azure/foundry/observability/how-to/how-to-monitor-agents-dashboard)
 - [Set up tracing in Microsoft Foundry](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup)
 - [Convert agent traces into evaluation datasets](https://learn.microsoft.com/azure/foundry/observability/how-to/traces-to-dataset)
-
-### Microsoft Copilot Studio
-
-- [About agent evaluation](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-intro)
-- [Create a test set](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-create)
-- [Run evaluations and view results](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-results)
-- [Automate agent evaluations with Power Platform API](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-rest-api)
-- [Analytics overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)
