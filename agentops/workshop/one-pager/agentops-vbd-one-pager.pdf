@@ -1,8 +1,8 @@
-%PDF-1.3
+%PDF-1.4
 %“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
 <<
-/F1 2 0 R
+/F1 2 0 R /F2 3 0 R /F3 4 0 R
 >>
 endobj
 2 0 obj
@@ -12,57 +12,93 @@ endobj
 endobj
 3 0 obj
 <<
-/Contents 7 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 6 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-/PageMode /UseNone /Pages 6 0 R /Type /Catalog
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
 >>
 endobj
 5 0 obj
 <<
-/Author (AgentOps VBD) /CreationDate (D:20260902111350-03'00') /Creator (anonymous) /Keywords () /ModDate (D:20260902111350-03'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (unspecified) /Title (AgentOps Value Based Delivery One-Pager) /Trapped /False
+/A <<
+/S /URI /Type /Action /URI (https://learn.microsoft.com/azure/foundry/agents/environment-setup)
+>> /Border [ 0 0 0 ] /Rect [ 57.78664 86.50496 164.9002 97.06496 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
 <<
-/Count 1 /Kids [ 3 0 R ] /Type /Pages
+/A <<
+/S /URI /Type /Action /URI (https://learn.microsoft.com/azure/foundry/observability/concepts/trace-agent-concept)
+>> /Border [ 0 0 0 ] /Rect [ 184.4714 86.50496 235.3442 97.06496 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 59
+/A <<
+/S /URI /Type /Action /URI (https://aka.ms/agentops-accelerator)
+>> /Border [ 0 0 0 ] /Rect [ 308.9764 144.5132 395.058 155.0732 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/Annots [ 5 0 R 6 0 R 7 0 R ] /Contents 12 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 11 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+9 0 obj
+<<
+/PageMode /UseNone /Pages 11 0 R /Type /Catalog
+>>
+endobj
+10 0 obj
+<<
+/Author (Azure AI Governance) /CreationDate (D:20260902132423-03'00') /Creator (anonymous) /Keywords () /ModDate (D:20260902132423-03'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (AgentOps Value Based Delivery workshop one-pager) /Title (AgentOps Value Based Delivery Workshop) /Trapped /False
+>>
+endobj
+11 0 obj
+<<
+/Count 1 /Kids [ 8 0 R ] /Type /Pages
+>>
+endobj
+12 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 4860
 >>
 stream
-GapQh0E=F,0U\H3T\pNYT^QKk?tc>IP,;W#U1^23ihPEM_PP$O!3^,C5Q~>endstream
+Gb!;g>EdgM'n5%IJ]DV>N=n0Vo&eFn-Cn]6f\?%p03ejrb>])hP-V]jrqLpI"A!3KGN;FU*llbBG]<02>_+-9')W@0s4)_+Df468^Cs:3G'hPgk*k-*aM,@$i^o8g,%Y#T3_StGbd7t`ICNJ?bq,!i.&:7J0_iY`9W4KE7@(71ZMUi.I_4Sp:[nnS.b@:+`c[CkWaP;1^Z$.."?+D5i,1Bp[,bqe8[`#1jucMXYcLB?Su.+afa!JlVD"<.1cK,PYfmeDc&EgV7E.l(E(I$3/lJjXquBZl"Ab"4(ok*n9)5aHoYlgopoumr[Sp9\Kh6?9RjA%>)!/Qe'Fs4TPmOT-^7Dc%1m;m_baD'\G!^bAnf3m-nj'1W'\9HeQ:7RUhnY)r8.!bmH\&%NA1J(X2uu*.q`2n;.!RBN2%CPd*Z8gsY.B5A*)J_9<Et>bC]H6<$nkK`8A_dNgcFVt/7JV^"TfU]o8JtiN=skQR7<,^aoodV;nsQSFc;hiatp$W%1!XL`!\F4)W`"XD67[U7!TnqKoMI!`?Cs!/)\s?!`-0c8[pV0"g'P_V9V?J+KM++4qO_E/V&JreMK`$Sk,,9C]\1<N*Zn!>]?7]+O;FYJ;_7]A7U7Cf7HE>W,X,7dFQa+lA&Dp$Z,#2)A<R;-Np+d3;aIB"+hhQNno5`5XMGqP,C>^"f?Pt,>Jn`!bA+g.CgEV1!16>?KTXWJO4kiTuKs)i.9;,l39M4G9&``Ii798U`Tfh#QlG:]#'8fk$/\A0E[(W12M6%H!`c2W^),gE:eiUbs^$+:,;-ldmW`TiO+LF:!#4u)]<?4;eQh=(F[ha,h+eg>)VRN[CW+O@\BkjCqpW2YWe<p9UR0h,):NcDK#oc+,Ld^&._6-(iUR2Re0#/`PcJb9P@+qPUC1:Z&'(jLeq4o-O'WH(.8L>`ao9*cdjrRE@A>a<01,C@mjQi,RF^O'<E2O0elpib]j>a('W,OJTt?A1);&PKj;FO;oECGq!%;%6qU#FS5"qTDu8"*JV*VcTuKsY=otVbX#mI%7KYXehFB[T;?7R6Y"!GA"Mk,KFWt<T4GD_7?k(2TU/A."\$!M[,)g2/,WGdp'l;l^btXnpE>IR`KLV&;*&WQn3'CX'EQ=c[i.dcHPjQCG/43n0O9e)nAV$[-Y^oA@=]1n8p;rO=Q]+B7R7p0eELJ;)5'em/T`7SU=iAB1JYksU:$2h-CQp9,)9!ZMCb>("l2g(;bJ\5T1"#K`h<G`6=^u>8QB9#d"q%I?&`6+sNIp,&\FbU+7#CCMC!^`lY6@B%*luGmG^'Pr&ql]CNIlLH>H;gqr-X40J2ma;Popt(&ul'g9RW0+]'olWEipd`0Tu"6^^f-Pf_%Iup>=\9Zhg-(I^%#pmAg$k]D\#NIc]Iag*<Mi"3!c^5T-S_e/&X`HQ_4BaR]k8CeonLJCI0#.DPg`cIZWGDqKicH?I-^hK?:*Ll^Y<`nmk7Mso:oFk&BUF5O=mRe:^P5-^:3Mku'r$B^GlGeMHQBgaA#OPt3C=B#?9Emm%]c;4R*#7noqXg6mU!-i3)SVbA=4\#q&"a:o:rS4dmK(L<c/1h"$*iWZCArUrbc1:1;r"!kl1i,q/9l;D,Ct<ID51TTV>ICoI^THh)mVTu[[f:/pOo)]5RATc+\*L&$\+]D>NnM6XS(W+*],N*1n@#D>5?lWr9LfU3pSP[>YH.?/J,4Oq@t#n!?n\jIjg)1uc^#+s:f/Q2*5?:C7G31)F>9unG1"*WR[,g(g@Em,]U>LGTVjNA:sEp5RQi2]jU,.!W/NXSE)XR4N\mbq]n!&J83j]QnROsXEbEk3!X5lXScRpYbS^!U8cJPkp3lP[[S$[fr;nodff*JTBC(VKfD+?>';3,M&JC*BZ!`cbGA->mgYO48o@qg(OWuI#-k7ooS7E$iZHrmO:g)uP2A_%]gqiGAM&:D1GXm/[`cb?dYK4GQR=E5K*O?^[kKLo"F/F`Ap[aTdcFq+bZ:FMI:t-NO+"`u4>ue)job)"[cg9SOlfH"n>iXV*SU51C?`(jdo/1gW`d)6Z)7F="b2Cr2l\A!C]s;3VhT[XB:0I74ANS1T+7%<m?[qWAPEdX(@-QLEMh\RP3U6OG9DX*>MYi.Ql[)i!<HH>Z^__Qqd!ui*mN-o&=&K'DZ2K0!pT):(52,E-nL2Dh;\5CGEsguk@?3k:AoP"i^PM7Q?`;E.U`3s$LR-q_=IF'Np0=A!-!\&JOCH54s08*I[d-LJBM\'T^;kV1g=ia`Zd9f0f\j.f*B7V3;5bq#>&+@Z4T?X7Me5$PgCH)*<8To7l3ggt6%o!-eQ:#$Dju$mG6,)n$4R67iB^e5#/,aMG]Lq?GlmG7p3Q0:%PrdOA_.Gq<9Nb?QZq6lWhW;6O^dL#*<P4aC:>b+TL2iU<O4[(*G>R]j%beENa@3[/6`8Ed0'$L?.@&0hE3n0q_G2KH?:,4.-IV@d)_*g9*3-15:@pI4oe^MdK)*k?&O2*!+?Jn51fE?8uYhiP!Bm)IX,#@l[I1kT43m"YM-Pg;FhMI6pfuQ02f@0$3"(iGgfXX"`+COo2)Sd$-d:?WXUord;Wh"dkgQTTUZB[>0mjJZ.I%D4c)_j"d@fplWHrUm'r*DgucsgH03leU<E53/JfGoWEW436j`*@$DIc,?+B7pDI(S$cVn/#4Q`"mo%XmfM+UZ,]@)%GQ8pk?V!;t[^Pg;4itBM!:,;Lf7-RL:*A#n0s/oSL](Ol]8I^Foh3r*URYlVa1UD/rgUcWB<\IUd1JR)aX&[W3M7*$X>Y`pMM=@\][568/=V6!N+h)O,K.<l.O_*^T)Cu$53b;NXmVd&J[1*j(6Uir>X*HM^Bhmh>bWFHQYmi/@@T'Hqc]Tt'XjmUH/D.tCZ/W\o5!!lpUHU<4aDu/t&KG7':m09V]Iji<;Io3W_jr[!)D9D\pFFLbJ]n;!/E%K&dis2jgb$TdkX\Vm34RaKR%U3F>+*6NbMaEhF6i\ESX$Io?BBdh]+/f_46.$1-YA\elaBqo.,jMu[-A)*L\tTj`s?>skN7l4Z"Dg9-pZF@).kk)q@YjL9&qYJ7/f*sKI^5Cf/of=B&T$S`qtudm0V+.]lo!:@gEaG^u]H;1A-7WH:=b3LhtGQ:[IrT[Y2P(Pq=JnH<&B2:g$e_\.Y=QEpFTOCSuR3_2QepZFtonD>K^CCRoubJHtr`rIRkYrZsfsl@Of^#4<@SrXEH:90;3XTHP[cfY2bP&jN9q413@H3;+'!Ed1[E&&.aaU%dH^V9qSDijr9k4\J=5QdsN4**T:of'mUW%O2<J=2WLCSI,#r8d*Y;*Vj(pF3E;+1$RnL0\OP3Z-N(/iEG@THO&q8rkebHXLa13*nZ4cG?S8LFSR<=5;k<!?Cro5*\s/O1n*<)(EFoQ2Q\+M"*obFr+O:)?]7FBF%mHT*B'hf7RJOg^/C[-m^7*]-e:ii*kEmZd`@aXO#oGX!RJY%TmSg'@r!Q5[e%7TdE*\9njVfgl`/hCc"sDeOn,T8osjj[;Lj(u,2__:b(3+8;<K-gC+aP+[W:2D!&>mll>pat")d$aKp),="#((mL\N%u,@>7#_nEmhS[A-5NO<br<b#WD3/9[m5f1Y>\Jlt2`4k&!`h*tu\m3nh'p@ACDI.OJm%\EG7;t&S4[&jQmle^$aE+UY17l!&R[8Yl^M_a+f;(k&H:`7@9*,ADb09,X%g]]eZ?:pbiCpb'Tm3.C?fGc!bJ?&@aR+Lna@'Z+VZ_&892A3R_Q(Xsq;<pui*B3@SrJt+\P.tWS[GuMGl!i934qM]V\]"F[*cTU[5;n8eC@P@h.Y&f2?lR?^3MupAm8s%FQ,i?XF\q3B3A3lhq>#7_`0BXDI$7k5Ar^p<Ru7lfT'kL\sbRKSNhgC_TknI8@=$^'P`-!dYKVHAhFq$k\=d3*Z%OJb@q`0FcUZmV*$DQShm?E</-42YCrrSV"?`DNQlaKTJF5uc2H]l"pRPklCeunM8;a:eMFXJS"%):1r[gY^nj`Bh-p51N0FT=+Xo*45E.DF8^C_=Y\'_p9`4=(6N>`qR=l/WA]aD5l.o_WjkQb?cXoij'/82BVG='qfppld+bDAli"H<'e0%H+/<0g[q71pGgMt0HfWlqZo&mN@BAJj!$o71"9R/C8TO(5)8lgtIJ,+@c7fW$X^\90Y\E#d_qs`&ZELmGiZb/FV6r@_.*^4ljh[T@%SXqFZ7<[_^;nidNc1"9QFn6)7rf4b.?6Pu7Xu#^&07uiqQ]g(LWJ+4Z4d8eh>"kW#U^[QB,['bVZ9_6WO,h4#@Q?oYB[B9XK9-6S8\]8'#*#uD84m2:$CoM:OZ!V?-$PtPV"":U,.\Q:FH/n%`Xa#@Ibl%?<C+Asbk>Wp8o!io@fHFm,ADVC2SROlar5I)H,+<M#a3o\Pr_hJ\gQ6^[I'euja9fT;V$TJBtEr4*-,(D;>5!14kek\kg;"P)t3-n,U5g>kdr5ZlZlj@k3fpCmYgGi)2K"F-(U!RYK'.N6a&s9b+50O_)<je$["f4.GZX^e,:4;Pp2tr0=R'GUI-1U@^b*!]MDX\ZsR+=b>@^"/f_*W!dT;UfMj'*<gq7U?ZS*Jqmp'L>h7[a'FCp)R(D_AB)8sCES"N61-:!oof`'k\dJK_rr?H`gIGJV#fD!M#>ok7Vk*V`Y0FlFPAq25nWhOh3c.fFKYis(qH6>DHo,pi24p2C4k,@23\$QVJpr<YcfBf%\Yc!L?-MBegNsXk<%`)1n/aN6610MWAT@Y%bh^rN@*Ofijp6+tj7[ng^G"Af+*QQlC2Bhr>ue+9.'30e#B..f;JGEq>J;#%4kQt(`N&7_&(nI_I_]u0cC<pJ]Dc0'e?$BZ?)/rO6_du$IH/DOrXZK%:gj~>endstream
 endobj
 xref
-0 8
+0 13
 0000000000 65535 f 
 0000000061 00000 n 
-0000000092 00000 n 
-0000000199 00000 n 
-0000000402 00000 n 
-0000000470 00000 n 
-0000000765 00000 n 
-0000000824 00000 n 
+0000000112 00000 n 
+0000000219 00000 n 
+0000000331 00000 n 
+0000000446 00000 n 
+0000000664 00000 n 
+0000000900 00000 n 
+0000001086 00000 n 
+0000001321 00000 n 
+0000001390 00000 n 
+0000001729 00000 n 
+0000001789 00000 n 
 trailer
 <<
 /ID 
-[<3eb2a33a7b9b1cc1e82a42cfaced7e29><3eb2a33a7b9b1cc1e82a42cfaced7e29>]
+[<6b262eb114c1db9cd602de144014d86a><6b262eb114c1db9cd602de144014d86a>]
 % ReportLab generated PDF document -- digest (opensource)
 
-/Info 5 0 R
-/Root 4 0 R
-/Size 8
+/Info 10 0 R
+/Root 9 0 R
+/Size 13
 >>
 startxref
-972
+6741
 %%EOF
