@@ -6,21 +6,33 @@ applyTo: "agentops/**"
 
 ## Position in the AI Governance VBD
 
-AgentOps VBD is a submodule of the AI Governance VBD. Treat AgentOps as part of
-the broader AI Governance workshop, not as a separate workshop or standalone
-offering.
+AgentOps is the discipline of evaluating, releasing, observing, and operating AI
+agents through repeatable practices across the agent lifecycle.
 
-AgentOps VBD contains three practice-based submodules:
+AgentOps VBD is part of the AI Governance VBD. It translates the AgentOps
+discipline into a delivery package with two complementary components: the
+workshop and implementation guidance. Treat it as part of the broader AI
+Governance offering, not as a separate workshop or standalone offering.
+
+AgentOps VBD contains four connected practices:
 
 1. **Evaluate**: evaluate agent quality, safety, behavior, and outcomes before
    release and on an ongoing basis.
 2. **Ship**: release agents through controlled, repeatable, and governed
    delivery processes.
-3. **Observe and operate**: monitor, troubleshoot, and operate agents after
-   deployment.
+3. **Observe**: collect and interpret runtime evidence about agent behavior,
+   quality, reliability, performance, and usage.
+4. **Operate**: respond to issues, maintain the service, manage operational
+   change, and improve the agent after deployment.
 
-Keep each submodule connected to its AgentOps practice. Do not mix the
-implementation guidance for one practice into another submodule.
+For content delivery, organize the four practices into three modules:
+**Evaluate**, **Ship**, and **Observe and Operate**. Observe and Operate remain
+distinct practices, but share one deck, one lab, and one implementation guide
+because their workflows are closely connected.
+
+Keep every module connected to its covered practices. Do not merge the concepts
+of Observe and Operate or move implementation guidance from one module into
+another.
 
 ## Platform scope
 
@@ -41,38 +53,51 @@ materials.
 
 Organize the AgentOps VBD into two complementary content groups.
 
+The root `agentops/README.md` is the primary navigation and delivery reference
+for Microsoft field teams, workshop facilitators, implementation teams, and VBD
+delivery leads. It is not an authoring guide. Keep detailed workshop preparation
+and facilitation instructions in the workshop one-pager.
+
+## Writing style
+
+- Do not use em dashes or en dashes for emphasis or as title separators.
+- Use a colon, period, or parentheses when separating a title from a qualifier.
+- Keep headings descriptive and direct.
+
 ### Workshop contents
 
 Workshop contents teach AgentOps concepts and let participants apply them during
 the AI Governance workshop. They consist of:
 
 - **One workshop one-pager PDF** for the complete AgentOps VBD. It summarizes
-  the module, its practices, audience, prerequisites, agenda, outcomes, and the
-  instructions for preparing and delivering the workshop.
-- **Three decks**, one for each practice: Evaluate, Ship, and Observe and
-  operate. Each deck presents the concepts, decisions, workflow, and expected
-  outcomes for its practice.
-- **Three labs**, one for each practice. Each lab provides hands-on activities
-  that reinforce its corresponding deck and produce practical workshop
-  outcomes.
+  the four practices, three content modules, audience, prerequisites, agenda,
+  outcomes, and the instructions for preparing and delivering the workshop.
+- **Three decks**, one for each content module: Evaluate, Ship, and Observe and
+  Operate. The combined Observe and Operate deck must preserve the distinction
+  between the two practices. Store decks as PowerPoint `.pptx` files.
+- **Three labs**, one for each content module. Each lab provides hands-on
+  activities that reinforce its corresponding deck and produce practical
+  workshop outcomes. Store each lab as a Markdown `.md` file.
 
-The deck, labs, and one-pager together represent the workshop experience. Keep
+The decks, labs, and one-pager together represent the workshop experience. Keep
 their terminology, sequence, examples, and expected outcomes aligned across the
-three AgentOps practices.
+three content modules and four AgentOps practices.
 
 ### Implementation guidance
 
 Provide three implementation guides, one each for **Evaluate**, **Ship**, and
-**Observe and operate**. These guides explain how to implement each practice in
-a real environment after or alongside the workshop.
+**Observe and Operate**. The combined guide must explain Observe and Operate as
+distinct but connected practices. These guides explain how to implement the
+covered practices in a real environment after or alongside the workshop.
 
 Implementation guidance must:
 
-- translate each practice into a clear implementation workflow;
+- translate each covered practice into a clear implementation workflow;
 - describe the decisions, activities, artifacts, and expected outputs;
 - connect workshop concepts to concrete Microsoft Foundry capabilities;
 - remain practical, concise, technically grounded, and reusable;
-- avoid customer-specific secrets, tenant identifiers, and production data;
+- remain organization-agnostic and reusable across delivery contexts;
+- avoid organization-specific secrets, tenant identifiers, and production data;
 - avoid duplicating the deck or becoming a detailed product runbook; and
 - avoid Statement of Work, commercial-scope, Definition of Use, or unrelated
   delivery-framework language.
@@ -81,16 +106,12 @@ Implementation guidance must:
 
 - Keep AgentOps working files under two root content directories:
   `agentops/workshop/` and `agentops/implementation-guidance/`.
-- Keep labs and their executable supporting assets in GitHub under
-  `agentops/workshop/labs/`.
-- Store the three workshop decks, workshop one-pager PDF, and published
-  implementation guides in the
-  [AgentOps SharePoint folder](https://microsoft.sharepoint.com/teams/FY26AIWPLUS/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FFY26AIWPLUS%2FShared%20Documents%2FSolution%20Accelerator%20%2D%20Azure%20AI%20Governance%2FSolution%20Accelerator%20release%2FSA%20%2D%20Azure%20AI%20Governance%2FModule%203%2E4%20AgentOps).
-- Treat SharePoint as the system of record for published workshop and
-  implementation artifacts.
-- Markdown implementation-guidance drafts under
-  `agentops/implementation-guidance/` may be used as working source during
-  section-by-section review. Do not treat them as the published deliverables.
+- Maintain all workshop and implementation artifacts in GitHub during the
+  current development phase.
+- Keep the one-pager, decks, labs, and supporting workshop assets under
+  `agentops/workshop/`.
+- Keep implementation guides and their supporting assets under
+  `agentops/implementation-guidance/`.
 
 ## Relationship between the materials
 
@@ -99,15 +120,19 @@ Use this hierarchy when creating or reviewing AgentOps content:
 ```text
 AI Governance VBD
 └── AgentOps VBD
-    ├── Evaluate practice
+    ├── Evaluate module
+    │   ├── Evaluate practice
     │   ├── Workshop content
     │   └── Evaluate implementation guidance
-    ├── Ship practice
+    ├── Ship module
+    │   ├── Ship practice
     │   ├── Workshop content
     │   └── Ship implementation guidance
-    └── Observe and operate practice
+    └── Observe and Operate module
+        ├── Observe practice
+        ├── Operate practice
         ├── Workshop content
-        └── Observe and operate implementation guidance
+        └── Observe and Operate implementation guidance
 ```
 
 Workshop content explains and exercises the practices. Implementation guidance

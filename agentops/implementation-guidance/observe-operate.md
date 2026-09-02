@@ -2,10 +2,17 @@
 
 ## Purpose and intended audience
 
-This implementation guide helps Microsoft field teams establish observability and Day-2
-operations for Microsoft Foundry agents. It is intended for architects, agent
-engineers, site reliability and operations teams, service owners, security
-teams, Responsible AI practitioners, support teams, and implementation leads.
+This implementation guide helps Microsoft field teams establish post-deployment
+observability and operations for Microsoft Foundry agents. It is intended for
+architects, agent engineers, site reliability and operations teams, service
+owners, security teams, Responsible AI practitioners, support teams, and
+implementation leads.
+
+This module combines two distinct practices. **Observe** establishes the
+telemetry, quality signals, traces, dashboards, and diagnostic evidence needed
+to understand agent behavior and service health. **Operate** establishes the
+ownership, alerting, incident response, maintenance, and improvement processes
+needed to manage the service over time.
 
 Use it to define operational outcomes and signals, select tooling, prepare
 telemetry and response procedures, execute monitoring and operational readiness,
@@ -25,11 +32,11 @@ commercial scope, a Definition of Use, or a detailed product runbook.
 | AgentOps Accelerator | Foundry-specific reference for reading Foundry and Application Insights signals, readiness findings, and evidence packaging |
 
 Preserve the native operational source, agent and version identity, retention,
-and access model. Aggregate only the signals needed for customer decisions.
+and access model. Aggregate only the signals needed for operational decisions.
 
 ## Implementation outcomes
 
-By the end of the workstream, the customer should have:
+By the end of the workstream, the organization should have:
 
 1. Operational outcomes, service objectives, and critical user journeys.
 2. A signal catalog covering quality, safety, reliability, performance, cost,
@@ -40,7 +47,7 @@ By the end of the workstream, the customer should have:
 5. A production-readiness and operational rehearsal record.
 6. A process for turning production learning into evaluation and release
    improvements.
-7. Named customer owners for platform, service, quality, safety, and support.
+7. Named owners for platform, service, quality, safety, and support.
 
 ## Implementation outline
 
@@ -51,14 +58,14 @@ By the end of the workstream, the customer should have:
 | 3. Prepare telemetry, alerts, and runbooks | Is the agent diagnosable and are responders ready before production? | Instrumentation plan, dashboards, alert design, runbook outlines |
 | 4. Execute observability and operations | Do signals arrive, alerts work, and responders resolve realistic failures? | Verification record, alert tests, incident rehearsal |
 | 5. Continuously improve | How will production learning change tests, controls, and releases? | Review cadence, feedback loop, prioritized improvements |
-| 6. End the project and transfer knowledge | Can the customer operate the service without the implementation team? | Handoff pack, operator rehearsal, owner acceptance |
+| 6. End the project and transfer knowledge | Can the designated teams operate the service without the implementation team? | Handoff pack, operator rehearsal, owner acceptance |
 
 ## Phase 1 - Discover operational outcomes and signals
 
 ### Objective
 
-Define observability from customer outcomes and operational decisions, not from
-the list of available dashboards.
+Define observability from organizational outcomes and operational decisions,
+not from the list of available dashboards.
 
 ### Discovery questions
 
@@ -153,7 +160,7 @@ questions and support incident response.
    by platform-side tracing.
 4. Use scheduled or continuous evaluation where supported to add sampled quality
    and safety signals to production monitoring.
-5. Use Azure Monitor alerts and customer-standard dashboards for actionable
+5. Use Azure Monitor alerts and organization-standard dashboards for actionable
    operational signals.
 6. Treat the [AgentOps Accelerator](https://aka.ms/agentops-accelerator) as an
    optional **Foundry-specific** reference for reading Foundry/Application
@@ -340,7 +347,7 @@ release gates.
 
 ### Objective
 
-Ensure customer teams can monitor, diagnose, respond, and improve independently.
+Ensure designated teams can monitor, diagnose, respond, and improve independently.
 
 ### Knowledge transfer activities
 
@@ -348,8 +355,8 @@ Ensure customer teams can monitor, diagnose, respond, and improve independently.
    boundaries.
 2. Demonstrate trace/session lookup from an alert through likely root cause and
    release identity.
-3. Have customer operators run a game-day scenario using customer-managed
-   access.
+3. Have designated operators run a game-day scenario using
+   organization-managed access.
 4. Review privacy, transcript, trace, and sensitive-data handling.
 5. Review recurring service, quality, safety, cost, and access reviews.
 6. Transfer dashboards, queries, alerts, runbook outlines, and evaluation links.
@@ -359,7 +366,7 @@ Ensure customer teams can monitor, diagnose, respond, and improve independently.
 
 | Role | Primary responsibilities |
 | --- | --- |
-| Customer product or service owner | Defines service outcomes, priorities, and operational acceptance |
+| Product or service owner | Defines service outcomes, priorities, and operational acceptance |
 | Agent engineer | Maintains instrumentation context, diagnoses behavior, and implements fixes |
 | Platform/observability engineer | Owns telemetry resources, dashboards, alerts, access, retention, and cost controls |
 | Operations or SRE lead | Owns on-call, incident process, game days, reliability reviews, and runbooks |
@@ -370,7 +377,7 @@ Ensure customer teams can monitor, diagnose, respond, and improve independently.
 | Business owner | Reviews adoption, outcomes, satisfaction, and value indicators |
 | Microsoft implementation team | Facilitates the method, demonstrates supported paths, and transfers knowledge |
 
-Incident command, production changes, and risk acceptance remain customer
+Incident command, production changes, and risk acceptance remain organizational
 responsibilities.
 
 ## Completion criteria
@@ -386,7 +393,7 @@ The Observe and Operate workstream is complete when:
 - Alerts link to actionable evidence and response guidance.
 - Operators have completed realistic failure and telemetry-silence rehearsals.
 - Production learning has a defined path into evaluation and release controls.
-- Customer owners have accepted dashboards, alerts, runbook outlines, and review
+- Designated owners have accepted dashboards, alerts, runbook outlines, and review
   cadences.
 
 ## Knowledge transfer and handoff checklist
@@ -397,7 +404,7 @@ The Observe and Operate workstream is complete when:
 - [ ] Dashboards, queries, and alert ownership transferred
 - [ ] Analytics, transcript, Application Insights, and Log Analytics roles reviewed
 - [ ] Sensitive-data, sampling, retention, and export controls documented
-- [ ] Alert delivery and escalation paths tested with customer identities
+- [ ] Alert delivery and escalation paths tested with approved operator identities
 - [ ] Runbook outlines and rollback/containment paths rehearsed
 - [ ] Quality and safety escalation procedures accepted
 - [ ] Production-to-regression feedback loop demonstrated

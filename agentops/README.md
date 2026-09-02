@@ -1,40 +1,61 @@
-# AgentOps VBD artifact map
+# AgentOps Value Based Delivery guide
 
-AgentOps is a submodule of the AI Governance VBD, organized into the Evaluate,
-Ship, and Observe and operate practices. The final package contains ten
-artifacts split between workshop content and implementation guidance.
+## Overview
 
-## Artifact locations
+AgentOps is the discipline of evaluating, releasing, observing, and operating AI
+agents through repeatable practices. It connects quality evidence, release
+controls, runtime visibility, operational response, and continuous improvement
+across the agent lifecycle. This material applies AgentOps to Microsoft Foundry
+agents.
 
-- **GitHub:** labs and executable lab assets under `workshop/labs/`.
-- **Working source:** workshop artifacts under `workshop/` and implementation
-  guides under `implementation-guidance/`.
-- **SharePoint:** published one-pager, decks, and implementation guides.
-- **SharePoint folder:** [Module 3.4 AgentOps](https://microsoft.sharepoint.com/teams/FY26AIWPLUS/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FFY26AIWPLUS%2FShared%20Documents%2FSolution%20Accelerator%20%2D%20Azure%20AI%20Governance%2FSolution%20Accelerator%20release%2FSA%20%2D%20Azure%20AI%20Governance%2FModule%203%2E4%20AgentOps)
+The AgentOps Value Based Delivery is part of the AI Governance Value Based
+Delivery offering. It has two components:
 
-## Workshop artifacts
+- **Workshop:** builds shared understanding through a one-pager, decks, and
+  hands-on labs.
+- **Implementation guidance:** helps teams establish the AgentOps practices in a
+  target environment.
 
-| Artifact | Practice | Planned name or location | Current state |
+## Practices and modules
+
+AgentOps covers four practices organized into three content modules. Observe and
+Operate remain distinct practices but are delivered together.
+
+| Practice | Content module | Focus |
+| --- | --- | --- |
+| Evaluate | Evaluate | Define and maintain evidence of agent quality, safety, behavior, and outcomes |
+| Ship | Ship | Release evaluated agents through controlled and repeatable processes |
+| Observe | Observe and Operate | Understand agent behavior, quality, reliability, performance, and usage |
+| Operate | Observe and Operate | Respond to issues, maintain the service, and improve it over time |
+
+> [!NOTE]
+> [AgentOps Accelerator](https://aka.ms/agentops-accelerator) is the open-source
+> AgentOps jumpstart for continuous evaluation, safety testing, observability,
+> and release readiness of Microsoft Foundry agents. In this Value Based
+> Delivery, it serves as a practical reference implementation alongside native
+> Microsoft Foundry capabilities.
+
+## Materials
+
+| Component | Module | Location | Status |
 | --- | --- | --- | --- |
-| Workshop one-pager PDF | Complete AgentOps VBD | `workshop/one-pager/` | Placeholder; final PDF not yet created |
-| Workshop deck | Evaluate | `workshop/decks/evaluate/` | Placeholder; final deck not yet created |
-| Workshop deck | Ship | `workshop/decks/ship/` | Placeholder; final deck not yet created |
-| Workshop deck | Observe and operate | `workshop/decks/observe-operate/` | Placeholder; final deck not yet created |
-| Workshop lab | Evaluate | GitHub | Placeholder at `workshop/labs/evaluate/README.md` |
-| Workshop lab | Ship | GitHub | Placeholder at `workshop/labs/ship/README.md` |
-| Workshop lab | Observe and operate | GitHub | Placeholder at `workshop/labs/observe-operate/README.md` |
+| Workshop one-pager | Complete VBD | [`agentops-vbd-one-pager.pdf`](workshop/one-pager/agentops-vbd-one-pager.pdf) | Placeholder |
+| Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) | Placeholder |
+| Workshop lab | Evaluate | [`lab.md`](workshop/labs/evaluate/lab.md) | Placeholder |
+| Workshop deck | Ship | [`agentops-ship-workshop.pptx`](workshop/decks/ship/agentops-ship-workshop.pptx) | Placeholder |
+| Workshop lab | Ship | [`lab.md`](workshop/labs/ship/lab.md) | Placeholder |
+| Workshop deck | Observe and Operate | [`agentops-observe-operate-workshop.pptx`](workshop/decks/observe-operate/agentops-observe-operate-workshop.pptx) | Placeholder |
+| Workshop lab | Observe and Operate | [`lab.md`](workshop/labs/observe-operate/lab.md) | Placeholder |
+| Implementation guidance | Evaluate | [`implementation-guidance/evaluate.md`](implementation-guidance/evaluate.md) | Draft in review |
+| Implementation guidance | Ship | [`implementation-guidance/ship.md`](implementation-guidance/ship.md) | Draft |
+| Implementation guidance | Observe and Operate | [`implementation-guidance/observe-operate.md`](implementation-guidance/observe-operate.md) | Draft |
 
-The one-pager owns the instructions for preparing and delivering the workshop.
-Each deck and lab covers one practice and must use the same terminology,
-sequence, examples, and expected outcomes.
+All materials are maintained in GitHub during the current development phase.
 
-## Implementation guidance artifacts
+## Delivery sequence
 
-| Artifact | System of record | Working source | Current state |
-| --- | --- | --- | --- |
-| Evaluate implementation guidance | SharePoint | `implementation-guidance/evaluate.md` | Existing draft; section-by-section review in progress |
-| Ship implementation guidance | SharePoint | `implementation-guidance/ship.md` | Existing draft; review pending |
-| Observe and operate implementation guidance | SharePoint | `implementation-guidance/observe-operate.md` | Existing draft; review pending |
-
-The Markdown files are working sources. SharePoint is the system of record for
-the published implementation guides.
+1. Use the one-pager to prepare the workshop and confirm its scope.
+2. Deliver each selected module with its deck and lab.
+3. Capture workshop decisions, evidence, gaps, and implementation priorities.
+4. Use the corresponding implementation guide to establish each practice in the
+   target environment.

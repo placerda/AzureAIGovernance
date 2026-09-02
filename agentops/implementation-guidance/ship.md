@@ -20,7 +20,7 @@ commercial scope, a Definition of Use, or a step-by-step product runbook.
 | --- | --- |
 | Release unit | Identified agent source and configuration, infrastructure definition, agent version, model and tool dependencies, and evaluation evidence |
 | Environment model | Separate Foundry projects, Azure resources, or governed environments for development, test, and production |
-| Deployment automation | Azure Developer CLI, GitHub Actions, Azure Pipelines, or customer-standard Azure deployment tooling supported by the agent type |
+| Deployment automation | Azure Developer CLI, GitHub Actions, Azure Pipelines, or organization-standard Azure deployment tooling supported by the agent type |
 | Quality gate | Foundry evaluation, safety checks, functional smoke checks, and authorized approval |
 | AgentOps Accelerator | Foundry-specific reference for repository-side evaluation gates, readiness checks, and release evidence |
 
@@ -31,11 +31,11 @@ not replace them.
 
 ## Implementation outcomes
 
-By the end of the workstream, the customer should have:
+By the end of the workstream, the organization should have:
 
 1. An approved release topology and environment promotion path.
 2. A defined release unit, version identity, and source-of-truth strategy.
-3. Customer-owned automation identities, permissions, and secrets management.
+3. Organization-managed automation identities, permissions, and secrets management.
 4. A pipeline or controlled release procedure with explicit quality, safety,
    security, and approval gates.
 5. Evidence that the evaluated candidate is the candidate promoted.
@@ -47,11 +47,11 @@ By the end of the workstream, the customer should have:
 | Phase | Implementation question | Expected evidence |
 | --- | --- | --- |
 | 1. Discover topology and controls | What is released, through which environments, under which controls? | Release topology, control matrix, release-unit definition |
-| 2. Select tools and platform path | Which supported tools fit the agent type, customer engineering model, and governance needs? | Tooling decision record, architecture, prerequisites |
+| 2. Select tools and platform path | Which supported tools fit the agent type, engineering model, and governance needs? | Tooling decision record, architecture, prerequisites |
 | 3. Prepare source, versioning, and environments | Can the candidate and its dependencies be reproduced and promoted safely? | Source baseline, version contract, environment readiness report |
 | 4. Execute pipeline and gates | Did the identified candidate pass required checks and reach the intended target? | Pipeline record, gate evidence, approval, deployment verification |
-| 5. Operationalize releases | Can the customer detect, reverse, and learn from release outcomes? | Runbook outline, rollback test, release metrics and ownership |
-| 6. End the project and transfer knowledge | Can customer teams operate the release path independently? | Handoff pack, rehearsal, owner acceptance |
+| 5. Operationalize releases | Can designated teams detect, reverse, and learn from release outcomes? | Runbook outline, rollback test, release metrics and ownership |
+| 6. End the project and transfer knowledge | Can designated teams operate the release path independently? | Handoff pack, rehearsal, owner acceptance |
 
 ## Phase 1 - Discover release topology and controls
 
@@ -123,12 +123,12 @@ environments, evidence, approvals, and failure behavior explicit.
 ### Objective
 
 Select supported release mechanisms that align with the target platform,
-customer skills, source-control system, and governance model.
+available skills, source-control system, and governance model.
 
 ### Selection criteria
 
 - Agent type and supported deployment mechanism
-- Customer source-control and pipeline standards
+- Organization source-control and pipeline standards
 - Required environment isolation and approval workflows
 - Identity model and secretless authentication options
 - Infrastructure-as-code requirements
@@ -141,9 +141,9 @@ customer skills, source-control system, and governance model.
 
 1. Use the deployment and versioning mechanism supported by the agent type.
    Hosted-agent projects can use Azure Developer CLI and generated CI/CD
-   integration; other Foundry agent types may use portal, SDK, or customer
+   integration; other Foundry agent types may use portal, SDK, or approved
    automation patterns documented for that type.
-2. Use federated workload identity or another customer-approved secretless
+2. Use federated workload identity or another approved secretless
    pattern for pipelines. Grant least privilege at the correct Foundry and Azure
    scopes.
 3. Store environment configuration outside source when it contains secrets.
@@ -152,8 +152,8 @@ customer skills, source-control system, and governance model.
 5. Optionally use the
    [AgentOps Accelerator](https://aka.ms/agentops-accelerator) as a
    **Foundry-specific** reference for repository-side gates and evidence. Confirm
-   that its branch and environment assumptions fit the customer rather than
-   adopting them unchanged.
+   that its branch and environment assumptions fit the operating model rather
+   than adopting them unchanged.
 
 ### Expected outputs and evidence
 
@@ -178,7 +178,7 @@ first pipeline execution.
    - agent name and version;
    - deployment artifact identity; and
    - infrastructure and configuration version.
-3. Protect main and release branches according to customer policy.
+3. Protect main and release branches according to organizational policy.
 4. Require review for instructions, prompts, tools, knowledge configuration,
    safety controls, and infrastructure changes.
 5. Keep evaluation data, gate configuration, and release evidence versioned or
@@ -189,7 +189,7 @@ first pipeline execution.
 ### Environment preparation
 
 1. Verify development, test, and production ownership and access boundaries.
-2. Configure customer-managed pipeline identities and least-privilege roles.
+2. Configure organization-managed pipeline identities and least-privilege roles.
 3. Configure approved secret and certificate storage.
 4. Establish environment-specific configuration and connection mappings.
 5. Validate network paths, private access, DNS, firewalls, and service
@@ -266,7 +266,7 @@ candidate promoted to the target environment.
 - Preserve prior versions or a redeployable known-good artifact according to the
   supported agent lifecycle.
 - If the AgentOps Accelerator is used, its gate and evidence output supplements
-  the Foundry and pipeline records; it does not replace customer approval,
+  the Foundry and pipeline records; it does not replace authorized approval,
   compliance, or platform deployment evidence.
 
 ### Expected outputs and evidence
@@ -294,7 +294,7 @@ Make release outcomes visible, reversible, and continuously improvable.
    evidence requirements.
 4. Exercise rollback or redeployment of a known-good version in a nonproduction
    environment.
-5. Record release metadata in the customer's change and incident systems.
+5. Record release metadata in the designated change and incident systems.
 6. Correlate production incidents and regressions with the release identity.
 7. Feed reviewed production failures into evaluation and future release gates.
 8. Review identity, permissions, secrets, certificates, dependencies, and
@@ -313,18 +313,18 @@ Make release outcomes visible, reversible, and continuously improvable.
 
 ### Objective
 
-Ensure customer teams can operate, troubleshoot, and evolve the release path.
+Ensure designated teams can operate, troubleshoot, and evolve the release path.
 
 ### Knowledge transfer activities
 
 1. Walk through the topology, release unit, version identity, and control matrix.
 2. Demonstrate one release from approved source to post-deployment verification.
 3. Run a failure rehearsal, including a blocked gate and rollback decision.
-4. Have customer operators perform a nonproduction release using customer-owned
-   identities.
+4. Have designated operators perform a nonproduction release using
+   organization-managed identities.
 5. Review the Foundry agent, deployment, evaluation, tracing, and dependency
    lifecycle.
-6. Transfer pipeline, environment, and evidence access to customer-managed
+6. Transfer pipeline, environment, and evidence access to organization-managed
    groups.
 7. Record owners, escalation paths, support boundaries, and the next control
    review.
@@ -333,7 +333,7 @@ Ensure customer teams can operate, troubleshoot, and evolve the release path.
 
 | Role | Primary responsibilities |
 | --- | --- |
-| Customer product owner | Approves release outcomes, user impact, and business acceptance |
+| Product owner | Approves release outcomes, user impact, and business acceptance |
 | Agent engineer | Maintains agent artifacts, dependencies, tests, and release fixes |
 | Platform engineer or administrator | Owns Foundry and Azure environments, identities, policies, and capacity |
 | Release manager | Owns promotion workflow, approvals, change records, schedules, and exceptions |
@@ -342,8 +342,8 @@ Ensure customer teams can operate, troubleshoot, and evolve the release path.
 | Operations or service owner | Owns post-release verification, incidents, rollback, and release health |
 | Microsoft implementation team | Facilitates design, demonstrates supported implementation paths, and transfers knowledge |
 
-The customer retains authority for production approval, policy exceptions, and
-risk acceptance.
+The organization retains authority for production approval, policy exceptions,
+and risk acceptance.
 
 ## Completion criteria
 
@@ -353,21 +353,21 @@ The Ship workstream is complete when:
   documented.
 - The selected Foundry path and its capability boundaries are explicit and use
   supported platform mechanisms.
-- Customer-owned identities and least-privilege permissions are in place.
+- Organization-managed identities and least-privilege permissions are in place.
 - Environment configuration and dependencies are reproducible or have explicit,
   controlled post-deployment steps.
 - Required quality, safety, security, functional, and approval gates are
   implemented and evidenced.
 - The approved candidate can be traced to the production deployment.
 - Post-deployment checks and rollback have been exercised.
-- Customer teams have completed a release rehearsal and accepted ownership.
+- Designated teams have completed a release rehearsal and accepted ownership.
 
 ## Knowledge transfer and handoff checklist
 
 - [ ] Release topology and control matrix transferred
 - [ ] Release-unit and version identity rules documented
 - [ ] Repository, artifact, and environment ownership transferred
-- [ ] Pipeline identities and permissions are customer-managed
+- [ ] Pipeline identities and permissions are organization-managed
 - [ ] Environment variables, connection references, and secrets documented
 - [ ] Quality, safety, security, and approval gates explained
 - [ ] Foundry agent type and supported deployment mechanism documented

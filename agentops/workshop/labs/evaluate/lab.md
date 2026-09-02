@@ -1,6 +1,6 @@
 # Evaluate workshop lab
 
-> Status: Placeholder
+> Status: Placeholder file
 
 This directory will contain the hands-on lab for the Evaluate practice. The lab
 content has not been created yet.
