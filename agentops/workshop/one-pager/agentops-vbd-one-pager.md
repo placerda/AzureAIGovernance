@@ -42,8 +42,7 @@ agents.
 ## Prerequisites
 
 - **Hands-on:** [lab access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs),
-  selected GitHub or Azure DevOps track, assigned Foundry project, and model
-  quota.
+  Foundry project, model quota, and the selected Ship CI/CD track.
 - **Demo:** a validated instructor environment; no participant Azure access.
 
 ## Pre-workshop provisioning
@@ -65,7 +64,7 @@ agents.
 
 | Identity | Scope | Role or access |
 | --- | --- | --- |
-| Participant | Lab delivery | [Lab repository access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs) and selected GitHub or Azure DevOps track |
+| Participant | Lab delivery | [Lab repository access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs); selected Ship CI/CD track |
 | Participant | Foundry project | Foundry User |
 | Participant | Foundry resource | Reader |
 | Participant | Model deployment | Cognitive Services Contributor on the Foundry account |
@@ -91,8 +90,8 @@ and [tracing setup](https://learn.microsoft.com/azure/foundry/observability/how-
   presentation and one hour for the lab.
 - **Demo (fallback):** the instructor executes the lab. Allow one hour for
   presentation and 20 minutes for the demo.
-- **Advanced extension:** allow two additional hours for alerts, runbook
-  execution, and closed-loop assurance.
+- **Advanced extension (optional):** two hours hands-on or one hour demo at
+  difficulty 400, producing a tested runbook, regression case, and updated gate.
 
 Choose the mode before delivery. Do not provision environments during the
 workshop.
