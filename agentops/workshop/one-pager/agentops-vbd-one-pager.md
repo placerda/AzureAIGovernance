@@ -41,8 +41,9 @@ agents.
 
 ## Prerequisites
 
-- **Hands-on:** a GitHub account, [lab repository access](https://github.com/placerda/AzureAIGovernance/tree/placerda-agentops-module/agentops/workshop/labs),
-  one Foundry project per participant, and sufficient model quota.
+- **Hands-on:** [lab access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs),
+  selected GitHub or Azure DevOps track, assigned Foundry project, and model
+  quota.
 - **Demo:** a validated instructor environment; no participant Azure access.
 
 ## Pre-workshop provisioning
@@ -64,7 +65,7 @@ agents.
 
 | Identity | Scope | Role or access |
 | --- | --- | --- |
-| Participant | GitHub | Account and [lab repository access](https://github.com/placerda/AzureAIGovernance/tree/placerda-agentops-module/agentops/workshop/labs) |
+| Participant | Lab delivery | [Lab repository access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs) and selected GitHub or Azure DevOps track |
 | Participant | Foundry project | Foundry User |
 | Participant | Foundry resource | Reader |
 | Participant | Model deployment | Cognitive Services Contributor on the Foundry account |
@@ -90,6 +91,8 @@ and [tracing setup](https://learn.microsoft.com/azure/foundry/observability/how-
   presentation and one hour for the lab.
 - **Demo (fallback):** the instructor executes the lab. Allow one hour for
   presentation and 20 minutes for the demo.
+- **Advanced extension:** allow two additional hours for alerts, runbook
+  execution, and closed-loop assurance.
 
 Choose the mode before delivery. Do not provision environments during the
 workshop.

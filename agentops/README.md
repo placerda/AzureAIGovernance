@@ -46,11 +46,16 @@ Operate remain distinct practices but are delivered together.
 | Workshop lab | Ship | [`lab.md`](workshop/labs/ship/lab.md) |
 | Workshop deck | Observe and Operate | [`agentops-observe-operate-workshop.pptx`](workshop/decks/observe-operate/agentops-observe-operate-workshop.pptx) |
 | Workshop lab | Observe and Operate | [`lab.md`](workshop/labs/observe-operate/lab.md) |
+| Optional advanced lab | Cross-module | [`lab.md`](workshop/labs/advanced/lab.md) |
 | Implementation guidance | Evaluate | [`implementation-guidance/evaluate.md`](implementation-guidance/evaluate.md) |
 | Implementation guidance | Ship | [`implementation-guidance/ship.md`](implementation-guidance/ship.md) |
 | Implementation guidance | Observe and Operate | [`implementation-guidance/observe-operate.md`](implementation-guidance/observe-operate.md) |
 
 All materials are maintained in GitHub during the current development phase.
+
+The Ship lab provides equivalent GitHub Actions and Azure Pipelines tracks.
+The optional advanced lab extends the core modules with alerts, runbook
+execution, regression evaluation, and release-gate improvement.
 
 ## Delivery sequence
 

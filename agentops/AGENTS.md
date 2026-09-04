@@ -53,9 +53,19 @@ Workshop content consists of:
 
 - one workshop one-pager;
 - three decks; and
-- three GitHub-based labs.
+- three core labs maintained in GitHub; and
+- one optional advanced lab.
 
 Maintain one deck and one lab for each content module.
+
+The Ship lab may provide equivalent GitHub Actions and Azure Pipelines tracks.
+Select one track before delivery and keep their learning objectives and expected
+artifact aligned.
+
+The optional advanced lab may combine content from multiple modules. Keep it
+outside the six-hour core workshop and use it for closed-loop scenarios that
+require additional time, such as alerts, runbook execution, trace-to-dataset,
+and release-gate updates.
 
 Workshop content must:
 
