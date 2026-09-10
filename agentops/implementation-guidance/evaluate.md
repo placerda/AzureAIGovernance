@@ -14,6 +14,18 @@ establishing operational ownership.
 > metrics, rubric and policy evaluators where needed, red teaming, tracing, and
 > continuous evaluation.
 
+For a bounded learning exercise, use the [Evaluate workshop
+lab](../workshop/labs/evaluate/lab.md). Its main path is the released Accelerator
+0.15.0 public CLI: initialize/review a workspace, configure the live hosted
+target and dataset, run `agentops eval run`, inspect its report and baseline
+comparison, and record the decision. Native Foundry rubric, safety,
+conversation and red-team activities provide separate supplementary evidence.
+Its [tooling decision](../workshop/labs/evaluate/TOOLING.md) defines the narrow
+coherence/similarity CLI gate and manual completeness, critical-case and
+regression review. No internal-module integration or unpublished extension is
+required. Local synthetic knowledge and simulated tickets are teaching
+substitutes, not a production knowledge or ticketing architecture.
+
 ## Implementation outcomes
 
 By the end of the workstream, the following outcomes should be in place:

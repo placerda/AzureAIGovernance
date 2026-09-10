@@ -36,45 +36,40 @@ agents.
 - **Observe:** interpret runtime traces, metrics, logs, and usage.
 - **Operate:** respond, maintain, manage change, and improve.
 
-> Observe and Operate are distinct practices delivered together in one content
-> module because their workflows and evidence are closely connected.
+Observe and Operate remain distinct practices in one shared module.
 
 ## Prerequisites
 
-- **Hands-on:** [lab access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs),
-  Foundry project, model quota, and the selected Ship CI/CD track.
-- **Demo:** a validated instructor environment; no participant Azure access.
+- **Hands-on:** complete [participant pre-work](https://github.com/placerda/AzureAIGovernance/blob/main/agentops/workshop/pre-work/README.md).
+- **Instructor/admin:** accept the pre-work readiness gate and prepare evidence.
+  Demo attendees need no Azure access. Setup is outside workshop time.
 
-## Pre-workshop provisioning
+## Evaluate facilitation
 
-> For hands-on delivery, assign every Participant access entry to each
-> participant before the session. Setup and troubleshooting are outside workshop
-> time.
+After the 60-minute presentation, select the 60-minute lab or 20-minute demo.
 
-### Environment readiness
+### Hands-on allocation
 
-| Area | Ready when |
+| Minutes | Participant activity and evidence |
 | --- | --- |
-| Foundry project | One assigned project per participant |
-| Model capacity | Quota and unique name assigned; participant creates the deployment in the lab |
-| Observability | Application Insights connected; test trace confirmed |
-| Tooling | [AgentOps Accelerator installation](https://azure.github.io/agentops/) completed |
+| 0-5 | Tool roles, handoff and workspace context |
+| 5-13 | Tools, eight cases, mappings and thresholds |
+| 13-25 | One CLI run, progress and baseline report |
+| 25-35 | Rows, completeness and tool/source failures |
+| 35-44 | Domain rubric calibration and native safety |
+| 44-51 | Conversation scope and red-team coverage |
+| 51-60 | Decision and evidence handoff to Ship |
 
-### Access assignments
+### Selected 20-minute demo
 
-| Identity | Scope | Role or access |
-| --- | --- | --- |
-| Participant | Lab delivery | [Lab repository access](https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/labs); selected Ship CI/CD track |
-| Participant | Foundry project | Foundry User |
-| Participant | Foundry resource | Reader |
-| Participant | Model deployment | Cognitive Services Contributor on the Foundry account |
-| Participant | Application Insights | Log Analytics Reader |
-| Participant | Evaluator model | Cognitive Services OpenAI User on its AI Services resource |
-| Project managed identity | Foundry resource | Foundry User |
+Allow **3m** for azd/Accelerator roles, target, dataset and config; **3m** to
+start the CLI run and open a matching rehearsal bundle; **5m** for report,
+raw rows, baseline and both defects; **5m** for native rubric, safety,
+conversation and red-team evidence; **4m** for the decision, gaps and handoff.
 
-See [Foundry RBAC](https://learn.microsoft.com/azure/foundry/concepts/rbac-foundry),
-[deployment permissions](https://learn.microsoft.com/azure/foundry/concepts/rbac-foundry#deployment-type-specific-permissions),
-and [tracing setup](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup).
+Cloud completion is not guaranteed. Label pre-completed results **instructor
+evidence review**, never the in-progress run. Follow lab failure handling;
+do not resubmit blindly or present missing evidence as a pass.
 
 ## Agenda
 
@@ -86,10 +81,8 @@ and [tracing setup](https://learn.microsoft.com/azure/foundry/observability/how-
 
 ## Delivery options
 
-- **Hands-on (preferred):** participants execute the lab. Allow one hour for
-  presentation and one hour for the lab.
-- **Demo (fallback):** the instructor executes the lab. Allow one hour for
-  presentation and 20 minutes for the demo.
+- **Hands-on (preferred):** 60m presentation and 60m participant lab per module.
+- **Demo (fallback):** 60m presentation and 20m instructor demo per module.
 - **Advanced extension (optional):** two hours hands-on or one hour demo at
   difficulty 400, producing a tested runbook, regression case, and updated gate.
 
@@ -99,11 +92,11 @@ workshop.
 ## Preparation and delivery
 
 1. Confirm participants, selected modules, and outcomes.
-2. Rehearse demonstrations and labs before the session.
+2. Rehearse the selected mode; use labelled evidence discussion if readiness is incomplete.
 3. Capture questions, takeaways, and follow-up learning resources.
 
 ## Reference implementation
 
-Labs use [AgentOps Accelerator](https://aka.ms/agentops-accelerator) as a
-practical reference implementation alongside native Microsoft Foundry
-capabilities.
+Evaluate uses the released [AgentOps Accelerator](https://aka.ms/agentops-accelerator)
+public CLI. Native Microsoft Foundry activities supplement its gate without
+requiring internal Accelerator APIs.

@@ -446,21 +446,27 @@ def add_column(
 
 def generate() -> None:
     metadata, sections = parse_source(SOURCE)
-    required_sections = {
+    left_sections = [
         "Description",
         "Outcomes",
+        "Prerequisites",
+        "Evaluate facilitation",
+    ]
+    right_sections = [
         "Methodology",
         "Scope",
-        "Prerequisites",
-        "Pre-workshop provisioning",
-        "Reference implementation",
         "Agenda",
         "Delivery options",
         "Preparation and delivery",
-    }
+        "Reference implementation",
+    ]
+    required_sections = set(left_sections + right_sections)
     missing = required_sections.difference(sections)
     if missing:
         raise ValueError(f"Missing required sections: {', '.join(sorted(missing))}")
+    unrendered = set(sections).difference(required_sections)
+    if unrendered:
+        raise ValueError(f"Unrendered sections: {', '.join(sorted(unrendered))}")
 
     pdf = canvas.Canvas(str(OUTPUT), pagesize=A4)
     pdf.setTitle(metadata.get("title", "AgentOps Value Based Delivery Workshop"))
@@ -474,26 +480,14 @@ def generate() -> None:
     add_column(
         pdf,
         MARGIN,
-        [
-            "Description",
-            "Outcomes",
-            "Prerequisites",
-            "Pre-workshop provisioning",
-        ],
+        left_sections,
         sections,
         section_gap=5.5 * mm,
     )
     add_column(
         pdf,
         MARGIN + COLUMN_WIDTH + GUTTER,
-        [
-            "Methodology",
-            "Scope",
-            "Agenda",
-            "Delivery options",
-            "Preparation and delivery",
-            "Reference implementation",
-        ],
+        right_sections,
         sections,
         section_gap=2.8 * mm,
     )

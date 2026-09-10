@@ -40,6 +40,11 @@ materials.
 - Use descriptive links that identify their destination.
 - Present AgentOps Accelerator as a practical reference implementation alongside
   native Microsoft Foundry capabilities.
+- Lead workshop explanations with Microsoft Foundry and the learning activity.
+  Present the Accelerator as supporting tooling, not the focus of the workshop.
+  Do not bold its name or include its version in learner-facing narrative.
+  Keep version pins and compatibility details in dependency files and TOOLING.md;
+  retain versioned source links where needed for technical accuracy.
 - Do not present AgentOps Accelerator as the Microsoft Foundry product contract
   or as a replacement for native capabilities.
 - Do not introduce alternative agent-building platforms or future platform
@@ -83,6 +88,60 @@ The workshop supports two delivery modes:
 
 Select the delivery mode before the session. Provisioning and troubleshooting
 are not part of workshop time.
+
+### Workshop document responsibilities
+
+Apply this separation to Evaluate, Ship, Observe and Operate, and the optional
+advanced lab whenever authoring or revising them. It does not require expanding
+scope-only labs into complete exercises before they are ready.
+
+- **Participant `lab.md`:** the execution guide, not a preparation checklist or
+  authoring log. Open with the objective, participant duration, scenario,
+  learning artifact, a link to pre-work, and short tool roles. Follow promptly
+  with numbered actions, commands where needed, and expected results or evidence
+  to inspect. End with the decision/output and handoff or retention instructions.
+  Starting an already prepared learner workspace belongs in the lab;
+  installation, authentication, permissions and provisioning do not.
+- **Workshop pre-work:** installation, authentication, permissions, deployment,
+  workspace preparation, environment readiness, instructor evidence preparation,
+  and owner-approved cleanup. Explicitly separate **PARTICIPANT** tasks from
+  **INSTRUCTOR/ADMIN** responsibilities. Keep delivery prerequisites and their
+  acceptance checks here, not the author's current validation status.
+  Organize shared pre-work as common preparation followed by requirements for
+  Evaluate, Ship, Observe and Operate, and the optional advanced lab. Attendees
+  complete only their selected modules; provide prior-module artifacts for
+  standalone delivery. Do not present Evaluate-specific setup as mandatory for
+  every module or treat one module's readiness as readiness for the whole workshop.
+  Keep the pre-work README a concise participant landing page. Put deployment,
+  workspace initialization, technical metadata, evidence generation and
+  packaging in a linked instructor guide, not below participant steps in the
+  same long page.
+- **Workshop one-pager:** scope, outcomes and facilitation, including module
+  schedule, activity time allocations, delivery alternatives, and the selected
+  20-minute demonstration. Link to pre-work rather than embedding setup/access
+  runbooks. Keep the PDF genuinely one page; consolidate guidance instead of
+  shrinking text to fit a full demo minute-by-minute table.
+- **Module `TOOLING.md`:** versions, tool selection and design rationale,
+  capability boundaries, authoring history and validation/readiness status.
+  This is workshop tooling documentation, not organizational implementation
+  guidance. Do not duplicate internal authoring status or migration narration
+  in the participant lab.
+- **Evidence assets/README:** the evidence contract, provenance labels and
+  result-review references; link to pre-work for preparation actions.
+- **Implementation guidance:** organizational adoption and operating practices,
+  not the storage location for workshop setup, tooling notes or facilitation.
+
+Keep runtime information required for correct execution in the lab even when
+TOOLING explains the underlying limitation: costs, failure handling, no blind
+resubmission, baseline-versus-threshold semantics, completeness and critical-case
+review, and the limits of a passing gate. Clearly distinguish authored examples,
+instructor evidence review and live participant results; missing evidence is a
+gap, not a pass.
+
+Keep one-pager Markdown and generated PDF synchronized. Ensure its renderer
+includes all delivery guidance in the source, regenerate after source changes,
+and verify page count, extracted content, links and visual readability. Update
+the README's relevant artifact descriptions and links when responsibilities move.
 
 ### Modular delivery
 
@@ -154,7 +213,102 @@ Decks must:
 ## Writing standards
 
 - Keep content practical, concise, clear, and professional.
+- Make the course welcoming to a first-time reader. Use direct, encouraging
+  language without assuming the reader knows internal engineering vocabulary.
+  A short sentence is not clear if it only compresses unexplained terms.
+  Name the person or software, what it must do, and how to see the result.
+  Replace phrases such as "runtime identity access" with the specific account
+  or agent and the action it needs permission to perform. Explain necessary
+  technical terms briefly where first used; do not add a separate glossary
+  instead of fixing the instruction.
+- Before a non-obvious download, command block, configuration change or review,
+  briefly explain its purpose and where the output will be used next. Use a
+  short note such as "Why this step" or "What this does", not line-by-line
+  narration. Explain what each ZIP contains and distinguish course source from
+  prepared settings/results. Learners should understand the task, not merely
+  copy commands. Prefer adding the missing reason to existing prose over
+  repeating the instruction.
+- Explain the reader's goal before the implementation mechanics: why the step
+  is needed, what it enables next and what result the reader will use.
+  Describing variable assignments or translating commands into prose is not
+  a substitute for that purpose. When implementation detail is useful, describe
+  it accurately; do not say a script "remembers", "understands" or "takes care of"
+  an unspecified task.
+- Do not use "check", "confirm", "verify" or "make sure" as a substitute for a
+  procedure. Give the reader a short path to the file or screen, the action to
+  perform, the value or status to look for and what to do on failure. Link to
+  a nearby worked procedure when repeating it would make the main flow too long.
+- Use portable Markdown for notes: a bold descriptive label and ordinary
+  paragraphs. Do not depend on GitHub-only alert markers or a browser extension's
+  optional features to convey instructions.
+- Use the workshop's illustrated banners at guide openings and a few meaningful
+  transitions. Keep them relevant, readable and consistent with the friendly
+  hand-drawn style. Include descriptive alt text and editable source files.
+  Banners support the instructions; they must not hide costs, prerequisites,
+  unfinished exercises or missing evidence.
+- Give each numbered step one short action. Group related steps under clear
+  headings; put required-file lists, expected results and failure actions in
+  separate blocks. Avoid procedural tables with paragraph-sized cells and
+  repeated warnings. Shorten the rendered content, not just its source lines.
+- Treat pre-work as preparation for a normal course, not a software-authoring
+  audit. Separate routine class preparation from first-time environment and
+  material creation. Reuse prepared assets; require only tools used by the
+  selected exercise. Keep optional editors, extensions and local debugging
+  optional. Do not add manual encoding, hash collection or metadata forms when
+  native tools and retained artifacts already handle the need.
+- Make the first-time instructor route complete and visible: provision or
+  explicitly reuse the Foundry project, deploy models, assign access, deploy
+  the agent, obtain actual tool records, prepare evaluation settings and results,
+  package, then rehearse with participant permissions. Local CLI installation
+  does not satisfy cloud setup. Name the guide for each stage and its completion
+  condition; do not send readers back to prerequisites that depend on a later step.
+- Keep main-lab evidence independent of optional supplements. If the exercise
+  inspects executed tools, prepare their real records as part of the main run.
+  A missing safety-scoring workflow must not also hide the only tool-trace links.
+- Write preparation and execution steps for someone opening the workshop for
+  the first time: identify the responsible role, starting folder, required
+  files/inputs and where to obtain them, exact commands or UI clicks, observable
+  successful result, and the first action if it fails.
+- Never use "install requirements", "prepare the pipeline", or "verify readiness"
+  as a complete instruction. Link to the specific installer/tutorial, explain
+  unfamiliar terms, and name the resulting file, screen, or evidence.
+- Never leave the starting source as "reviewed archive", "exact repository
+  revision" or "instructor-provided link" without a retrieval path. Name the
+  actual repository/download, exact distributed filename, invitation field
+  or package README label, extraction destination and missing-file action.
+  Session-specific URLs and identities must be populated by the instructor
+  from named portal/CLI outputs; do not invent them. Define how the instructor
+  creates/distributes a package before telling participants to download it.
+  Separate unfinished authoring requirements from executable preparation.
+- Define reusable paths explicitly. Use environment-specific executables for
+  Python and CLIs; do not assume activation, an unexplained working-directory
+  change, or permission to change execution policy. Stop after installation or
+  configuration errors; preserve useful evaluation failure codes and reports.
+- Authors own initial workspace configuration and provenance; instructors reuse
+  it and check the class assignment. Participants receive
+  a reviewed native workspace and evidence bundle, not a JSON template or metadata
+  transcription exercise. Do not introduce a custom bootstrap runner to hide
+  setup complexity. Keep instructor-only recipes outside participant sections.
+- Walk the participant path from a fresh terminal before finalizing it. Remove
+  unnecessary actions instead of explaining ever-longer scripts. Do not ask
+  learners to paste PowerShell variable names into editor/file-picker dialogs;
+  give a visible folder path or say how to display the actual path. Keep the
+  instructions accessible while learners open datasets and reports.
+- Distinguish local checks, authenticated service checks and billable actions.
+  Use assigned resource values, never invented identifiers or unreviewed default
+  subscriptions. Keep secrets out of commands, screenshots and transcripts.
+- State when distributed files require an instructor-supplied revision/archive;
+  do not imply unpublished work is available on the default branch. Identify
+  outline-only activities and missing evidence instead of claiming runnable labs.
 - Keep headings descriptive and direct.
+- Write participant worksheets as short, plain-language questions with one
+  clear purpose per field. Explain necessary terms and say where to find an
+  answer. Link to retained evidence instead of asking learners to transcribe
+  hashes, technical identifiers or compound metadata fields.
+- For questions requiring judgment, include where to look, what to check,
+  how to choose an answer, and a clearly labelled illustrative response.
+  Explain unfamiliar terms at first use and provide an explicit answer space.
+  Examples must not be mistaken for actual run results or prefilled passes.
 - Use organization-neutral language.
 - Do not include secrets, tenant identifiers, or production data.
 - Do not use em dashes or en dashes as title or emphasis separators.

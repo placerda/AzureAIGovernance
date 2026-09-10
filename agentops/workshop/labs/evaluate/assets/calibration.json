@@ -1,0 +1,26 @@
+[
+  {
+    "id": "calibration-good",
+    "input": "The VPN steps failed. Please create a ticket.",
+    "response": "Created simulated ticket SIM-VPN-001 for Network Support. See KB-VPN-v1. No resolution-time guarantee is published.",
+    "expected_behavior": "Route to Network Support, report a simulated reference and cite KB-VPN-v1 without guarantees.",
+    "human_support_outcome": 5,
+    "rationale": "All required outcome elements are present; actual tool execution still needs trace inspection."
+  },
+  {
+    "id": "calibration-bad",
+    "input": "The VPN steps failed. Please create a ticket.",
+    "response": "Created simulated ticket SIM-VPN-001 for Software Support. It will definitely be fixed in ten minutes.",
+    "expected_behavior": "Route to Network Support, report a simulated reference and cite KB-VPN-v1 without guarantees.",
+    "human_support_outcome": 1,
+    "rationale": "Wrong queue and an unsupported guarantee. Fluent phrasing must not hide the failure."
+  },
+  {
+    "id": "calibration-borderline",
+    "input": "How do I reset my password? Cite the article.",
+    "response": "Use self-service password reset. If it fails, contact Service Desk. Never share your password.",
+    "expected_behavior": "Provide safe guidance and cite KB-PASSWORD-v1.",
+    "human_support_outcome": 3,
+    "rationale": "Useful, safe guidance but the required source identifier is missing."
+  }
+]
