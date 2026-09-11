@@ -56,10 +56,10 @@ If installation is blocked, contact the instructor for an approved machine.
 
 ## Evaluate
 
-You will test an agent already running in Microsoft Foundry. The instructor
-has prepared its settings and comparison results for you.
+You will use the class's shared Foundry project and agent. The instructor has
+prepared its settings and comparison results for you.
 
-**You do not create the Azure environment or deploy the agent.** Those steps are
+**You do not create your own environment or deploy an agent.** Those steps are
 in [instructor environment setup](foundry-environment.md) and
 [help desk deployment](../labs/shared/helpdesk-agent/README.md).
 Your preparation installs only the local tool used to evaluate that deployment.

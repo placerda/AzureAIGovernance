@@ -57,6 +57,7 @@ materials.
 Workshop content consists of:
 
 - one workshop one-pager;
+- a Markdown instructor guide with general and module-specific facilitation;
 - three decks; and
 - three core labs maintained in GitHub; and
 - one optional advanced lab.
@@ -116,11 +117,24 @@ scope-only labs into complete exercises before they are ready.
   workspace initialization, technical metadata, evidence generation and
   packaging in a linked instructor guide, not below participant steps in the
   same long page.
-- **Workshop one-pager:** scope, outcomes and facilitation, including module
-  schedule, activity time allocations, delivery alternatives, and the selected
-  20-minute demonstration. Link to pre-work rather than embedding setup/access
-  runbooks. Keep the PDF genuinely one page; consolidate guidance instead of
-  shrinking text to fit a full demo minute-by-minute table.
+- **Workshop one-pager:** a customer-facing description of the whole workshop.
+  Explain its purpose, audience, outcomes, modules, duration, formats,
+  prerequisites and what participants receive. Keep the PDF genuinely one page.
+  Do not include instructor tasks, module-specific facilitation, technical
+  preparation or internal authoring status.
+- **Workshop instructor guide:** the starting point for a new instructor.
+  Explain the workshop, what to read first, how to prepare and how to teach
+  each module. Keep it in Markdown under `workshop/instructor-guide/`.
+  Make it the single entry point: understand the lesson before installing
+  tools, find reusable assets, prepare only what is missing, rehearse with
+  participant access, distribute the files, then teach. Name the destination
+  and completion condition for linked tasks so readers know when to return
+  and continue. Separate first-time material authoring from routine delivery.
+  Include hands-on and demonstration guidance, discussion prompts and module
+  transitions. Give overall activity durations and allow the instructor to
+  adapt the pace; avoid minute-by-minute micromanagement. Link to technical
+  pre-work rather than duplicating its commands. Mark unfinished activities
+  honestly without expanding them into invented procedures.
 - **Module `TOOLING.md`:** versions, tool selection and design rationale,
   capability boundaries, authoring history and validation/readiness status.
   This is workshop tooling documentation, not organizational implementation
@@ -139,7 +153,7 @@ instructor evidence review and live participant results; missing evidence is a
 gap, not a pass.
 
 Keep one-pager Markdown and generated PDF synchronized. Ensure its renderer
-includes all delivery guidance in the source, regenerate after source changes,
+includes all customer-facing content in the source, regenerate after source changes,
 and verify page count, extracted content, links and visual readability. Update
 the README's relevant artifact descriptions and links when responsibilities move.
 
@@ -180,6 +194,7 @@ Store files under:
 agentops/
 ├── workshop/
 │   ├── one-pager/
+│   ├── instructor-guide/
 │   ├── decks/
 │   └── labs/
 └── implementation-guidance/

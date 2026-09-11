@@ -6,6 +6,13 @@
 [deploying the help desk agent](../labs/shared/helpdesk-agent/README.md).
 Participants do not follow this guide.
 
+**One environment for the class:** the instructor prepares one Foundry project,
+shared by all participants, with two model deployments and the baseline and
+candidate versions of the help desk agent. Each participant signs in with their
+own account and runs their own evaluation against the same candidate.
+Evaluation results and traces are stored in the shared project, not isolated
+by participant.
+
 **What you are preparing:** a Microsoft Foundry project, two model deployments
 and monitoring. The agent will use one model to answer requests; evaluation
 will use the other to score those answers. A project alone does not deploy the

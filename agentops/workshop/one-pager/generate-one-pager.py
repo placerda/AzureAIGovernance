@@ -448,17 +448,17 @@ def generate() -> None:
     metadata, sections = parse_source(SOURCE)
     left_sections = [
         "Description",
+        "Audience",
         "Outcomes",
+        "Methodology",
+        "Format",
         "Prerequisites",
-        "Evaluate facilitation",
     ]
     right_sections = [
-        "Methodology",
         "Scope",
         "Agenda",
-        "Delivery options",
-        "Preparation and delivery",
-        "Reference implementation",
+        "Workshop materials",
+        "Optional advanced module",
     ]
     required_sections = set(left_sections + right_sections)
     missing = required_sections.difference(sections)
@@ -482,14 +482,14 @@ def generate() -> None:
         MARGIN,
         left_sections,
         sections,
-        section_gap=5.5 * mm,
+        section_gap=7 * mm,
     )
     add_column(
         pdf,
         MARGIN + COLUMN_WIDTH + GUTTER,
         right_sections,
         sections,
-        section_gap=2.8 * mm,
+        section_gap=7 * mm,
     )
 
     pdf.showPage()

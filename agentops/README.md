@@ -39,10 +39,11 @@ it is not the platform itself.
 
 | Component | Module | Location |
 | --- | --- | --- |
-| Workshop one-pager | Scope, schedule and facilitation | [One-page PDF](workshop/one-pager/agentops-vbd-one-pager.pdf), [Markdown source and Evaluate timings](workshop/one-pager/agentops-vbd-one-pager.md#evaluate-facilitation) |
+| Workshop one-pager | Customer-facing overview, outcomes, scope and formats | [One-page PDF](workshop/one-pager/agentops-vbd-one-pager.pdf), [Markdown source](workshop/one-pager/agentops-vbd-one-pager.md) |
+| Workshop instructor guide | Start here, prepare and facilitate each module | [General guide](workshop/instructor-guide/README.md), [Evaluate](workshop/instructor-guide/evaluate.md), [Ship](workshop/instructor-guide/ship.md), [Observe and Operate](workshop/instructor-guide/observe-operate.md) |
 | Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) |
 | Workshop lab | Evaluate participant actions and decision | [`lab.md`](workshop/labs/evaluate/lab.md) |
-| Workshop pre-work | Essential participant setup and class preparation | [Participants start here](workshop/pre-work/README.md), [instructor guide](workshop/pre-work/instructor-setup.md) |
+| Workshop pre-work | Essential participant setup and technical class preparation | [Participants start here](workshop/pre-work/README.md), [instructor technical preparation](workshop/pre-work/instructor-setup.md) |
 | Foundry environment setup | Create or reuse the project, deploy models and arrange access | [Instructor/admin environment steps](workshop/pre-work/foundry-environment.md) |
 | First-time material authoring | Extra Foundry checks and the Python packages they need | [Author guide](workshop/pre-work/native-evidence.md), [sample dependencies](workshop/pre-work/requirements-native.txt) |
 | Hosted agent setup | Create/update course versions; local debugging is optional | [Help desk deployment](workshop/labs/shared/helpdesk-agent/README.md) |
@@ -68,11 +69,11 @@ Participants receive their module's package through **Workshop files** in the
 `agentops-workshop-source.zip`. The instructor publishes these session files;
 they are not public evidence downloads.
 
-**Preparing the first class?** Follow
-[the instructor route](workshop/pre-work/instructor-setup.md):
-files and tools, Foundry environment, deployed agent versions, evaluation
-settings/results, participant package, then rehearsal and invitation.
-Installing the evaluation CLI does not provision the environment or deploy the agent.
+**Teaching for the first time?** Start with
+[the instructor guide](workshop/instructor-guide/README.md): understand the
+workshop, study the selected module and choose the format before technical
+preparation. It links to the environment, agent deployment, result preparation
+and rehearsal instructions. Reuse prepared resources when the assignment is unchanged.
 
 **Attending the workshop?** Start at [participant pre-work](workshop/pre-work/README.md).
 Evaluate requires Python and Azure CLI; VS Code is optional, and no VS Code
@@ -101,9 +102,9 @@ and complete release pipeline are not supplied yet.
 
 ## Delivery sequence
 
-1. Use the one-pager to select scope, delivery mode and timings; complete the
-   audience-specific pre-work before delivery.
-2. Deliver each selected module with its deck and lab.
+1. Share the one-pager with the customer and agree the modules and format.
+2. Follow the instructor guide and audience-specific pre-work, then teach each
+   selected module with its deck and lab.
 3. Capture workshop decisions, evidence, gaps, and implementation priorities.
 4. Use the corresponding implementation guide to establish each practice in the
    target environment.

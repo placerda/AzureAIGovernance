@@ -7,7 +7,9 @@ It includes creating the Foundry environment and deploying the agent, not just
 installing the evaluation tool.
 
 Participants follow [participant pre-work](README.md), not this guide.
-Timing and facilitation belong in the [one-pager](../one-pager/agentops-vbd-one-pager.md).
+For the workshop overview, reading order and module facilitation, start with
+the [instructor guide](../instructor-guide/README.md).
+This page covers technical preparation, not how to teach the session.
 
 | Order | Action | You finish with |
 | --- | --- | --- |
