@@ -450,12 +450,12 @@ def generate() -> None:
         "Description",
         "Audience",
         "Outcomes",
-        "Methodology",
         "Format",
         "Prerequisites",
     ]
     right_sections = [
         "Scope",
+        "Methodology",
         "Agenda",
         "Workshop materials",
         "Optional advanced module",
@@ -482,14 +482,14 @@ def generate() -> None:
         MARGIN,
         left_sections,
         sections,
-        section_gap=7 * mm,
+        section_gap=13 * mm,
     )
     add_column(
         pdf,
         MARGIN + COLUMN_WIDTH + GUTTER,
         right_sections,
         sections,
-        section_gap=7 * mm,
+        section_gap=10 * mm,
     )
 
     pdf.showPage()

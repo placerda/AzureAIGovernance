@@ -40,15 +40,10 @@ AI agents. Familiarity with Azure and agent development is recommended.
 
 ## Scope
 
-- **Evaluate:** compare two versions of a help desk agent using scores,
-  responses, and tool actions. Discuss a simple scoring rubric and prepared
-  red-teaming results.
-- **Ship:** follow evaluation, release approval, deployment, and
-  post-deployment checks through one pipeline example. See why a release
-  is blocked or allowed.
-- **Observe and Operate:** follow a notification to a trace, investigate the
-  issue, and decide who should act. Connect monitoring and continuous
-  evaluation to agent improvement.
+- **Evaluate:** Foundry evaluators; test datasets; rubric evaluation; red teaming.
+- **Ship:** Versioning; CI/CD;<br/>release gates and approvals; rollback.
+- **Observe and Operate:** Tracing; monitoring; continuous evaluation;
+  alerts and notifications; incident response.
 
 Observe and Operate are distinct practices taught together.
 
@@ -88,13 +83,8 @@ to its own projects.
 
 ## Optional advanced module
 
-**Additional 2h hands-on (level 400).** Explore one behavior requirement,
-one failure, and one control.
+**Additional 2h hands-on (level 400).**
 
-- Use ASSERT for requirement-based evaluations.
-- Apply an Agent Control Specification (ACS) runtime control and compare
-  results, including legitimate requests that should still succeed.
-- Add a regression test to stop the same failure from reaching the next release.
-
-A prepared agent, test cases, and pipeline keep the focus on evaluating
-behavior and applying controls.
+- ASSERT
+- Agent Control Specification (ACS)
+- Agent hooks
