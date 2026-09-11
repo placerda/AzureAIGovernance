@@ -63,7 +63,7 @@ resources, deploy the agent or run an evaluation.
 ```powershell
 $ErrorActionPreference = 'Stop'
 $RepoRoot = (Resolve-Path (Read-Host 'Repository folder path')).Path
-$EvaluateRoot = Join-Path $RepoRoot 'agentops\workshop\labs\evaluate'
+$EvaluateRoot = Join-Path $RepoRoot 'agentops\workshop\labs\01-evaluate'
 $LocalRoot = Join-Path $EvaluateRoot '.local'
 foreach ($file in @(
     'requirements.txt', 'assets\agentops.yaml', 'assets\turns.jsonl',
@@ -81,7 +81,7 @@ Set-Location $RepoRoot
 
 **Check the output:** compare `Repository` with the path in File Explorer's
 address bar. They must match. `Evaluate lab` must end in
-`agentops\workshop\labs\evaluate`; `Local work` adds `.local` to that path.
+`agentops\workshop\labs\01-evaluate`; `Local work` adds `.local` to that path.
 
 Keep this PowerShell window open. If you close it, run this block again to
 define the variables in the new window.
@@ -298,7 +298,7 @@ if ($candidateExit -notin @(0,2)) { throw 'Candidate error. Inspect the existing
 if ($LASTEXITCODE -ne 0) { throw 'Report rendering failed. Keep original results and error.' }
 ```
 
-Review both runs using [lab step 4](../labs/evaluate/lab.md#4-inspect-the-report-and-actual-interactions):
+Review both runs using [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions):
 eight different requests, both scores for every request, errors and the actual
 tool results. Review every request marked `critical: yes` individually.
 Exit `2` means a score missed its required minimum; keep that result for discussion.
@@ -352,7 +352,7 @@ pre-work. Label missing results **Not assessed** and say what is missing.
 baseline to compare against and saved candidate results if their run cannot
 finish. They copy it into `.local`; they do not configure the project themselves.
 
-1. In File Explorer, open `agentops\workshop\labs\evaluate\.local`.
+1. In File Explorer, open `agentops\workshop\labs\01-evaluate\.local`.
 2. Create `staging`, then create `evaluate` inside it.
 3. Inside `evaluate`, create `workspace` and `instructor`.
 4. Copy the entries below into those folders.
@@ -463,7 +463,7 @@ into the signed-in browser. The evaluation page must show that run's results.
 
 If `report_url` is missing, give its `eval_id` and `run_id` to the author for
 the matching link. If a trace opens as a list, use
-[the trace lookup steps](../labs/observe-operate/lab.md#find-the-supplied-trace).
+[the trace lookup steps](../labs/03-observe-operate/lab.md#find-the-supplied-trace).
 Do not choose an unrelated run to make the check pass.
 
 #### Try one evaluation with participant permissions
@@ -472,8 +472,8 @@ Do not choose an unrelated run to make the check pass.
 Use the invitation's **Network access** instructions first if a VPN is required.
 
 1. Have the participant complete [Evaluate pre-work](README.md#evaluate) on their actual or prepared machine.
-2. Run [Evaluate step 3](../labs/evaluate/lab.md#3-run-the-supported-public-command) once.
-3. Review the report and Foundry page using [lab step 4](../labs/evaluate/lab.md#4-inspect-the-report-and-actual-interactions).
+2. Run [Evaluate step 3](../labs/01-evaluate/lab.md#3-run-the-supported-public-command) once.
+3. Review the report and Foundry page using [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions).
 4. Find all eight requests, with actual answers, both scores and no agent-call or scoring errors.
 
 **Expected:** the participant can submit and read results; the agent can answer.
@@ -559,7 +559,7 @@ notifications only to people who agreed to receive them.
 **Used for:** following one real test request from trace to alert and choosing
 an allowed response, without changing the running service.
 
-Under `agentops\workshop\labs\evaluate`, create `.local\staging\observe` with:
+Under `agentops\workshop\labs\01-evaluate`, create `.local\staging\observe` with:
 
 | Entry | Content |
 | --- | --- |
@@ -593,7 +593,7 @@ Do not use production data or disrupt other workloads.
 **Used for:** comparing the incident before and after recovery, then seeing
 which new test prevents the same bug from returning.
 
-Under `agentops\workshop\labs\evaluate`, create `.local\staging\advanced` with:
+Under `agentops\workshop\labs\01-evaluate`, create `.local\staging\advanced` with:
 
 | Entry | Content |
 | --- | --- |
@@ -616,7 +616,7 @@ evidence cannot be presented as validated hands-on exercises.
 If the required files are missing, explain that the session is a design discussion,
 not a completed hands-on lab.
 
-See [TOOLING](../labs/evaluate/TOOLING.md#authoring-validation-status) for scripts
+See [TOOLING](../labs/01-evaluate/TOOLING.md#authoring-validation-status) for scripts
 and service checks still missing. Completing them is the author's job, not participant pre-work.
 
 ## Retention and cleanup

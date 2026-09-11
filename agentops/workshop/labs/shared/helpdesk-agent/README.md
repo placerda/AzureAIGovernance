@@ -47,7 +47,7 @@ You will deploy a copy, first with baseline behavior and then with the deliberat
 
 ```powershell
 $HostSource = Join-Path $RepoRoot 'agentops\workshop\labs\shared\helpdesk-agent'
-$DeployRoot = Join-Path $RepoRoot 'agentops\workshop\labs\evaluate\.local\deployment'
+$DeployRoot = Join-Path $RepoRoot 'agentops\workshop\labs\01-evaluate\.local\deployment'
 $AgentName = Read-Host 'Owner-approved workshop agent name'
 $AzdEnvironment = 'agentops-workshop'
 ```

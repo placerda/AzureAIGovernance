@@ -2,6 +2,8 @@
 
 ![Check first. Then decide what ships. Review the checks and approvals that keep a release under control.](../../assets/banners/ship.png)
 
+[Lab sequence](../README.md) | **Module 2 of 3**
+
 ## Lab definition
 
 **Full lab objective:** Decide whether the help desk agent is ready to release, use a
@@ -17,11 +19,12 @@ links to their evaluation, approval and post-deployment test evidence.
 
 **Delivery tracks:**
 
-- **Track A:** GitHub and GitHub Actions
-- **Track B:** Azure Repos and Azure Pipelines
+- **Track A:** [GitHub and GitHub Actions](github-actions/README.md)
+- **Track B:** [Azure Repos and Azure Pipelines](azure-pipelines/README.md)
 
 Select one track before the workshop. Both tracks teach the same concepts and
-produce the same learning artifact.
+produce the same learning artifact. These are alternative paths within Ship,
+not consecutive labs.
 
 **Current activity:** review existing runs supplied by the instructor.
 The full hands-on pipeline instructions are still being written and tested.
@@ -79,7 +82,7 @@ Evaluate uses Microsoft Foundry to test an already deployed agent. Ship's
 planned hands-on exercise releases the
 [same help desk agent](../shared/helpdesk-agent/README.md), using its code,
 settings, test requests, scoring rules, baseline and
-[reviewed reports and closing findings](../evaluate/lab.md#7-decide-and-hand-off-to-ship).
+[reviewed reports and closing findings](../01-evaluate/lab.md#7-decide-and-hand-off-to-ship).
 
 For standalone Ship delivery, the instructor supplies those same reviewed
 reports and assignment in pre-work;

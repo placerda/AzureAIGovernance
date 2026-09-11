@@ -2,6 +2,9 @@
 
 [Back to the instructor guide](README.md)
 
+**Participant entry:** [02-ship](../labs/02-ship/lab.md). It follows Evaluate
+in the full workshop, or uses supplied Evaluate results for standalone delivery.
+
 ## Learning focus
 
 Connect an evaluation decision to a controlled release. Participants should
@@ -11,9 +14,12 @@ that the deployed version is the one they intended to release.
 ## Before the session
 
 Read the [Ship deck and speaker notes](../decks/ship/agentops-ship-workshop.pptx)
-and the [current lab](../labs/ship/lab.md).
-Choose either GitHub Actions or Azure Pipelines before the session; both
-tracks teach the same concepts and produce the same release checklist.
+and the [current lab](../labs/02-ship/lab.md).
+Choose either [GitHub Actions](../labs/02-ship/github-actions/README.md)
+or [Azure Pipelines](../labs/02-ship/azure-pipelines/README.md) before the
+session. Both tracks teach the same concepts and produce the same release
+checklist. They are alternatives within the module, not two labs to complete.
+Link the selected track in the invitation and use matching pipeline results.
 
 Use [Ship preparation](../pre-work/instructor-setup.md#ship) for the saved
 blocked and accepted pipeline runs, evaluation reports, approval and

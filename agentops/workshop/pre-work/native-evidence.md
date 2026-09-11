@@ -35,7 +35,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Native dependency conflict.' }
 ```
 
 Run `$NativeRoot` in PowerShell to display the folder path, then open it in your editor.
-Inputs remain in `agentops\workshop\labs\evaluate\assets`.
+Inputs remain in `agentops\workshop\labs\01-evaluate\assets`.
 This folder has its own Python packages, separate from the main lab and the agent.
 
 For the manual rubric sample's [client setup](https://learn.microsoft.com/azure/foundry/observability/how-to/cloud-evaluation#set-up-the-sdk-client):

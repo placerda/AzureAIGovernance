@@ -2,6 +2,11 @@
 
 [Back to the instructor guide](README.md)
 
+**Participant entry:** [01-evaluate](../labs/01-evaluate/lab.md), after
+[Evaluate pre-work](../pre-work/README.md#evaluate). The instructor/admin
+prepares the agent beforehand; there is no participant agent-building module
+before Evaluate.
+
 ## Learning focus
 
 Help participants decide whether an agent is good enough by looking at both
@@ -13,7 +18,7 @@ result; an average score is not the whole release decision.
 ### 1. Understand the story
 
 Read the [Evaluate deck and speaker notes](../decks/evaluate/agentops-evaluate-workshop.pptx),
-then the [participant lab](../labs/evaluate/lab.md), without running commands.
+then the [participant lab](../labs/01-evaluate/lab.md), without running commands.
 The help desk scenario uses
 fictional support articles and simulated tickets, not employee data.
 
@@ -46,7 +51,7 @@ before the technical steps.
 first participant ZIP still need to be produced for the first class.
 The source files are not that package. Agree this work with the material
 author; a new instructor should not have to recreate it for every delivery.
-See [tooling status](../labs/evaluate/TOOLING.md#authoring-validation-status)
+See [tooling status](../labs/01-evaluate/TOOLING.md#authoring-validation-status)
 for the current technical readiness.
 
 ### 3. Prepare or reuse the environment and agent
@@ -74,7 +79,7 @@ the tool records from these evaluation runs.
 
 Then follow [package preparation](../pre-work/instructor-setup.md#instructoradmin-package-and-rehearse-the-learner-bundle).
 Include the baseline for comparison and the saved candidate results for
-demonstration or contingency. The [evidence guide](../labs/evaluate/assets/evidence/README.md)
+demonstration or contingency. The [evidence guide](../labs/01-evaluate/assets/evidence/README.md)
 defines what to retain. Mark unfinished supplementary checks **Not assessed**.
 
 **Ready to continue:** the ZIP contains the assignment, prepared settings,
@@ -151,6 +156,6 @@ Ask which findings would block release even if average scores passed.
 Participants should retain their evaluation criteria, results and decision,
 including anything not assessed.
 
-Use the lab's [closing discussion](../labs/evaluate/lab.md#7-decide-and-hand-off-to-ship)
+Use the lab's [closing discussion](../labs/01-evaluate/lab.md#7-decide-and-hand-off-to-ship)
 to connect that decision to Ship: which checks should be automated, and which
 still need a person to review them?

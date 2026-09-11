@@ -168,8 +168,8 @@ build of an unpublished extension would establish public availability.
 From the repository root, with the pinned environment installed:
 
 ```powershell
-agentops\workshop\labs\evaluate\.venv\Scripts\python.exe -m unittest discover `
-  -s agentops\workshop\labs\evaluate\scripts -p test_public_cli.py -v
+agentops\workshop\labs\01-evaluate\.venv\Scripts\python.exe -m unittest discover `
+  -s agentops\workshop\labs\01-evaluate\scripts -p test_public_cli.py -v
 ```
 
 The existing unittest runner invokes **public CLI subprocesses** for version,

@@ -6,7 +6,11 @@ Let's get your computer and files ready so you can focus on the agent during
 the workshop. Complete only the section for your module.
 
 **Watching a demo?** Just read the invitation; no other pre-work is needed.
-Instructors use [their own guide](instructor-setup.md).
+Instructors start with [their own guide](../instructor-guide/README.md).
+
+After preparation, return to the [numbered labs](../labs/README.md):
+Evaluate, Ship, then Observe and Operate. Complete only the modules selected
+for your session; Advanced is optional.
 
 ## Common preparation
 
@@ -116,7 +120,7 @@ error or mismatched ID; do not continue with another subscription.
 **What this gives you:** the `agentops` command submits test requests to Foundry
 and saves the evaluation reports. It does not deploy the agent.
 
-In File Explorer, open `agentops\workshop\labs\evaluate` inside the repository.
+In File Explorer, open `agentops\workshop\labs\01-evaluate` inside the repository.
 Type `powershell` in its address bar and press Enter.
 On a prepared machine, run only `.\.venv\Scripts\agentops.exe --version`.
 Otherwise, run the complete block:
@@ -146,11 +150,11 @@ machine. Do not select an older version or change your package source.
 and comparison results in `.local\instructor`. This puts each file where the
 commands will look for it.
 
-1. In `agentops\workshop\labs\evaluate`, create a folder named `.local`.
+1. In `agentops\workshop\labs\01-evaluate`, create a folder named `.local`.
 2. Copy `README.md`, `workspace` and `instructor` from the extracted
    `agentops-evaluate-workspace.zip` into `.local`.
 3. Read `.local\README.md` for the project, agent version and model that will score its answers.
-4. Run [lab step 1](../labs/evaluate/lab.md#1-start-the-workspace-and-confirm-the-exact-candidate)
+4. Run [lab step 1](../labs/01-evaluate/lab.md#1-start-the-workspace-and-confirm-the-exact-candidate)
    and follow its **Check the three displayed values** instructions.
 
 The lab calls the version you will test the **candidate**. The **scoring model**
@@ -176,7 +180,7 @@ Do not select **Run** or **Rerun** during pre-work.
 ## Observe and Operate
 
 1. Open `README.md` in `agentops-observe-review` and follow **Trace**.
-2. If a trace list opens, use [Find the supplied trace](../labs/observe-operate/lab.md#find-the-supplied-trace) to open the correct record.
+2. If a trace list opens, use [Find the supplied trace](../labs/03-observe-operate/lab.md#find-the-supplied-trace) to open the correct record.
 3. Open **Alert**. You should see the alert rule, time and affected resource.
 4. Open `response-notes.md` to read what happened and who may respond.
 

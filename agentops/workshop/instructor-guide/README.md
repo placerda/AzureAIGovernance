@@ -17,15 +17,20 @@ AgentOps is part of the AI Governance Value Based Delivery. The workshop helps
 teams apply four practices to Microsoft Foundry agents: Evaluate, Ship, Observe,
 and Operate. They are taught in three modules:
 
-| Module | Central question | Learning output |
-| --- | --- | --- |
-| [Evaluate](evaluate.md) | Are the agent's responses and actions good enough? | Evaluation criteria and a decision supported by results |
-| [Ship](ship.md) | What allows this version to be released? | A release checklist supported by evaluation, approval and deployment results |
-| [Observe and Operate](observe-operate.md) | What happened, and what should we do next? | Findings connecting a runtime problem to a response and a future test |
+| Teaching guide | Participant lab | Central question | Learning output |
+| --- | --- | --- | --- |
+| [Evaluate](evaluate.md) | [01-evaluate](../labs/01-evaluate/lab.md) | Are the agent's responses and actions good enough? | Evaluation criteria and a decision supported by results |
+| [Ship](ship.md) | [02-ship](../labs/02-ship/lab.md) | What allows this version to be released? | A release checklist supported by evaluation, approval and deployment results |
+| [Observe and Operate](observe-operate.md) | [03-observe-operate](../labs/03-observe-operate/lab.md) | What happened, and what should we do next? | Findings connecting a runtime problem to a response and a future test |
 
 Observe and Operate are distinct practices taught together. Microsoft Foundry
 is the platform; the [AgentOps Accelerator](https://aka.ms/agentops-accelerator)
 supports some of the evaluation and release activities.
+
+The [lab index](../labs/README.md) shows this order to participants who go
+straight to the code. The numbers are a navigation aid, not a requirement to
+attend earlier modules. `04-advanced` is optional and outside the core workshop.
+The unnumbered `shared` folder contains reusable agent code, not another module.
 
 The workshop teaches through sample scenarios. It does not implement AgentOps
 in the customer's production environment. The separate
@@ -46,6 +51,9 @@ You are ready to prepare when you can explain the scenario, what the group
 will do, and what decision or output they should leave with. Agree the
 selected modules and format with the customer, taking account of
 [the material's current readiness](#what-is-ready-to-use).
+For Ship, also choose [GitHub Actions](../labs/02-ship/github-actions/README.md)
+or [Azure Pipelines](../labs/02-ship/azure-pipelines/README.md).
+Use one path throughout the session; they teach the same release decisions.
 
 ### 2. Reuse or prepare the class materials
 
@@ -54,10 +62,20 @@ package before creating anything. **A new instructor does not need a new
 environment.** Reuse resources and files when they match the module's
 agent versions, test requests and evaluation settings.
 
+**Updating an older checkout?** The lab folders now have numbered names.
+Preserve prepared settings and results from the previous folders, but follow
+[files and tools](../pre-work/instructor-setup.md#1-prepare-the-instructor-machine)
+at the new path rather than copying or moving a Python `.venv`.
+Reuse the prepared package only when it matches the selected activity.
+
 Follow your module guide's preparation route. It links to the relevant parts
 of [technical preparation](../pre-work/instructor-setup.md), including
 environment setup and agent deployment where needed. Keep these tasks outside
 workshop time and work with the administrator on access.
+
+Creating the environment and deploying the initial agent belong here, not
+in a new participant "build an agent" lab. For Evaluate, participants use
+the class's prepared agent with their own accounts.
 
 Continue when the selected activity has the files, access and real results
 it needs, including prepared results for a demo or an interrupted live run.
@@ -82,6 +100,9 @@ Follow [file distribution and invitation](../pre-work/instructor-setup.md#publis
 to publish the files and send the tested instructions. The invitation tells
 participants where to download the package, which account to use, which project
 to open and how to get help. Ask them to complete pre-work before the class.
+Include the [lab index](../labs/README.md) and the selected numbered lab;
+for Ship, include the chosen track's entry page. Use a source archive that
+matches these paths and the prepared package, not a mix of older and current files.
 
 ### 4. Teach the module and discuss the decision
 
@@ -104,6 +125,7 @@ Local paths below are relative to the repository's `agentops` folder.
 | Customer overview | [One-pager](../one-pager/agentops-vbd-one-pager.pdf), in `workshop/one-pager` |
 | Instructor starting point | This page, `workshop/instructor-guide/README.md`, and its module guides |
 | Slides and participant activities | `workshop/decks` and `workshop/labs`; open the direct links in each module guide |
+| Participant sequence and Ship alternatives | [Lab index](../labs/README.md), in `workshop/labs/README.md`; numbered folders show the order |
 | Participant preparation | [Pre-work](../pre-work/README.md), in `workshop/pre-work` |
 | Technical preparation | [Instructor setup](../pre-work/instructor-setup.md), [Foundry environment](../pre-work/foundry-environment.md), and [help desk deployment](../labs/shared/helpdesk-agent/README.md) |
 | Prepared settings and actual results | The session's **Workshop files** invitation link, published by the instructor; not a ready-made package in the source repository |
@@ -133,7 +155,7 @@ committing to a live activity.
 
 | Module | Current material and delivery boundary |
 | --- | --- |
-| Evaluate | Detailed lab and preparation instructions exist. A live class still requires deployed agents, actual results and tool traces, a complete participant package, and rehearsal. See [tooling status](../labs/evaluate/TOOLING.md#authoring-validation-status). |
+| Evaluate | Detailed lab and preparation instructions exist. A live class still requires deployed agents, actual results and tool traces, a complete participant package, and rehearsal. See [tooling status](../labs/01-evaluate/TOOLING.md#authoring-validation-status). |
 | Ship | The current activity reviews instructor-supplied pipeline results. Full hands-on pipeline tracks are not ready. |
 | Observe and Operate | The current activity reviews supplied traces, alerts and response notes. Full hands-on monitoring and incident response are not ready. |
 | Optional advanced | The current activity reviews a supplied incident example. Failure-simulation scripts and the complete release pipeline are not supplied yet. |
@@ -148,13 +170,15 @@ customer's selected scope.
 Carry the Evaluate decision into Ship, then use Observe and Operate to show
 how runtime findings lead to the next evaluation. For standalone modules,
 provide the earlier results as part of pre-work; prior attendance is not required.
+Point participants back to the lab index whenever they need the next module
+or the distinction between preparation, exercises and shared code.
 
 At the end, ask what participants would apply first in their projects.
 Capture questions, takeaways, unresolved gaps and useful follow-up resources.
 Use the corresponding implementation guide for organizational adoption,
 not as additional workshop homework.
 
-The [optional advanced lab](../labs/advanced/lab.md) extends this cycle from
+The [optional advanced lab](../labs/04-advanced/lab.md) extends this cycle from
 incident to recovery and a test that catches the same defect. Keep it outside the
 core workshop: allow an additional two hours hands-on or one hour demo at level
 400. Its [preparation requirements](../pre-work/instructor-setup.md#advanced-optional)

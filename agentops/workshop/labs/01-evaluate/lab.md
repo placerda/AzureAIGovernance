@@ -2,6 +2,8 @@
 
 ![A good answer is a start. Check what the agent did. Test the help desk agent, inspect the results, and compare versions.](../../assets/banners/evaluate.png)
 
+[Lab sequence](../README.md) | **Module 1 of 3**
+
 ## Lab definition
 
 **Objective:** Use Microsoft Foundry evaluation and its evaluators to assess a
@@ -69,7 +71,7 @@ You do not fill in a settings template or collect technical metadata.
 
 ### Open your assignment
 
-1. In VS Code, open `agentops\workshop\labs\evaluate\.local\README.md`.
+1. In VS Code, open `agentops\workshop\labs\01-evaluate\.local\README.md`.
 2. Read the project, candidate version and scoring-model assignment.
 3. Open its **Foundry project** link.
 
@@ -84,7 +86,7 @@ Do not create replacement settings.
 **Why this startup check:** make sure the commands use the intended agent and
 scoring model before you spend money on an evaluation.
 
-1. In File Explorer, open `agentops\workshop\labs\evaluate` inside the repository.
+1. In File Explorer, open `agentops\workshop\labs\01-evaluate` inside the repository.
 2. Type `powershell` in the address bar and press Enter.
 3. Paste and run the entire startup block below.
 
@@ -143,7 +145,7 @@ Do not change projects or settings to make a mismatch disappear.
 The **dataset** is the collection of test requests. First, see what the agent
 will be asked and how its answers will be scored.
 
-1. In VS Code's repository tree, expand `agentops\workshop\labs\evaluate\.local\workspace`.
+1. In VS Code's repository tree, expand `agentops\workshop\labs\01-evaluate\.local\workspace`.
 2. Open `turns.jsonl`: eight employee requests, one per line.
 3. Open `agentops.yaml`: the selected agent and scoring rules.
 
@@ -407,7 +409,7 @@ evaluator recognizes the same good and bad behavior a human reviewer sees.
 
 1. Read [the rubric](assets/rubric.json) and [three calibration examples](assets/calibration.json).
 2. Decide whether you agree with each `human_support_outcome` rating.
-3. In VS Code, expand `agentops\workshop\labs\evaluate\.local\instructor`.
+3. In VS Code, expand `agentops\workshop\labs\01-evaluate\.local\instructor`.
 4. Open `calibration\review.md`, then its listed `definition.json`, `run.json`
    and `output-items.json`.
 5. Compare the real Foundry scores with the human ratings for the wrong queue,
@@ -488,6 +490,6 @@ Deployment may create a new version number. Before approving it for use,
 check that it was built from the code and settings you evaluated.
 
 **Expected result:** Reviewed reports and the supporting files for
-[Ship](../ship/lab.md), with blocking findings and retest needs identified.
+[Ship](../02-ship/lab.md), with blocking findings and retest needs identified.
 Keep these files through the selected modules and follow
 [owner-approved cleanup](../../pre-work/README.md#retention-and-cleanup).

@@ -2,6 +2,10 @@
 
 [Back to the instructor guide](README.md)
 
+**Participant entry:** [03-observe-operate](../labs/03-observe-operate/lab.md).
+It closes the core workshop sequence; [04-advanced](../labs/04-advanced/lab.md)
+is an optional extension, not a required fourth module.
+
 ## Learning focus
 
 Help participants connect runtime information to a useful response.
@@ -11,7 +15,7 @@ and carrying out the response, then improving the agent.
 ## Before the session
 
 Read the [Observe and Operate deck and speaker notes](../decks/observe-operate/agentops-observe-operate-workshop.pptx)
-and the [current lab](../labs/observe-operate/lab.md).
+and the [current lab](../labs/03-observe-operate/lab.md).
 Use [module preparation](../pre-work/instructor-setup.md#observe-and-operate)
 to supply a trace, related alert, dashboard and response notes with working
 links and a clear time range.

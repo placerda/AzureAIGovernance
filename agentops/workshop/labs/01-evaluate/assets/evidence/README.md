@@ -10,7 +10,7 @@ Authors track unfinished work in [TOOLING.md](../../TOOLING.md#authoring-validat
 
 Follow [participant extraction](../../../../pre-work/README.md#2-participant-initialize-the-supported-evaluation-workspace)
 for `agentops-evaluate-workspace.zip` from the invitation's **Workshop files**.
-All paths below are relative to `agentops\workshop\labs\evaluate`.
+All paths below are relative to `agentops\workshop\labs\01-evaluate`.
 
 The repository supplies these instructions and teaching inputs, not a finished
 package of actual evaluation results.

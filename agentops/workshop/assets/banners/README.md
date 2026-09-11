@@ -28,7 +28,7 @@ handwritten typography follow the evaluation-plan illustration in
 From the repository root in PowerShell:
 
 ```powershell
-& .\agentops\workshop\labs\evaluate\.venv\Scripts\python.exe .\agentops\workshop\assets\banners\generate_banners.py
+& .\agentops\workshop\labs\01-evaluate\.venv\Scripts\python.exe .\agentops\workshop\assets\banners\generate_banners.py
 ```
 
 The existing interpreter supplies Pillow and fontTools. The renderer reads

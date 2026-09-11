@@ -68,6 +68,19 @@ The Ship lab may provide equivalent GitHub Actions and Azure Pipelines tracks.
 Select one track before delivery and keep their learning objectives and expected
 artifact aligned.
 
+Make the learning order visible in the lab folders: `01-evaluate`, `02-ship`,
+`03-observe-operate`, and optional `04-advanced`. Keep `shared` unnumbered:
+it contains reusable agent code and assets, not an extra module.
+Use `workshop/labs/README.md` as the participant entry point, linking to
+pre-work before the numbered labs. Keep the instructor guide as the teaching
+entry point and explain folder purposes in `agentops/README.md`.
+Numbering indicates the full-workshop sequence, not mandatory attendance at
+earlier modules. Agent/environment preparation belongs to instructor/admin
+pre-work, not a participant "build an agent" module.
+Within Ship, make `github-actions` and `azure-pipelines` alternative entry
+points to the same lab and output, not consecutive labs. Do not turn outlines
+into runnable instructions merely to populate the folders.
+
 The optional advanced lab may combine content from multiple modules. Keep it
 outside the six-hour core workshop and use it for closed-loop scenarios that
 require additional time, such as alerts, runbook execution, trace-to-dataset,
@@ -195,8 +208,18 @@ agentops/
 ├── workshop/
 │   ├── one-pager/
 │   ├── instructor-guide/
+│   ├── pre-work/
 │   ├── decks/
+│   ├── assets/
 │   └── labs/
+│       ├── README.md
+│       ├── 01-evaluate/
+│       ├── 02-ship/
+│       │   ├── github-actions/
+│       │   └── azure-pipelines/
+│       ├── 03-observe-operate/
+│       ├── 04-advanced/
+│       └── shared/
 └── implementation-guidance/
 ```
 

@@ -2,6 +2,8 @@
 
 ![Find the fault. Help it stay fixed. Review how an incident becomes a test that catches the same bug.](../../assets/banners/advanced.png)
 
+[Lab sequence](../README.md) | **Optional extension, outside the three core modules**
+
 ## Lab definition
 
 **Full lab objective:** Follow a problem from alert to recovery, then add a test and a
@@ -37,7 +39,7 @@ Use the `agentops-advanced-review` folder from
 2. In `README.md`, follow **Trace** and **Blocked run**. Compare the agent version and time recorded for the incident.
 3. Follow **Recovered run** and read the saved test responses. Compare them with the runbook's expected result after recovery.
 
-If **Trace** opens a list, use [the trace lookup steps](../observe-operate/lab.md#find-the-supplied-trace)
+If **Trace** opens a list, use [the trace lookup steps](../03-observe-operate/lab.md#find-the-supplied-trace)
 with **Trace ID** and **UTC time range** from this package's README.
 
 ### Find the test added after the incident

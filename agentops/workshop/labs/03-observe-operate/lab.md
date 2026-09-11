@@ -2,6 +2,8 @@
 
 ![Follow the clues. Choose the next move. Connect a slow or failed request to a clear response.](../../assets/banners/observe-operate.png)
 
+[Lab sequence](../README.md) | **Module 3 of 3**
+
 ## Lab definition
 
 **Objective:** Use Microsoft Foundry to see what happened during an agent

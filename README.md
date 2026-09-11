@@ -11,11 +11,13 @@ The following solution accelerators are currently available in this repository.
 
 ## In Development
 
-The following solution accelerator is currently in active development:
+The following materials are currently in active development:
 
-| Solution Accelerator | Description |
+| Material | Description |
 | --- | --- |
+| [AgentOps Value Based Delivery](agentops/README.md) | Workshop and implementation guidance for Evaluate, Ship, Observe and Operate. Start with the [instructor guide](agentops/workshop/instructor-guide/README.md) to teach, or the [ordered labs](agentops/workshop/labs/README.md) to participate. |
 | [AgentOps Solution Accelerator](https://aka.ms/agentops-accelerator) | Provides a production-ready foundation for taking Microsoft Foundry agents from prototype to production, with standardized evaluations, CI/CD release gates, observability, safety and governance checks, release evidence, and continuous improvement workflows. |
+
 ## Coming Soon
 
 The following solution accelerators are being considered for development:
