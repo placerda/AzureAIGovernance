@@ -154,6 +154,22 @@ TABLE_LABEL = ParagraphStyle(
     fontName="Helvetica-Bold",
     textColor=BLUE,
 )
+SCOPE_TABLE_BODY = ParagraphStyle(
+    "ScopeTableBody",
+    parent=BODY,
+    spaceAfter=0,
+)
+SCOPE_TABLE_LABEL = ParagraphStyle(
+    "ScopeTableLabel",
+    parent=SCOPE_TABLE_BODY,
+    fontName="Helvetica-Bold",
+    textColor=BLUE,
+)
+SCOPE_TABLE_HEADER = ParagraphStyle(
+    "ScopeTableHeader",
+    parent=SCOPE_TABLE_LABEL,
+    textColor=WHITE,
+)
 READINESS_BODY = ParagraphStyle(
     "ReadinessBody",
     parent=TABLE_BODY,
@@ -277,6 +293,7 @@ def section_story(name: str, lines: list[str]) -> list[object]:
                 )
         elif kind == "table":
             rows = value
+            is_scope_table = name == "Scope"
             is_readiness_table = rows[0][0] == "Area"
             is_access_table = rows[0][0] == "Identity"
             is_grouped_table = is_readiness_table or is_access_table
@@ -285,7 +302,11 @@ def section_story(name: str, lines: list[str]) -> list[object]:
                 table_row = []
                 for column_index, cell in enumerate(row):
                     if row_index == 0:
-                        style = TABLE_HEADER
+                        style = SCOPE_TABLE_HEADER if is_scope_table else TABLE_HEADER
+                    elif is_scope_table:
+                        style = (
+                            SCOPE_TABLE_LABEL if column_index == 0 else SCOPE_TABLE_BODY
+                        )
                     elif is_grouped_table and column_index == 0:
                         style = READINESS_LABEL
                     elif is_grouped_table:
@@ -317,6 +338,13 @@ def section_story(name: str, lines: list[str]) -> list[object]:
                 ("TOPPADDING", (0, 0), (-1, -1), 1.1 * mm),
                 ("BOTTOMPADDING", (0, 0), (-1, -1), 1.1 * mm),
             ]
+            if is_scope_table:
+                table_style.extend(
+                    [
+                        ("BACKGROUND", (0, 1), (0, -1), PALE),
+                        ("BACKGROUND", (1, 1), (-1, -1), WHITE),
+                    ]
+                )
             if is_grouped_table:
                 table_style.extend(
                     [
@@ -489,7 +517,7 @@ def generate() -> None:
         MARGIN + COLUMN_WIDTH + GUTTER,
         right_sections,
         sections,
-        section_gap=10 * mm,
+        section_gap=8.8 * mm,
     )
 
     pdf.showPage()

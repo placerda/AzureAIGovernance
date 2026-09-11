@@ -40,10 +40,11 @@ AI agents. Familiarity with Azure and agent development is recommended.
 
 ## Scope
 
-- **Evaluate:** Foundry evaluators; test datasets; rubric evaluation; red teaming.
-- **Ship:** Versioning; CI/CD;<br/>release gates and approvals; rollback.
-- **Observe and Operate:** Tracing; monitoring; continuous evaluation;
-  alerts and notifications; incident response.
+| Module | Topics |
+| --- | --- |
+| **Evaluate** | Foundry evaluators, test datasets, rubric evaluation, red teaming. |
+| **Ship** | Versioning, CI/CD, release gates and approvals, rollback. |
+| **Observe<br/>and Operate** | Tracing, monitoring, continuous evaluation, alerts and notifications, incident response. |
 
 Observe and Operate are distinct practices taught together.
 
