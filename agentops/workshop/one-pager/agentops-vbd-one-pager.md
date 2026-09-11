@@ -85,6 +85,5 @@ to its own projects.
 
 **Additional 2h hands-on (level 400).**
 
-- ASSERT
-- Agent Control Specification (ACS)
-- Agent hooks
+**Responsible AI in practice:** ASSERT; Agent Control Specification (ACS);
+Agent hooks.
