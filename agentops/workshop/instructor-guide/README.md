@@ -23,9 +23,7 @@ and Operate. They are taught in three modules:
 | [Ship](ship.md) | [02-ship](../labs/02-ship/lab.md) | How do we automate agent testing and deployment with CI/CD pipelines? | A release checklist supported by evaluation, approval and deployment results |
 | [Observe and Operate](observe-operate.md) | [03-observe-operate](../labs/03-observe-operate/lab.md) | What happened, and what should we do next? | Findings connecting a runtime problem to a response and a future test |
 
-Observe and Operate are distinct practices taught together. Microsoft Foundry
-is the platform; the [AgentOps Accelerator](https://aka.ms/agentops-accelerator)
-supports some of the evaluation and release activities.
+Observe and Operate are distinct practices taught together.
 
 The [lab index](../labs/README.md) shows this order to participants who go
 straight to the code. The numbers are a navigation aid, not a requirement to
