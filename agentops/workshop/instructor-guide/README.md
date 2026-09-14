@@ -20,7 +20,7 @@ and Operate. They are taught in three modules:
 | Teaching guide | Participant lab | Central question | Learning output |
 | --- | --- | --- | --- |
 | [Evaluate](evaluate.md) | [01-evaluate](../labs/01-evaluate/lab.md) | Are the agent's responses and actions good enough? | Evaluation criteria and a decision supported by results |
-| [Ship](ship.md) | [02-ship](../labs/02-ship/lab.md) | What allows this version to be released? | A release checklist supported by evaluation, approval and deployment results |
+| [Ship](ship.md) | [02-ship](../labs/02-ship/lab.md) | How do we automate agent testing and deployment with CI/CD pipelines? | A release checklist supported by evaluation, approval and deployment results |
 | [Observe and Operate](observe-operate.md) | [03-observe-operate](../labs/03-observe-operate/lab.md) | What happened, and what should we do next? | Findings connecting a runtime problem to a response and a future test |
 
 Observe and Operate are distinct practices taught together. Microsoft Foundry
