@@ -5,7 +5,7 @@
 Start here if you are teaching AgentOps for the first time. This guide explains
 the workshop, helps you prepare, and gives you a natural flow for each module.
 Use the [one-pager](../one-pager/agentops-vbd-one-pager.pdf) to introduce the
-workshop to a customer, not as your teaching script.
+workshop to participants, not as your teaching script.
 
 **Understand the class before installing tools.** Keep this guide as your
 starting point. The linked technical pages explain individual tasks; return to
@@ -25,13 +25,18 @@ and Operate. They are taught in three modules:
 
 Observe and Operate are distinct practices taught together.
 
-The [lab index](../labs/README.md) shows this order to participants who go
-straight to the code. The numbers are a navigation aid, not a requirement to
-attend earlier modules. `04-advanced` is optional and outside the core workshop.
-The unnumbered `shared` folder contains reusable agent code, not another module.
+The [workshop labs page](../labs/README.md) is the starting point for
+participants. It brings together links to pre-work and each module's lab,
+including the two alternative Ship tracks. Share it before the workshop so
+participants can prepare and find their selected activity.
+
+Lab folders are numbered in workshop order, but participants can attend a
+single module. The optional advanced lab is in `04-advanced`, outside the core
+workshop. The unnumbered `shared` folder contains reusable agent code,
+not another module.
 
 The workshop teaches through sample scenarios. It does not implement AgentOps
-in the customer's production environment. The separate
+in participants' production environments. The separate
 [implementation guides](../../README.md#materials) help teams apply the
 practices after the workshop.
 
@@ -47,7 +52,7 @@ executing commands.
 
 You are ready to prepare when you can explain the scenario, what the group
 will do, and what decision or output they should leave with. Agree the
-selected modules and format with the customer, taking account of
+selected modules and format with the workshop organizer, taking account of
 [the material's current readiness](#what-is-ready-to-use).
 For Ship, also choose [GitHub Actions](../labs/02-ship/github-actions/README.md)
 or [Azure Pipelines](../labs/02-ship/azure-pipelines/README.md).
@@ -98,7 +103,7 @@ Follow [file distribution and invitation](../pre-work/instructor-setup.md#publis
 to publish the files and send the tested instructions. The invitation tells
 participants where to download the package, which account to use, which project
 to open and how to get help. Ask them to complete pre-work before the class.
-Include the [lab index](../labs/README.md) and the selected numbered lab;
+Include the [workshop labs page](../labs/README.md) and the selected numbered lab;
 for Ship, include the chosen track's entry page. Use a source archive that
 matches these paths and the prepared package, not a mix of older and current files.
 
@@ -120,10 +125,10 @@ Local paths below are relative to the repository's `agentops` folder.
 
 | Material | Location and purpose |
 | --- | --- |
-| Customer overview | [One-pager](../one-pager/agentops-vbd-one-pager.pdf), in `workshop/one-pager` |
+| Overview for participants | [One-pager](../one-pager/agentops-vbd-one-pager.pdf), in `workshop/one-pager` |
 | Instructor starting point | This page, `workshop/instructor-guide/README.md`, and its module guides |
 | Slides and participant activities | `workshop/decks` and `workshop/labs`; open the direct links in each module guide |
-| Participant sequence and Ship alternatives | [Lab index](../labs/README.md), in `workshop/labs/README.md`; numbered folders show the order |
+| Participant sequence and Ship alternatives | [Workshop labs page](../labs/README.md), in `workshop/labs/README.md`; links to pre-work, each lab and the two Ship tracks |
 | Participant preparation | [Pre-work](../pre-work/README.md), in `workshop/pre-work` |
 | Technical preparation | [Instructor setup](../pre-work/instructor-setup.md), [Foundry environment](../pre-work/foundry-environment.md), and [help desk deployment](../labs/shared/helpdesk-agent/README.md) |
 | Prepared settings and actual results | The session's **Workshop files** invitation link, published by the instructor; not a ready-made package in the source repository |
@@ -160,16 +165,16 @@ committing to a live activity.
 
 Do not describe a review of saved results as a completed live exercise.
 If the required results are unavailable, agree a discussion-based session
-instead of improvising an incomplete lab. Keep that distinction clear in the
-customer's selected scope.
+instead of improvising an incomplete lab. Agree this format with the workshop
+organizer and explain it to participants before the session.
 
 ## Connect the modules and close the session
 
 Carry the Evaluate decision into Ship, then use Observe and Operate to show
 how runtime findings lead to the next evaluation. For standalone modules,
 provide the earlier results as part of pre-work; prior attendance is not required.
-Point participants back to the lab index whenever they need the next module
-or the distinction between preparation, exercises and shared code.
+Point participants back to the [workshop labs page](../labs/README.md) to find
+their next activity or revisit the preparation instructions.
 
 At the end, ask what participants would apply first in their projects.
 Capture questions, takeaways, unresolved gaps and useful follow-up resources.

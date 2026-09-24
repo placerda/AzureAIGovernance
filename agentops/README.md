@@ -22,7 +22,7 @@ Delivery offering. It has two components:
 
 | Your goal | Start with |
 | --- | --- |
-| Understand what the workshop delivers | [Customer one-pager](workshop/one-pager/agentops-vbd-one-pager.pdf) |
+| Understand what the workshop delivers | [Workshop one-pager](workshop/one-pager/agentops-vbd-one-pager.pdf) |
 | Prepare and teach a module | [Instructor guide](workshop/instructor-guide/README.md): understand the lesson, reuse or prepare the environment, rehearse, then teach |
 | Participate in the workshop | [Lab sequence](workshop/labs/README.md): complete your pre-work, then open the selected numbered lab |
 | Apply the practices in your organization | [Implementation guidance](implementation-guidance/) |
@@ -50,7 +50,7 @@ Paths below are relative to `agentops`.
 
 | Folder | What belongs here |
 | --- | --- |
-| [`workshop/one-pager`](workshop/one-pager/) | Customer overview, outcomes, scope and formats |
+| [`workshop/one-pager`](workshop/one-pager/) | Overview for participants, outcomes, scope and formats |
 | [`workshop/instructor-guide`](workshop/instructor-guide/README.md) | Reading order, preparation route and facilitation |
 | [`workshop/pre-work`](workshop/pre-work/README.md) | Participant setup and separately identified instructor/admin preparation |
 | [`workshop/decks`](workshop/decks/) | Presentations and speaker notes for the three modules |
@@ -71,9 +71,9 @@ Complete one, not both.
 
 | Component | Module | Location |
 | --- | --- | --- |
-| Workshop one-pager | Customer-facing overview, outcomes, scope and formats | [One-page PDF](workshop/one-pager/agentops-vbd-one-pager.pdf), [Markdown source](workshop/one-pager/agentops-vbd-one-pager.md) |
+| Workshop one-pager | Overview for participants, outcomes, scope and formats | [One-page PDF](workshop/one-pager/agentops-vbd-one-pager.pdf), [Markdown source](workshop/one-pager/agentops-vbd-one-pager.md) |
 | Workshop instructor guide | Start here, prepare and facilitate each module | [General guide](workshop/instructor-guide/README.md), [Evaluate](workshop/instructor-guide/evaluate.md), [Ship](workshop/instructor-guide/ship.md), [Observe and Operate](workshop/instructor-guide/observe-operate.md) |
-| Workshop lab sequence | Participant entry point and numbered modules | [Lab index](workshop/labs/README.md) |
+| Workshop lab sequence | Participant starting page with links to pre-work, numbered labs and alternative Ship tracks | [Workshop labs](workshop/labs/README.md) |
 | Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) |
 | Workshop lab | Evaluate participant actions and decision | [`lab.md`](workshop/labs/01-evaluate/lab.md) |
 | Workshop pre-work | Essential participant setup and technical class preparation | [Participants start here](workshop/pre-work/README.md), [instructor technical preparation](workshop/pre-work/instructor-setup.md) |
@@ -126,7 +126,8 @@ and complete release pipeline are not supplied yet.
 
 ## Delivery sequence
 
-1. Share the one-pager with the customer and agree the modules and format.
+1. Share the one-pager with participants and agree the modules and format with
+   the workshop organizer.
 2. Follow the instructor guide and audience-specific pre-work, then teach each
    selected module with its deck and lab.
 3. Capture workshop decisions, evidence, gaps, and implementation priorities.

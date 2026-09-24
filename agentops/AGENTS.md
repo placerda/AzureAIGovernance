@@ -130,7 +130,7 @@ scope-only labs into complete exercises before they are ready.
   workspace initialization, technical metadata, evidence generation and
   packaging in a linked instructor guide, not below participant steps in the
   same long page.
-- **Workshop one-pager:** a customer-facing description of the whole workshop.
+- **Workshop one-pager:** a description of the whole workshop for participants.
   Explain its purpose, audience, outcomes, modules, duration, formats,
   prerequisites and what participants receive. Keep the PDF genuinely one page.
   Do not include instructor tasks, module-specific facilitation, technical
@@ -166,7 +166,7 @@ instructor evidence review and live participant results; missing evidence is a
 gap, not a pass.
 
 Keep one-pager Markdown and generated PDF synchronized. Ensure its renderer
-includes all customer-facing content in the source, regenerate after source changes,
+includes all participant-facing content in the source, regenerate after source changes,
 and verify page count, extracted content, links and visual readability. Update
 the README's relevant artifact descriptions and links when responsibilities move.
 
@@ -251,6 +251,12 @@ Decks must:
 ## Writing standards
 
 - Keep content practical, concise, clear, and professional.
+- Refer to people attending the workshop as "participants", not with commercial
+  labels. Use "workshop organizer" when discussing session planning and "team"
+  or "organization" when discussing implementation and production environments.
+- When first introducing a document, page, tool, package or folder, explain
+  what it contains or does and when the reader should use it. Use descriptive
+  link labels rather than assuming the reader already knows the material.
 - Make the course welcoming to a first-time reader. Use direct, encouraging
   language without assuming the reader knows internal engineering vocabulary.
   A short sentence is not clear if it only compresses unexplained terms.

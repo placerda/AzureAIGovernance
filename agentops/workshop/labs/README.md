@@ -41,7 +41,8 @@ it is not a preliminary participant lab.
 
 ## Find the other workshop materials
 
-Use the [folder map](../../README.md#folder-map) to find the customer
-one-pager, decks, instructor guidance and implementation guidance.
+The [folder map](../../README.md#folder-map) describes where each type of
+material is stored. Use it to find the workshop one-pager, decks,
+instructor guidance and implementation guidance.
 Preparation stays in pre-work; the numbered labs explain what to do
 during the selected activity.
