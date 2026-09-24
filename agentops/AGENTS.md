@@ -138,6 +138,11 @@ scope-only labs into complete exercises before they are ready.
 - **Workshop instructor guide:** the starting point for a new instructor.
   Explain the workshop, what to read first, how to prepare and how to teach
   each module. Keep it in Markdown under `workshop/instructor-guide/`.
+  Separate first reading from preparation: ask readers to finish the general
+  guide before opening linked materials. Keep its opening module overview
+  free of guide and lab links, and place module-guide links in a final handoff.
+  Present other resource links as references for the relevant preparation stage,
+  not as a checklist to open during the first reading.
   Make it the single entry point: understand the lesson before installing
   tools, find reusable assets, prepare only what is missing, rehearse with
   participant access, distribute the files, then teach. Name the destination

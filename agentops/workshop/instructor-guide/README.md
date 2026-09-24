@@ -3,13 +3,13 @@
 ![Set the stage. Let the learning happen. Prepare the essentials so the group can focus on the agent.](../assets/banners/instructor.png)
 
 Start here if you are teaching AgentOps for the first time. This guide explains
-the workshop, helps you prepare, and gives you a natural flow for each module.
-Use the [one-pager](../one-pager/agentops-vbd-one-pager.pdf) to introduce the
-workshop to participants, not as your teaching script.
+the workshop and the overall preparation and teaching flow.
 
-**Understand the class before installing tools.** Keep this guide as your
-starting point. The linked technical pages explain individual tasks; return to
-your module guide after each task to continue the teaching route.
+**Read this guide through first.** You do not need to open the linked materials
+yet. Start by understanding the workshop, the preparation stages and the
+available formats. Afterward, use the module guides listed at the end of this
+page to prepare the modules you will teach. Each guide introduces its slides,
+lab and technical preparation in the order you need them.
 
 ## What the workshop is
 
@@ -17,11 +17,11 @@ AgentOps is part of the AI Governance Value Based Delivery. The workshop helps
 teams apply four practices to Microsoft Foundry agents: Evaluate, Ship, Observe,
 and Operate. They are taught in three modules:
 
-| Teaching guide | Participant lab | Central question | Learning output |
+| Module | Participant lab | Central question | Learning output |
 | --- | --- | --- | --- |
-| [Evaluate](evaluate.md) | [01-evaluate](../labs/01-evaluate/lab.md) | Are the agent's responses and actions good enough? | Evaluation criteria and a decision supported by results |
-| [Ship](ship.md) | [02-ship](../labs/02-ship/lab.md) | How do we automate agent testing and deployment with CI/CD pipelines? | A release checklist supported by evaluation, approval and deployment results |
-| [Observe and Operate](observe-operate.md) | [03-observe-operate](../labs/03-observe-operate/lab.md) | What happened, and what should we do next? | Findings connecting a runtime problem to a response and a future test |
+| Evaluate | `01-evaluate` | Are the agent's responses and actions good enough? | Evaluation criteria and a decision supported by results |
+| Ship | `02-ship` | How do we automate agent testing and deployment with CI/CD pipelines? | A release checklist supported by evaluation, approval and deployment results |
+| Observe and Operate | `03-observe-operate` | What happened, and what should we do next? | Findings connecting a runtime problem to a response and a future test |
 
 Observe and Operate are distinct practices taught together.
 
@@ -44,19 +44,21 @@ practices after the workshop.
 
 ### 1. Understand what you will teach
 
-Read the [one-pager](../one-pager/agentops-vbd-one-pager.md), then open your
-module guide: [Evaluate](evaluate.md), [Ship](ship.md), or
-[Observe and Operate](observe-operate.md). Each links directly to its deck
-and lab. Study the slides and speaker notes, then read the lab without
-executing commands.
+After finishing this guide, begin preparation with the one-pager, a short
+overview of the workshop's purpose, audience and outcomes. Use it to introduce
+the workshop to participants, not as a teaching script.
+
+Then follow the guide for your selected module, listed at the end of this page.
+It points you to the slides, speaker notes and participant lab to study before
+running commands.
 
 You are ready to prepare when you can explain the scenario, what the group
 will do, and what decision or output they should leave with. Agree the
 selected modules and format with the workshop organizer, taking account of
 [the material's current readiness](#what-is-ready-to-use).
-For Ship, also choose [GitHub Actions](../labs/02-ship/github-actions/README.md)
-or [Azure Pipelines](../labs/02-ship/azure-pipelines/README.md).
-Use one path throughout the session; they teach the same release decisions.
+For Ship, also choose GitHub Actions or Azure Pipelines. The Ship guide
+introduces these alternative tracks and links to each. Use one path throughout
+the session; they teach the same release decisions.
 
 ### 2. Reuse or prepare the class materials
 
@@ -120,8 +122,10 @@ their own projects.
 
 ## Find the material
 
-The links work from this guide in GitHub or a downloaded repository.
-Local paths below are relative to the repository's `agentops` folder.
+Use this table as a reference during preparation, not as a reading checklist.
+Your module guide will direct you to the materials needed for each stage.
+The links work in GitHub or a downloaded repository. Local paths below are
+relative to the repository's `agentops` folder.
 
 | Material | Location and purpose |
 | --- | --- |
@@ -186,3 +190,20 @@ incident to recovery and a test that catches the same defect. Keep it outside th
 core workshop: allow an additional two hours hands-on or one hour demo at level
 400. Its [preparation requirements](../pre-work/instructor-setup.md#advanced-optional)
 explain the assets needed before teaching it.
+
+## Continue with your module guide
+
+After this first reading, review the workshop overview in the
+[one-pager](../one-pager/agentops-vbd-one-pager.pdf), then open the guide for the
+module you will teach. Each guide explains the learning focus, preparation,
+facilitation and closing discussion.
+
+| Module guide | What you will prepare to teach |
+| --- | --- |
+| [Evaluate](evaluate.md) | Assess agent responses and actions, then use the results to support a decision. |
+| [Ship](ship.md) | Connect automated testing and deployment through CI/CD pipelines, including release gates, approvals and recovery. |
+| [Observe and Operate](observe-operate.md) | Connect traces and monitoring to an operational response and a future evaluation. |
+
+If you are teaching several modules, prepare one at a time. When a module guide
+sends you to a lab or technical page, complete the named task and return to that
+module guide to continue.
