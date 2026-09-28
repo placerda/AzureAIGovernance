@@ -194,8 +194,9 @@ the repository, its Azure sign-in and its approval step.
    in the browser and sign in. You should see the repository files, including
    `azure.yaml` and `agentops.yaml`. Git asks for the same sign-in the first
    time you clone, in lab step 1.
-3. **Open your track.** Open the **Ship track** link from the invitation. It is
-   the page you follow alongside the lab.
+3. **Open your pipeline tool's instructions.** Open the **Pipeline tool** link
+   from the invitation (GitHub Actions or Azure Pipelines). You follow that page
+   alongside the lab.
 
 Do not create a branch or run a pipeline during pre-work.
 

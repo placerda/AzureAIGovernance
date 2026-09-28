@@ -19,7 +19,7 @@ The folder numbers show the sequence for the full workshop. You can also
 attend a single module: complete the common pre-work and that module's section.
 Each lab's scenario explains what came before. Advanced continues your Ship work.
 
-**Choose one Ship path:** [GitHub Actions](02-ship/github-actions/README.md)
+**Choose one Ship pipeline tool:** [GitHub Actions](02-ship/github-actions/README.md)
 or [Azure Pipelines](02-ship/azure-pipelines/README.md). They are alternatives
 within module 2, not two consecutive labs.
 

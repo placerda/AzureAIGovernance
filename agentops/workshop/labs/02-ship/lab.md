@@ -20,12 +20,13 @@ released run, with their evaluation reports, approvals and smoke-test output.
 
 **Prerequisite:** Complete [participant pre-work](../../pre-work/README.md#ship)
 and have the invitation's **Ship settings** at hand: the class repository URL
-and your track. Your **alias** is the part of your sign-in account before `@`.
+and the pipeline tool. Your **alias** is the part of your sign-in account before `@`.
 The instructor prepares the class repository, Azure sign-in, variables and
 approval environment before the workshop. You do not create
 Azure resources in this lab.
 
-**Tracks:** choose the one your team uses. Both teach the same release process.
+**Pipeline tool:** use the one in your invitation, GitHub Actions or Azure
+Pipelines. Each has its own instructions page; both teach the same release process.
 
 - [GitHub and GitHub Actions](github-actions/README.md)
 - [Azure Repos and Azure Pipelines](azure-pipelines/README.md)
@@ -121,17 +122,17 @@ Keep this PowerShell window open; the next steps use it.
 pipeline, so you begin from a known structure instead of a blank file. It is
 generic: it does not know your release process yet.
 
-Run the line for your track.
+Run the line for your pipeline tool.
 
 **What this block does:** writes the starting pipeline file into your clone. Local only.
 
 ```powershell
-# GitHub Actions track
+# GitHub Actions
 agentops workflow generate --kinds dev --deploy-mode azd
 ```
 
 ```powershell
-# Azure Pipelines track
+# Azure Pipelines
 agentops workflow generate --kinds dev --deploy-mode azd --platform azure-devops
 ```
 
@@ -157,7 +158,7 @@ pipeline has four stages:
 3. **Release (production):** waits for a person to approve, then deploys `helpdesk-ALIAS`.
 4. **Smoke test:** sends one request to the released version and fails if the ticket goes to the wrong team.
 
-Follow your track's edits, then come back to step 4:
+Follow the edits for your pipeline tool, then come back to step 4:
 
 - [GitHub Actions edits](github-actions/README.md)
 - [Azure Pipelines edits](azure-pipelines/README.md)
@@ -178,7 +179,7 @@ git commit -m "Add Ship pipeline for $Alias"
 git push -u origin "ship/$Alias"
 ```
 
-On Azure Pipelines, create the pipeline once now, as your track README describes.
+On Azure Pipelines, create the pipeline once now, as its instructions page describes.
 
 Watch the run:
 

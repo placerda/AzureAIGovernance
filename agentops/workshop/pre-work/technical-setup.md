@@ -221,7 +221,8 @@ Allow about an hour, plus the time the Azure administrator needs.
 
 #### 1. Create the empty class repository
 
-Choose the track the class will use and create an **empty** repository, with no
+Choose the pipeline tool the class will use, GitHub Actions or Azure Pipelines,
+and create an **empty** repository, with no
 README, `.gitignore` or license:
 
 - **GitHub Actions:** a private GitHub repository, for example
@@ -345,7 +346,7 @@ The pipeline pauses before each release until a person approves it.
 
 #### 6. Run the lab yourself
 
-Follow [the Ship lab](../labs/02-ship/lab.md) on the track you chose, with the
+Follow [the Ship lab](../labs/02-ship/lab.md) with the pipeline tool you chose and the
 alias `rehearsal`. Use a repository account that has only the participant
 access from step 1, so a missing permission shows up now and not in class.
 Finish with one rejected run and one released run.
@@ -432,7 +433,7 @@ Evaluate settings
 
 Ship settings
 - Class repository: <URL of the class repository>
-- Ship track: <GitHub Actions | Azure Pipelines>, <link to that track's page>
+- Pipeline tool: <GitHub Actions | Azure Pipelines>, <link to its instructions page>
 
 Observe settings
 - Project endpoint: <https://RESOURCE.services.ai.azure.com/api/projects/PROJECT>
@@ -458,8 +459,9 @@ not work, reply to this invitation before the session.
   **Agent to observe if you skip Ship** is the name inside the baseline URL.
 - **Scoring-model deployment:** **Build > Models** in the Foundry project.
 - **Sign-in account** and **Network access:** ask the Azure administrator.
-- **Class repository** and **Ship track:** the repository from
-  [Ship preparation](#ship), and the track page under [the Ship lab](../labs/02-ship/lab.md) on GitHub.
+- **Class repository** and **Pipeline tool:** the repository from
+  [Ship preparation](#ship), and the tool's instructions page linked from
+  [the Ship lab](../labs/02-ship/lab.md) on GitHub.
 - **Application Insights resource:** the resource connected in
   [environment setup step 3](foundry-environment.md#3-connect-monitoring).
 - **Keep your work until:** the date agreed with the workshop organizer.

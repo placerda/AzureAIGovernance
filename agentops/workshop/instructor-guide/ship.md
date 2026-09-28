@@ -18,7 +18,7 @@ one they tested.
 Read the [Ship deck and speaker notes](../decks/ship/agentops-ship-workshop.pptx)
 and the [lab](../labs/02-ship/lab.md). Choose
 [GitHub Actions](../labs/02-ship/github-actions/README.md) or
-[Azure Pipelines](../labs/02-ship/azure-pipelines/README.md): both tracks teach
+[Azure Pipelines](../labs/02-ship/azure-pipelines/README.md): both pipeline tools teach
 the same release process. They are alternatives, not two labs to complete.
 
 All the technical preparation is in [Ship preparation](../pre-work/technical-setup.md#ship).

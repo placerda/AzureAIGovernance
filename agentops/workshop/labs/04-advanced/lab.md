@@ -97,7 +97,7 @@ Do not commit yet; step 2 commits both changes together.
 approval. Running the same smoke test on the test agent stops a candidate that
 sends tickets to the wrong team before anyone is asked to approve it.
 
-Open your pipeline file and make the edit for your track.
+Open your pipeline file and make the edit for your pipeline tool.
 
 **GitHub Actions** (`.github\workflows\agentops-deploy-dev.yml`): in the
 `test-deploy` job, add this step directly after the **Deploy helpdesk-ALIAS-test** step, with the same indentation. Replace `ALIAS` with your alias.

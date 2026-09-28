@@ -73,7 +73,7 @@ Complete one, not both.
 | --- | --- | --- |
 | Workshop one-pager | Overview for participants, outcomes, scope and formats | [One-page PDF](workshop/one-pager/agentops-vbd-one-pager.pdf), [Markdown source](workshop/one-pager/agentops-vbd-one-pager.md) |
 | Workshop instructor guide | Start here, prepare and facilitate each module | [General guide](workshop/instructor-guide/README.md), [Evaluate](workshop/instructor-guide/evaluate.md), [Ship](workshop/instructor-guide/ship.md), [Observe and Operate](workshop/instructor-guide/observe-operate.md) |
-| Workshop lab sequence | Participant starting page with links to pre-work, numbered labs and alternative Ship tracks | [Workshop labs](workshop/labs/README.md) |
+| Workshop lab sequence | Participant starting page with links to pre-work, numbered labs and the alternative Ship pipeline tools | [Workshop labs](workshop/labs/README.md) |
 | Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) |
 | Workshop lab | Evaluate participant actions and decision | [`lab.md`](workshop/labs/01-evaluate/lab.md) |
 | Workshop pre-work | Essential participant setup and technical class preparation | [Participants start here](workshop/pre-work/README.md), [technical setup](workshop/pre-work/technical-setup.md) |
@@ -85,7 +85,7 @@ Complete one, not both.
 | Evaluation assignment and evidence | Evaluate | [Receive the prepared workspace](workshop/pre-work/README.md#2-participant-initialize-the-supported-evaluation-workspace), [technical setup](workshop/pre-work/technical-setup.md#instructoradmin-prepare-the-evaluation-workspace), [closing discussion](workshop/labs/01-evaluate/lab.md#5-decide-and-hand-off-to-ship), [required instructor evidence](workshop/labs/01-evaluate/assets/evidence/README.md) |
 | Workshop deck | Ship | [`agentops-ship-workshop.pptx`](workshop/decks/ship/agentops-ship-workshop.pptx) |
 | Workshop lab | Ship | [`lab.md`](workshop/labs/02-ship/lab.md) |
-| Ship track choices | Choose one alternative | [GitHub Actions](workshop/labs/02-ship/github-actions/README.md), [Azure Pipelines](workshop/labs/02-ship/azure-pipelines/README.md) |
+| Ship pipeline tools | Choose one alternative | [GitHub Actions](workshop/labs/02-ship/github-actions/README.md), [Azure Pipelines](workshop/labs/02-ship/azure-pipelines/README.md) |
 | Workshop deck | Observe and Operate | [`agentops-observe-operate-workshop.pptx`](workshop/decks/observe-operate/agentops-observe-operate-workshop.pptx) |
 | Workshop lab | Observe and Operate | [`lab.md`](workshop/labs/03-observe-operate/lab.md) |
 | Optional advanced lab | Cross-module | [`lab.md`](workshop/labs/04-advanced/lab.md) |
@@ -110,7 +110,7 @@ rules, safety, conversations and adversarial tests.
 Use [final check before the workshop](workshop/pre-work/technical-setup.md#final-check-before-the-workshop)
 before teaching.
 
-Ship has equivalent GitHub Actions and Azure Pipelines tracks.
+Ship has equivalent instructions for GitHub Actions and Azure Pipelines.
 Evaluate uses Foundry evaluation and evaluators, with the Accelerator CLI
 submitting runs against an already deployed help desk agent; learners do not
 use azd in Evaluate. In Ship, participants generate a pipeline with the

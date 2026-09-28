@@ -67,8 +67,9 @@ Workshop content consists of:
 
 Maintain one deck and one lab for each content module.
 
-The Ship lab may provide equivalent GitHub Actions and Azure Pipelines tracks.
-Select one track before delivery and keep their learning objectives and expected
+The Ship lab may provide equivalent instructions for two pipeline tools,
+GitHub Actions and Azure Pipelines. Call them pipeline tools, not tracks.
+Select one before delivery and keep their learning objectives and expected
 artifact aligned.
 
 Make the learning order visible in the lab folders: `01-evaluate`, `02-ship`,

@@ -32,8 +32,8 @@ Observe and Operate are distinct practices taught together.
 
 The **AgentOps workshop labs** page is the starting point for
 participants. It brings together links to pre-work and each module's lab.
-For Ship, it links to two alternative tracks for the same exercise: one uses
-GitHub Actions and the other Azure Pipelines. Share it before the workshop so
+For Ship, it links to instructions for two alternative pipeline tools, GitHub
+Actions and Azure Pipelines, for the same exercise. Share it before the workshop so
 participants can prepare and find their selected activity.
 
 Lab folders are numbered in workshop order, but participants can attend a
@@ -60,7 +60,7 @@ running commands.
 You are ready to prepare when you can explain the scenario, what the group
 will do, and what decision or output they should leave with. Agree the selected modules and format with the workshop organizer.
 For Ship, also choose GitHub Actions or Azure Pipelines. The Ship guide
-introduces these alternative tracks and links to each. Use one path throughout
+introduces both pipeline tools and links to each. Use one throughout
 the session; they teach the same release decisions.
 
 ### 2. Prepare the environment
@@ -116,7 +116,7 @@ instructions. The invitation tells participants which
 account to use, which project and agent versions to open, and how to get help.
 Ask them to complete pre-work before the class.
 Include the **AgentOps workshop labs** page and the selected numbered lab;
-for Ship, include the chosen track's entry page.
+for Ship, include the instructions page for the chosen pipeline tool.
 
 ### 4. Teach the module and discuss the decision
 
@@ -220,7 +220,7 @@ relative to the repository's `agentops` folder.
 | AgentOps workshop: instructor guide | This page | `workshop/instructor-guide` |
 | Module guides: [Teaching Evaluate](evaluate.md), [Teaching Ship](ship.md), [Teaching Observe and Operate](observe-operate.md) | How to prepare and teach each module | `workshop/instructor-guide` |
 | Decks: [Evaluate](../decks/evaluate/agentops-evaluate-workshop.pptx), [Ship](../decks/ship/agentops-ship-workshop.pptx), [Observe and Operate](../decks/observe-operate/agentops-observe-operate-workshop.pptx) | Slides and speaker notes | `workshop/decks` |
-| [AgentOps workshop labs](../labs/README.md) | Participants' starting page: pre-work, each lab and the two Ship tracks | `workshop/labs` |
+| [AgentOps workshop labs](../labs/README.md) | Participants' starting page: pre-work, each lab and the two Ship pipeline tools | `workshop/labs` |
 | Labs: [Evaluate](../labs/01-evaluate/lab.md), [Ship](../labs/02-ship/lab.md), [Observe and Operate](../labs/03-observe-operate/lab.md), [Advanced (optional)](../labs/04-advanced/lab.md) | Hands-on steps for participants | `workshop/labs` |
 | [Participant pre-work](../pre-work/README.md) | What participants install and check before class | `workshop/pre-work` |
 | [Instructor technical setup](../pre-work/technical-setup.md) | Your environment, agent, rehearsal runs and invitation | `workshop/pre-work` |
