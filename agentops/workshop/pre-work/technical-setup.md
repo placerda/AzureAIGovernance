@@ -14,7 +14,7 @@ How to teach each module is in the [instructor guide](../instructor-guide/README
 3. [Deploy the help desk agent](#3-deploy-the-help-desk-agent): working baseline and candidate versions
 4. [Prepare your module](#4-prepare-your-module): the results and files each module needs
 5. [Invite and rehearse](#5-invite-and-rehearse): a participant-tested invitation
-6. [Final check before the workshop](#final-check-before-the-workshop): decide whether each module runs as a lab or a discussion
+6. [Final check before the workshop](#final-check-before-the-workshop): decide whether each module runs as a lab or a demo
 7. [Retention and cleanup](#retention-and-cleanup): remove workshop resources after the retention date
 
 **Project and agent already deployed for an earlier workshop?** Reuse them. Start with [access and rehearsal](#instructoradmin-shared-environment-and-permissions).
@@ -335,42 +335,93 @@ reaches the participants.
 
 ### Publish the workshop files and invitation
 
-**Why one invitation:** it becomes the single place to find the project, agent
-versions and sign-in details without searching chat history.
+Participants find everything they need in one calendar invitation: the links,
+the account to sign in with and the values the labs ask for. Prepare it in
+three steps.
 
-Evaluate participants clone the course repository, so it needs no file folder.
-For Ship, Observe and Operate, or Advanced, publish their review ZIP first:
+**1. Share the module files.** Skip this if you teach only Evaluate:
+participants get its files by cloning the course repository.
 
-1. Open [Microsoft 365](https://www.microsoft365.com), then **OneDrive > My files > New > Folder**.
-   Name it `AgentOps workshop YYYY-MM-DD` with the session date.
-2. Use **Upload > Files** to add the selected modules' review ZIPs.
-3. Select **Share > Link settings > Specific people**, give attendees **Can view** access,
-   and copy the link.
+1. In [OneDrive](https://www.microsoft365.com/onedrive), create a folder named
+   `AgentOps workshop YYYY-MM-DD` with the session date.
+2. Upload the review ZIPs of the modules you teach.
+3. Select **Share**, add the participants and the test account you will use in
+   the rehearsal, choose **Can view**, and copy the link.
 
-Then, for every session:
+**2. Draft the invitation.** In Outlook, select **Calendar > New event**, name
+it **AgentOps workshop** and add the participants. Paste the message below into
+the body. Delete every line that does not apply to your session, and any
+heading left empty, then replace the remaining `<...>` placeholders. Keep the
+label wording unchanged: the participant pages refer to each label by name.
 
-1. In Outlook **Calendar > New event**, draft **AgentOps workshop** with the fields below.
-2. Use the draft details yourself in [the rehearsal below](#instructoradmin-shared-environment-and-permissions).
-3. Send the class invitation only after those checks succeed.
+**3. Test it before sending.** Keep the event as a draft and use it yourself in
+[the rehearsal below](#instructoradmin-shared-environment-and-permissions).
+Send it only after the rehearsal works.
 
-| Invitation field | Include |
-| --- | --- |
-| Your module and mode | Modules and whether attendees run the lab, watch a demo or review saved results |
-| Workshop files | The restricted folder link, only for Ship, Observe and Operate, or Advanced |
-| Evaluate settings | Project endpoint, Baseline agent and Candidate agent URLs, and Scoring-model deployment, for Evaluate hands-on |
-| Foundry project | Project browser link |
-| Project name | Name displayed on the project page |
-| Sign-in account | Account attendees are permitted to use |
-| Tenant ID | Organization ID from environment setup, for Evaluate CLI users |
-| Subscription ID | Approved subscription from environment setup, for Evaluate CLI users |
-| Local workshop folder | Repository path, only for prepared machines |
-| Network access | VPN application and connection instructions, if needed |
-| Ship track | GitHub Actions or Azure Pipelines, when selected |
-| Keep files until | Retention date |
+<details open>
+<summary>Invitation message to copy</summary>
 
-The organizer is the support contact. If OneDrive sharing is blocked, resolve
-it with the organization's file-sharing administrator before distributing the
-invitation. Do not publish private evidence to GitHub.
+```text
+Hi everyone,
+
+You are invited to the AgentOps workshop on <date>, <start time> to <end time> (<time zone>).
+
+Your module and mode
+- Evaluate: <run the lab | watch a demo>
+- Ship: <review saved results | watch a demo>
+- Observe and Operate: <review saved results | watch a demo>
+- Advanced (optional): <review saved results | watch a demo>
+
+Before the session, complete the pre-work for each module marked "run the lab"
+or "review saved results". Modules marked "watch a demo" need no pre-work.
+https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/pre-work
+
+Access
+- Foundry project: <project link>
+- Project name: <name shown on the project page>
+- Sign-in account: <account you must use>
+- Network access: <VPN instructions, or "Not needed">
+- Tenant ID: <tenant ID> (Evaluate hands-on only)
+- Subscription ID: <subscription ID> (Evaluate hands-on only)
+
+Evaluate settings (Evaluate hands-on only)
+- Project endpoint: <https://RESOURCE.services.ai.azure.com/api/projects/PROJECT>
+- Baseline agent: <PROJECT ENDPOINT/agents/NAME/versions/NUMBER>
+- Candidate agent: <PROJECT ENDPOINT/agents/NAME/versions/NUMBER>
+- Scoring-model deployment: <deployment name, normally agentops-eval>
+
+Other modules
+- Workshop files: <OneDrive folder link> (Ship, Observe and Operate, Advanced)
+- Ship track: <GitHub Actions | Azure Pipelines>, <link to that track's page>
+
+Prepared computers only
+- Local workshop folder: <repository path on the computer>
+
+Keep files until: <retention date>
+Please do not share these links outside the class. If a link or sign-in does
+not work, reply to this invitation before the session.
+
+<your name>
+```
+
+</details>
+
+**Where to find each value**
+
+- **Foundry project, Project name** and **Project endpoint:** the project's
+  **Home** page, as in [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in).
+- **Tenant ID** and **Subscription ID:** the same step 5.
+- **Baseline agent** and **Candidate agent:** `versions.txt`, saved in
+  [agent deployment step 6](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
+- **Scoring-model deployment:** **Build > Models** in the Foundry project.
+- **Sign-in account** and **Network access:** ask the Azure administrator.
+- **Workshop files:** the link you copied in step 1 above.
+- **Ship track:** the track page under [the Ship lab](../labs/02-ship/lab.md) on GitHub.
+- **Keep files until:** the date agreed with the workshop organizer.
+
+The workshop organizer is the support contact. If OneDrive blocks sharing, ask
+the organization's file-sharing administrator before you send the invitation.
+Do not publish private results to GitHub.
 
 <a id="instructoradmin-shared-environment-and-permissions"></a>
 
@@ -441,7 +492,7 @@ will run it:
 
 - **As a hands-on lab**, if you completed that module's checklist in
   [step 4](#4-prepare-your-module) and ran the lab yourself from start to finish.
-- **As a discussion**, if anything in that checklist is missing, such as lab
+- **As a demo**, if anything in that checklist is missing, such as lab
   files, agent versions or results you produced. Present the module with the
   slides and explain the steps, but do not ask participants to run it.
 
