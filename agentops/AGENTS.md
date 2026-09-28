@@ -77,6 +77,10 @@ instructor only copies that folder and pushes it. Its `src/helpdesk/` and
 `turns.jsonl` are copies of the shared agent and the Evaluate test requests;
 update them together, and keep the lab test that compares them passing.
 
+Keep `shared/helpdesk-agent` a ready azd project (`azure.yaml` and
+`.agentignore` included), so the instructor deploys straight from the clone
+without downloading samples or copying files.
+
 Make the learning order visible in the lab folders: `01-evaluate`, `02-ship`,
 `03-observe-operate`, and optional `04-advanced`. Keep `shared` unnumbered:
 it contains reusable agent code and assets, not an extra module.

@@ -164,7 +164,7 @@ For a connection error, stop and give the administrator the resource name and er
 The [hosting library exports telemetry automatically](https://learn.microsoft.com/azure/foundry/agents/how-to/configure-hosted-agent-telemetry)
 when monitoring is connected. Do not add another exporter or paste an Application
 Insights connection string into the agent configuration.
-[Agent deployment](../labs/shared/helpdesk-agent/README.md#4-deploy-and-test-the-baseline)
+[Agent deployment](../labs/shared/helpdesk-agent/README.md#2-deploy-and-test-the-baseline)
 enables the tool-content capture required by this fictional exercise.
 
 ## 4. Give people access

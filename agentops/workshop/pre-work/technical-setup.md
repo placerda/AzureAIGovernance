@@ -95,12 +95,12 @@ azd version
 if ($LASTEXITCODE -ne 0) { throw 'Azure Developer CLI is unavailable. Contact the software administrator.' }
 azd extension install microsoft.foundry
 if ($LASTEXITCODE -ne 0) { throw 'Foundry extension installation failed. Contact the software administrator.' }
-azd ai agent init --help
+azd ai agent --help
 if ($LASTEXITCODE -ne 0) { throw 'Foundry agent commands are unavailable.' }
 ```
 
 The tools are ready when the block ends without an error and shows the help
-for `azd ai agent init`.
+for `azd ai agent`.
 
 You don't need VS Code or any extension: any text editor works, and the
 workshop uses the agent running in Foundry, not a copy on your computer.
@@ -174,12 +174,13 @@ resources.
 The **baseline** is the earlier version used for comparison. The **candidate**
 is the version participants will test.
 
-**Agent not deployed yet?** Follow [help desk deployment, steps 1-6](../labs/shared/helpdesk-agent/README.md).
-That guide uploads the supplied Python code, lets Foundry install its packages,
-deploys the baseline and the candidate, and sends test requests.
+**Agent not deployed yet?** Follow [help desk deployment, steps 1-4](../labs/shared/helpdesk-agent/README.md).
+You deploy straight from your clone: the folder already holds the agent code
+and its deployment settings. It deploys the baseline and the candidate and
+sends test requests.
 
-**Agent already deployed for an earlier workshop?** Skip the deployment. Keep
-the URLs of both versions and the code and settings used to deploy them.
+**Agent already deployed for an earlier workshop?** Skip the deployment and
+keep the `versions.txt` saved then.
 
 Continue below only after both versions answer and their tool results are
 visible. A successful local installation is not a deployed agent.
@@ -199,8 +200,8 @@ Run the lab yourself once, exactly as participants will. This proves that
 the environment, the CLI and tracing work together, and your results are the
 fallback you show if a participant's run fails.
 
-1. **Run lab steps 1 to 4.** Use the four values saved at
-   [the end of agent deployment](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references)
+1. **Run lab steps 1 to 4.** Use the two references in `versions.txt`, saved at
+   [the end of agent deployment](../labs/shared/helpdesk-agent/README.md#4-save-the-two-version-references)
    and follow [the Evaluate lab](../labs/01-evaluate/lab.md) from step 1 to 4.
    At the end, all eight requests must have an answer and both scores, and the traces for `password-basic` and `vpn-ticket`
    must open.
@@ -482,7 +483,7 @@ not work, reply to this invitation before the session.
   **Home** page, as in [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in).
 - **Tenant ID:** the same step 5.
 - **Baseline agent** and **Candidate agent:** `versions.txt`, saved in
-  [agent deployment step 6](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
+  [agent deployment step 4](../labs/shared/helpdesk-agent/README.md#4-save-the-two-version-references).
   **Agent to observe if you skip Ship** is the name inside the baseline URL.
 - **Scoring-model deployment:** **Build > Models** in the Foundry project.
 - **Sign-in account** and **Network access:** ask the Azure administrator.

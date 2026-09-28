@@ -218,7 +218,7 @@ releases. It is optional in the revised course path. Cloud dependency resolution
 and deployed startup have not been exercised; a local feed error neither proves
 nor disproves a successful remote build.
 
-The downloaded official Responses tools sample and the pinned wheel's exported
+The official Responses tools sample, which the course `azure.yaml` follows, and the pinned wheel's exported
 client API agree with the retained `FoundryChatClient`/`Agent` host pattern.
 The source intentionally reads process environment variables, not `.env`.
 The revised [host guide](../shared/helpdesk-agent/README.md) makes this explicit
