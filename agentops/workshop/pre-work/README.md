@@ -2,8 +2,8 @@
 
 ![A little setup. More time to explore. Get your files ready, sign in, and bring your curiosity.](../assets/banners/prework.png)
 
-Let's get your computer and files ready so you can focus on the agent during
-the workshop. Complete only the section for your module.
+Let's get your computer ready so you can focus on the agent during the workshop.
+Complete the common preparation, then only the sections for your modules.
 
 **Watching a demo?** Just read the invitation; no other pre-work is needed.
 Instructors start with [their own guide](../instructor-guide/README.md).
@@ -24,33 +24,30 @@ for your session; Advanced is optional.
 
 ## Common preparation
 
-### Get your workshop files
+### Open the invitation
 
 1. Open the **AgentOps workshop** calendar invitation. Read **Your module and mode**.
 2. Open the invitation's **Foundry project** link and sign in with the account it names.
    Follow **Network access** if a VPN connection is required.
-3. For Ship, Observe and Operate, or Advanced, open the invitation's
-   **Workshop files** link and download your module's ZIP from the table below.
-   Right-click it in Downloads, select **Extract All**, and open its `README.md`.
 
-Evaluate needs no download from the invitation: you get the course files from
-GitHub and generate your own results during the lab.
+Every hands-on module starts from the course repository and the AgentOps
+Accelerator CLI, prepared once below. Then each module adds a few values from
+the invitation:
 
-| Continue with | What you need | What you will use it for |
+| Continue with | What you need from the invitation | What you will do |
 | --- | --- | --- |
-| [Evaluate](#evaluate) | The course repository and the invitation's **Evaluate settings** | Evaluate two agent versions in the shared project |
-| [Ship](#ship) | `agentops-ship-review.zip` | Compare a blocked release with an approved one |
-| [Observe and Operate](#observe-and-operate) | `agentops-observe-review.zip` | Follow a request from its trace to an alert and response |
-| [Advanced](#advanced-optional) | `agentops-advanced-review.zip` | Review an incident, its recovery and the test added afterward |
+| [Evaluate](#evaluate) | **Evaluate settings** | Evaluate two agent versions in the shared project |
+| [Ship](#ship) | **Ship settings** | Build a release pipeline and release your own agent |
+| [Observe and Operate](#observe-and-operate) | **Observe settings** | Investigate a complaint with traces, a query and an alert |
+| [Advanced](#advanced-optional) | Nothing new: your Ship branch | Add a regression test and an automatic gate, then recover from a bad release |
 
-**Can't open a file or link?** Reply to the invitation's organizer before the
-session. They will provide the correct files or arrange access.
+**Can't open a link?** Reply to the invitation's organizer before the session.
+They will arrange access.
+
 ### Use a prepared machine, or install only missing tools
 
-**Evaluate hands-on needs Git, Python 3.11 and Azure CLI.**
+**Every hands-on module needs Git, Python 3.11 and Azure CLI.**
 Skip installation if the instructor provides a prepared machine.
-For the other modules, you will read saved results rather than run the agent.
-A browser and text editor are enough.
 
 To check an existing installation, open **Start**, type **PowerShell**, and
 press Enter. Run each command below. Install only the tool whose expected
@@ -64,21 +61,10 @@ output is missing or whose command is not recognized.
 
 VS Code is a convenient editor, **not a requirement**. Use
 [VS Code](https://code.visualstudio.com/download) or an editor you already have.
-**No VS Code extension, Foundry Toolkit or azd is needed for Evaluate.**
-The lab uses VS Code menu names; other editors can open the same files.
+**No VS Code extension, Foundry Toolkit or azd is needed on your machine.**
+The labs use VS Code menu names; other editors can open the same files.
 
 If installation is blocked, contact the instructor for an approved machine.
-
-## Evaluate
-
-You will use the class's shared Foundry project, where the instructor has
-deployed two versions of the sample agent. During the lab you evaluate both
-and compare the results.
-
-**You do not create your own environment or deploy an agent.** Those steps are
-in [instructor environment setup](foundry-environment.md) and
-[help desk deployment](../labs/shared/helpdesk-agent/README.md).
-Your preparation installs only the local tool used to evaluate that deployment.
 
 ### Get the lab files
 
@@ -100,10 +86,11 @@ call this folder the **repository root**. If it already exists from an earlier
 attempt, keep it and continue.
 
 On a prepared machine, this folder is already in place; skip this block.
+
 ### Sign in to the assigned account
 
-**Why sign in here:** the AgentOps Accelerator CLI needs your permission to use the
-workshop's Azure project. Signing in to the browser alone does not sign in PowerShell.
+**Why sign in here:** the labs use your permission to work in the workshop's
+Azure project. Signing in to the browser alone does not sign in PowerShell.
 
 Open **Start > PowerShell** and run the block below.
 Paste **Tenant ID** from the invitation when prompted. Azure CLI is the tool
@@ -130,10 +117,11 @@ with another account.
 
 <a id="1-participant-install-the-public-cli"></a>
 
-### 1. Install the AgentOps Accelerator CLI
+### Install the AgentOps Accelerator CLI
 
-**What this gives you:** the `agentops` command submits test requests to Foundry
-and saves the evaluation reports. It does not deploy the agent.
+**What this gives you:** the `agentops` command evaluates agents, generates
+release pipelines and checks an agent's health. Every lab uses the copy you
+install here.
 
 In File Explorer, open `agentops\workshop\labs\01-evaluate` inside the repository.
 Type `powershell` in its address bar and press Enter.
@@ -153,15 +141,25 @@ if ($LASTEXITCODE -ne 0) { throw 'AgentOps Accelerator CLI unavailable. Contact 
 
 **Check:** installation finishes and `agentops` prints its version.
 The `.venv` folder keeps the tool's Python packages separate from other projects.
-The commands use it directly; you do not need to activate it.
+The labs use it directly; you do not need to activate it.
 
 **Package unavailable or version not found:** stop and send the error to the
 instructor. They must provide access to the required packages or a prepared
 machine. Do not select an older version or change your package source.
 
+## Evaluate
+
+You will use the class's shared Foundry project, where the instructor has
+deployed two versions of the sample agent. During the lab you evaluate both
+and compare the results.
+
+**You do not create your own environment or deploy an agent.** Those steps are
+in [instructor environment setup](foundry-environment.md) and
+[help desk deployment](../labs/shared/helpdesk-agent/README.md).
+
 <a id="2-participant-initialize-the-supported-evaluation-workspace"></a>
 
-### 2. Create your workspace
+### Create your workspace
 
 Run [lab step 1](../labs/01-evaluate/lab.md#1-start-the-workspace-and-confirm-the-exact-candidate)
 now and follow its **Check the displayed values** instructions. It asks for the
@@ -170,54 +168,70 @@ under review the **candidate**, the earlier version the **baseline**, and the
 model deployment that grades the answers the **scoring model**. You do not
 deploy any of them.
 
-Creating the workspace does not run an evaluation and incurs no cost.
+Creating the workspace does not run an evaluation.
 Report mismatched values to the instructor.
 
 **Ready for the session:** once the displayed values match the invitation,
-your local setup is complete. Save the evaluation runs for the workshop:
-they use paid Azure services.
+your local setup is complete. Save the evaluation runs for the workshop.
+
 ## Ship
 
-1. Open `README.md` in the extracted `agentops-ship-review` folder.
-2. Open **Blocked run**, then its job-log link. You should see a saved run and readable log text.
-3. Open **Accepted run** and its job-log link the same way.
+You will create your own release pipeline in the class repository and use it to
+release your own copy of the help desk agent. The instructor has already set up
+the repository, its Azure sign-in and its approval step.
 
-Read **Ship track** in the invitation to see which pipeline tool the class uses.
-An access-denied page is not a failed evaluation; send the link to the instructor.
-Do not select **Run** or **Rerun** during pre-work.
+1. **Tell Git who you are.** Your commits carry this name. Run the block once.
+
+   **What this block does:** sets the name and email on your commits. Local only.
+
+   ```powershell
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
+
+2. **Open the class repository.** Open **Class repository** from the invitation
+   in the browser and sign in. You should see the repository files, including
+   `azure.yaml` and `agentops.yaml`. Git asks for the same sign-in the first
+   time you clone, in lab step 1.
+3. **Open your track.** Open the **Ship track** link from the invitation. It is
+   the page you follow alongside the lab.
+
+Do not create a branch or run a pipeline during pre-work.
 
 ## Observe and Operate
 
-1. Open `README.md` in `agentops-observe-review` and follow **Trace**.
-2. If a trace list opens, use [Find the supplied trace](../labs/03-observe-operate/lab.md#find-the-supplied-trace) to open the correct record.
-3. Open **Alert**. You should see the alert rule, time and affected resource.
-4. Open `response-notes.md` to read what happened and who may respond.
+You will investigate the released help desk agent with its traces, a log query
+and an alert. You need the sign-in and the CLI from
+[Common preparation](#common-preparation), nothing else to install.
 
-If a link is denied or the record is missing, ask the instructor for access or
-the correct link. Do not create an alert to replace it.
+1. Open **Foundry project** from the invitation and select **Agents**. You
+   should see the agent from your Ship lab, or **Agent to observe if you skip
+   Ship**.
+2. In the [Azure portal](https://portal.azure.com), search for the
+   **Application Insights resource** named in **Observe settings** and open it.
+   Select **Logs**; the query editor should open without an access error.
+
+If either page is denied, send the link to the instructor.
 
 ## Advanced (optional)
 
-1. Open `runbook.md` in `agentops-advanced-review`; its procedure should be readable.
-2. In the same folder's `README.md`, open **Trace**, **Blocked run** and **Recovered run**.
-3. Each link must show the named saved record, not an access-denied page.
-
-Send missing or denied links to the instructor. Do not cause a failure or run
-recovery steps during pre-work.
+Advanced continues your Ship branch and pipeline. Finish the
+[Ship](../labs/02-ship/lab.md) and [Observe and Operate](../labs/03-observe-operate/lab.md)
+labs first; there is nothing else to prepare.
 
 <a id="readiness-gate"></a>
 
 ## Ready for the workshop?
 
-You are ready when your files and links open and, for Evaluate hands-on, your
-workspace shows the values from the invitation. Ship, Observe and Operate, and Advanced
-currently use saved examples; their full hands-on instructions are still being written.
+You are ready when the links in the invitation open with your sign-in account,
+the AgentOps Accelerator CLI prints its version and each module you run has its pre-work done. For
+Evaluate, your workspace shows the values from the invitation.
 
 <a id="retention-and-cleanup"></a>
 
 ## Keep your files for the next activity
 
-Keep the files until the invitation's **Keep files until** date.
+Keep your files, branch and agents until the invitation's **Keep your work until** date.
 Participants do not delete cloud resources.
 
 <a id="instructoradmin-prepare-the-evaluation-workspace"></a>

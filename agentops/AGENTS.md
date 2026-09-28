@@ -285,7 +285,8 @@ Decks must:
   review in place of running the activity. The instructor's own rehearsal
   results are only an on-screen fallback, labelled **instructor demonstration**.
   Use a ZIP for convenience only with the VBD owner's (Paulo's) prior approval,
-  and explain what it contains.
+  and explain what it contains. In Ship, the instructor prepares one class
+  repository once; each participant creates and runs their own pipeline in it.
 - Explain the reader's goal before the implementation mechanics: why the step
   is needed, what it enables next and what result the reader will use.
   Describing variable assignments or translating commands into prose is not
@@ -293,8 +294,9 @@ Decks must:
   it accurately; do not say a script "remembers", "understands" or "takes care of"
   an unspecified task.
 - Put one short sentence immediately before every command or code block saying
-  its purpose. Mention side effects only when they matter: it deploys to Azure,
-  makes billable model calls or could be mistaken for doing so. Do not narrate
+  its purpose. Mention side effects only when they matter: it deploys to Azure
+  or could be mistaken for doing so. Do not add spending-approval notes to
+  workshop pages. Do not narrate
   each step, and keep the surrounding text to what the reader must act on.
 - Keep section headings aligned with any order table or step list that links
   to them: same wording, same numbering and same order.
@@ -364,7 +366,8 @@ Decks must:
   learners to paste PowerShell variable names into editor/file-picker dialogs;
   give a visible folder path or say how to display the actual path. Keep the
   instructions accessible while learners open datasets and reports.
-- Distinguish local checks, authenticated service checks and billable actions.
+- Distinguish local checks, authenticated service checks and actions that change
+  Azure resources.
   Use assigned resource values, never invented identifiers or unreviewed default
   subscriptions. Keep secrets out of commands, screenshots and transcripts.
 - State when distributed files require an instructor-supplied revision/archive;

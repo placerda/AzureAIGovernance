@@ -99,8 +99,9 @@ Instructors follow [source download](workshop/pre-work/technical-setup.md#a-down
 and [session distribution](workshop/pre-work/technical-setup.md#publish-the-workshop-files-and-invitation).
 Evaluate participants clone this repository and run both evaluations
 themselves in a shared Foundry project, using the **Evaluate settings** from the
-**AgentOps workshop** invitation. Ship, Observe and Operate, and Advanced
-currently use review ZIPs shared through **Workshop files** in the same invitation.
+**AgentOps workshop** invitation. In Ship, the instructor prepares one class
+repository and each participant builds their own pipeline in it. Observe and
+Operate and Advanced continue with the participant's own agent and pipeline.
 
 In Evaluate, participants test an agent running in Microsoft Foundry and read
 its answers, tool results and scores. The Accelerator CLI submits the requests
@@ -109,15 +110,15 @@ rules, safety, conversations and adversarial tests.
 Use [final check before the workshop](workshop/pre-work/technical-setup.md#final-check-before-the-workshop)
 before teaching.
 
-The Ship outline defines equivalent GitHub Actions and Azure Pipelines tracks.
+Ship has equivalent GitHub Actions and Azure Pipelines tracks.
 Evaluate uses Foundry evaluation and evaluators, with the Accelerator CLI
 submitting runs against an already deployed help desk agent; learners do not
-use azd in Evaluate. Ship's agreed scope exercises
-code deployment with azd and test requests with `azd ai agent`, using the same
-agent code and Evaluate results. Creating Azure resources stays outside workshop time.
-In Observe and Operate and the optional advanced lab, participants review saved
-results; their pre-work explains which files the instructor provides. Advanced
-connects an incident to recovery and a test that catches the same bug.
+use azd in Evaluate. In Ship, participants generate a pipeline with the
+Accelerator CLI that deploys with azd, evaluates, waits for approval and runs a
+smoke test. Creating Azure resources stays outside workshop time.
+In Observe and Operate, participants investigate traces, write a query and
+create an alert. Advanced adds a regression test and an automatic gate, then
+recovers from a bad release.
 
 ## Delivery sequence
 

@@ -160,8 +160,9 @@ Skip familiar foundation slides when the group does not need them.
 
 When you teach more than one module, carry the Evaluate decision into Ship,
 then use Observe and Operate to show how runtime findings lead to the next
-evaluation. When you teach a module on its own, provide the earlier module's
-results as part of pre-work; participants do not need to have attended it.
+evaluation. When you teach a module on its own, each lab's scenario explains
+what came before, and Observe and Operate uses the baseline agent for anyone
+who skipped Ship. Participants do not need to have attended earlier modules.
 
 The optional **Advanced AgentOps workshop lab** extends this cycle from
 incident to recovery and a test that catches the same defect. It sits outside the

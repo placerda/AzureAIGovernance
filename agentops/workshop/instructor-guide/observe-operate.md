@@ -15,42 +15,45 @@ and carrying out the response, then improving the agent.
 ## Before the session
 
 Read the [Observe and Operate deck and speaker notes](../decks/observe-operate/agentops-observe-operate-workshop.pptx)
-and the [current lab](../labs/03-observe-operate/lab.md).
-Use [module preparation](../pre-work/technical-setup.md#observe-and-operate)
-to supply a trace, related alert, dashboard and response notes with working
-links and a clear time range.
+and the [lab](../labs/03-observe-operate/lab.md). The technical preparation is
+in [module preparation](../pre-work/technical-setup.md#observe-and-operate).
 
-For standalone delivery, introduce the agent and deployed version in the
-prepared example. Participants do not need to have completed Ship.
+When you finish, you should have:
 
-**Activity:** participants review a saved example without changing the service.
+- Traces from your own agent visible in Foundry and Application Insights.
+- A decision on who creates the alert in lab step 6: each participant, with
+  Monitoring Contributor, or you, on screen.
+- The invitation sent, with the **Observe settings** you tested.
 
-## Present and discuss
+Participants who did Ship observe their own released agent. Participants who
+skipped it observe the baseline agent named in the invitation.
 
-Use the 60-minute presentation to connect tracing, quality and performance
+## Present the module
+
+Allow 60 minutes for the presentation. Connect tracing, quality and performance
 monitoring, continuous evaluation and operational response. Explain how
-runtime findings can become tests for the next version.
+runtime findings become tests for the next version.
 
-For the current guided review:
+## Hands-on lab (60 minutes)
 
-- Open the supplied trace and explore the failed or slow operation together.
-  A trace records the operations that handled one request.
-- Compare the alert and dashboard with the example. Discuss what the data
-  supports and what still needs investigation.
-- Use the response notes to discuss the next action and who is allowed to
-  take it. Ask which request would make a useful future test.
+- Steps 1 and 2: participants send the complaint's requests and read their
+  traces. Ask them to find the tool call that never happened.
+- Steps 3 to 5: they measure the problem with a query and run the health check.
+  Discuss what the data supports and what still needs investigation.
+- Steps 6 and 7: they set the alert and decide the response: who owns it, what
+  action is allowed and which request becomes a test.
 
-For a 20-minute demo, follow one example from trace to response and
-improvement. Keep Observe and Operate distinct: finding a problem does not
-by itself resolve it.
+Keep Observe and Operate distinct: finding a problem does not by itself
+resolve it. Participants do not change the agent in this lab.
 
-The planned hands-on lab is 60 minutes. Configuration and live response
-steps will be added as the exercise is completed. Do not create failures
-or change the service to compensate for missing example files.
+## Instructor demo (20 minutes)
+
+Send one request to your agent, open its trace, run the query and show the
+alert rule. Finish with the response notes: owner, allowed action and the test
+to add.
 
 ## Close the cycle
 
-Keep notes linking the runtime problem to a response, a responsible person
-and a test that could catch the same issue. Ask how the team would evaluate
-the proposed improvement before releasing it. This returns the discussion
-to Evaluate and Ship.
+Participants keep their query, alert and response notes. Ask how the team would
+evaluate the proposed improvement before releasing it. This returns the
+discussion to Evaluate and Ship, and leads into the optional Advanced lab.

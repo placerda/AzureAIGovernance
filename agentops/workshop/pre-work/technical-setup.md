@@ -12,7 +12,7 @@ How to teach each module is in the [instructor guide](../instructor-guide/README
 1. [Get the files and tools](#1-get-the-files-and-tools): clone the course repository and prepare your computer
 2. [Create or reuse the Foundry environment](#2-create-or-reuse-the-foundry-environment): project, models, monitoring and access
 3. [Deploy the help desk agent](#3-deploy-the-help-desk-agent): working baseline and candidate versions
-4. [Prepare your module](#4-prepare-your-module): the results and files each module needs
+4. [Prepare your module](#4-prepare-your-module): run each lab yourself; for Ship, set up the class repository
 5. [Invite and rehearse](#5-invite-and-rehearse): a participant-tested invitation
 6. [Final check before the workshop](#final-check-before-the-workshop): decide whether each module runs as a lab or a demo
 7. [Retention and cleanup](#retention-and-cleanup): remove workshop resources after the retention date
@@ -21,8 +21,8 @@ How to teach each module is in the [instructor guide](../instructor-guide/README
 Do not redeploy agents just to teach again.
 
 Two other people may be involved: the **Azure administrator** grants project
-permissions, and the **workshop organizer** approves the use and spending.
-You may cover these roles yourself.
+permissions, and the **workshop organizer** owns the schedule and the class
+list. You may cover these roles yourself.
 
 <a id="common-preparation"></a>
 
@@ -30,8 +30,6 @@ Do steps 1 to 3 **once for the whole workshop**: every module uses the same
 files, Foundry project and agent versions. Then do step 4 once for each module
 you teach, and step 5 once. This also applies when you teach only Ship, Observe
 and Operate, or Advanced.
-Azure resources and model calls can incur charges; obtain the workshop organizer's
-approval before the cloud steps.
 
 <a id="1-prepare-the-instructor-machine"></a>
 
@@ -216,132 +214,197 @@ instead of running it again.
 
 ### Ship
 
-Participants compare two saved pipeline runs: a release that was blocked and
-one that was approved. The course does not include a runnable pipeline yet, so
-you create these runs yourself.
+Participants build their own release pipeline in a **class repository** that
+you prepare once for the whole class. Each participant works on a branch of it
+and deploys two agents of their own, so nobody overwrites anyone else.
+Allow about an hour, plus the time the Azure administrator needs.
 
-1. **Choose the track:** GitHub Actions or Azure Pipelines.
-2. **Run the pipeline twice** for the help desk agent: once so that evaluation
-   or approval stops the release, and once so that it deploys and the test
-   requests after deployment succeed.
-3. **Package the results** as `agentops-ship-review.zip`, with the contents below.
-   Remove secrets, `.azure` folders and virtual environments first.
+#### 1. Create the empty class repository
+
+Choose the track the class will use and create an **empty** repository, with no
+README, `.gitignore` or license:
+
+- **GitHub Actions:** a private GitHub repository, for example
+  `agentops-ship-class`, in an organization the participants belong to.
+- **Azure Pipelines:** an Azure Repos repository in an Azure DevOps project the
+  participants can use. When you create it, clear **Add a README**.
+
+Give the participants write access: the **Write** role on GitHub, or the
+project's **Contributors** group on Azure DevOps, which can also create pipelines.
+
+#### 2. Assemble and push the class repository
+
+Use the PowerShell window from [step 1](#1-get-the-files-and-tools) in which
+you also ran [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in).
+If it closed, repeat both.
+
+**What this block does:** clones the empty class repository to `agentops-ship-class` in your user folder, copies the Ship starting files, the help desk agent code and the Evaluate test requests into it, sets the project endpoint and pushes it to `main`.
+
+```powershell
+$ErrorActionPreference = 'Stop'
+if (-not $RepoRoot -or -not $ProjectEndpoint) { throw 'Run step 1 and environment setup step 5 in this window first.' }
+$ClassUrl = (Read-Host 'Empty class repository URL').Trim()
+$Class = Join-Path $HOME 'agentops-ship-class'
+git clone $ClassUrl $Class
+if ($LASTEXITCODE -ne 0) { throw 'Clone failed. Check the URL and your sign-in.' }
+$Labs = Join-Path $RepoRoot 'agentops\workshop\labs'
+Get-ChildItem -Force (Join-Path $Labs '02-ship\class-repo') |
+    Where-Object Name -ne 'README.md' | Copy-Item -Destination $Class -Recurse -Force
+foreach ($file in 'main.py','tools.py','instructions.md','knowledge.json','requirements.txt') {
+    Copy-Item (Join-Path $Labs "shared\helpdesk-agent\$file") (Join-Path $Class "src\helpdesk\$file")
+}
+Copy-Item (Join-Path $Labs '01-evaluate\assets\turns.jsonl') $Class
+$Config = Join-Path $Class 'agentops.yaml'
+(Get-Content $Config) -replace 'FOUNDRY_ENDPOINT', $ProjectEndpoint | Set-Content $Config
+Set-Location $Class
+git add -A
+git commit -m 'Prepare the Ship class repository'
+git branch -M main
+git push -u origin main
+if ($LASTEXITCODE -ne 0) { throw 'Push failed. Check your write access to the class repository.' }
+```
+
+**Expected result:** the class repository shows `azure.yaml`, `agentops.yaml`,
+`turns.jsonl`, `scripts` and `src` on `main`. What each file does is in the
+[class repository seed](../labs/02-ship/class-repo/README.md).
+
+#### 3. Let the pipelines sign in to Azure
+
+**AZURE ADMINISTRATOR.** The pipelines deploy agents and run evaluations with
+their own identity, never with a participant's password.
+
+- **GitHub Actions:** create an app registration and add two
+  [federated credentials](https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect)
+  for the class repository, entity type **Environment**, named `dev` and
+  `production`. Copy its **Application (client) ID**.
+- **Azure Pipelines:** in the Azure DevOps project, open **Project settings >
+  Service connections** and create an **Azure Resource Manager** connection with
+  [workload identity federation](https://learn.microsoft.com/azure/devops/pipelines/release/configure-workload-identity?view=azure-devops),
+  scoped to the workshop resource group. Name it `agentops-azure` and select
+  **Grant access permission to all pipelines**.
+
+Then give that identity **Foundry User** and **Contributor** on the workshop
+Foundry project, using the same **Access control (IAM)** steps as
+[environment setup step 4](foundry-environment.md#4-give-people-access).
+
+#### 4. Add the class settings
+
+Every pipeline reads the same settings: which project to deploy to, which
+models to use and where to send traces.
+
+**What this block does:** collects the class settings from your sign-in session and prints them. Read-only.
+
+```powershell
+$AppInsights = (Read-Host 'Application Insights connection string (Overview page)').Trim()
+$ClientId = (Read-Host 'Pipeline app client ID (GitHub only; press Enter for Azure Pipelines)').Trim()
+$Settings = [ordered]@{
+    AZURE_CLIENT_ID = $ClientId
+    AZURE_TENANT_ID = $TenantId
+    AZURE_SUBSCRIPTION_ID = $SubscriptionId
+    AZURE_LOCATION = az resource show --ids $ProjectId --query location --output tsv
+    AZURE_RESOURCE_GROUP = $ResourceGroup
+    AZURE_AI_PROJECT_ID = $ProjectId
+    FOUNDRY_PROJECT_ENDPOINT = $ProjectEndpoint
+    AZURE_AI_FOUNDRY_PROJECT_ENDPOINT = $ProjectEndpoint
+    AZURE_AI_MODEL_DEPLOYMENT_NAME = $ModelDeployment
+    AZURE_OPENAI_DEPLOYMENT = $JudgeDeployment
+    AZURE_OPENAI_ENDPOINT = az cognitiveservices account show --name $FoundryResource `
+        --resource-group $ResourceGroup --query properties.endpoint --output tsv
+    AZURE_OPENAI_MODEL_NAME = az cognitiveservices account deployment show --name $FoundryResource `
+        --resource-group $ResourceGroup --deployment-name $JudgeDeployment --query properties.model.name --output tsv
+}
+$Settings.GetEnumerator() | Format-Table -AutoSize
+```
+
+Enter each printed value, with its exact name, in the class repository's settings:
+
+- **GitHub Actions:** **Settings > Secrets and variables > Actions > Variables >
+  New repository variable**. Add the connection string on the **Secrets** tab
+  as `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+- **Azure Pipelines:** **Pipelines > Library > + Variable group**, named
+  `agentops`. Leave out `AZURE_CLIENT_ID`, add
+  `APPLICATIONINSIGHTS_CONNECTION_STRING` with the lock icon selected, and add
+  `AZURE_SERVICE_CONNECTION` with the value `agentops-azure`. Under
+  **Pipeline permissions**, select **Open access**.
+
+Define every name even if a pipeline seems not to use it: Azure Pipelines
+passes an undefined `$(NAME)` through as literal text.
+
+#### 5. Create the approval environments
+
+The pipeline pauses before each release until a person approves it.
+
+- **GitHub Actions:** **Settings > Environments**, create `dev` with no rules,
+  then `production` with **Required reviewers** set to a team that contains
+  the participants.
+  Clear **Prevent self-review**, so each participant can approve their own release.
+- **Azure Pipelines:** **Pipelines > Environments**, create `dev` and
+  `production`. On `production`, open **Approvals and checks > Approvals**, add
+  the participants and allow approvers to approve their own runs. On both, open
+  **Security > Pipeline permissions** and select **Open access**.
+
+#### 6. Run the lab yourself
+
+Follow [the Ship lab](../labs/02-ship/lab.md) on the track you chose, with the
+alias `rehearsal`. Use a repository account that has only the participant
+access from step 1, so a missing permission shows up now and not in class.
+Finish with one rejected run and one released run.
 
 <details>
-<summary>What the Ship ZIP must contain</summary>
+<summary>More about pipelines on each platform</summary>
 
-Zip the files themselves, not a folder that contains them.
-
-- `blocked\` and `accepted\`: the `report.md` and `results.json` from each run.
-  Download them from GitHub **Actions > run > Artifacts** or Azure Pipelines
-  **Pipelines > run > Summary**.
-- `deployment\`: the `azure.yaml` used and the code folders it names.
-- `README.md` with these fields: **Blocked run**, **Accepted run** and links to
-  their job logs; **Pipeline steps**, naming the actual evaluation, approval and
-  deployment steps; **Deployment source**, **Evaluated source revision**,
-  **Deployed agent version** and **Approval**; **Smoke-test evidence**, the
-  responses to the test requests after deployment; and **Recovery
-  instructions**, how to restore the previous version if those requests fail.
-
-</details>
-
-<details>
-<summary>References for building the pipeline</summary>
-
-[GitHub workload identity](https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect),
 [azd GitHub pipeline](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-github-actions),
-[Azure Pipelines workload identity](https://learn.microsoft.com/azure/devops/pipelines/release/configure-workload-identity?view=azure-devops)
+[GitHub environments](https://docs.github.com/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment),
+[Azure Pipelines environments](https://learn.microsoft.com/azure/devops/pipelines/process/environments?view=azure-devops)
 and [approvals](https://learn.microsoft.com/azure/devops/pipelines/process/approvals?view=azure-devops).
 
 </details>
 
 ### Observe and Operate
 
-Participants follow one saved request from its trace to the alert it caused,
-then choose a response. They do not configure monitoring or change the service.
+Participants observe their own released agent from Ship, or your baseline agent
+if they skip Ship. They read its traces, query them, run the health check and
+create an alert. There is nothing to package.
 
-1. **Send a fictional test request** to the help desk agent that triggers an alert.
-   Use [Foundry tracing](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup)
-   and a [log alert](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-create-log-alert-rule)
-   on the workshop's Application Insights resource. Send notifications only to
-   people who agreed to receive them.
-2. **Check that the trace and the alert** refer to the same request and time.
-3. **Package the results** as `agentops-observe-review.zip`, with the contents below.
-   Remove sensitive information first.
-
-<details>
-<summary>What the Observe and Operate ZIP must contain</summary>
-
-Zip the files themselves, not a folder that contains them.
-
-- `README.md` with **Trace** (from Foundry **Agents > Traces**), **Trace ID**,
-  **UTC time range**, **Agent version**, **Alert** (from Azure portal
-  **Monitor > Alerts**) and **Dashboard**. Mark any scheduled evaluation you
-  did not run as **Not assessed**.
-- `response-notes.md`: what went wrong, what action is allowed, who acts, who
-  to call for help, when to stop and what to retest.
-
-</details>
+1. **Check trace access.** [Environment setup step 4](foundry-environment.md#4-give-people-access)
+   already gives participants **Monitoring Reader** and **Log Analytics Reader**.
+2. **Decide who creates the alert.** Creating an alert rule needs
+   **Monitoring Contributor** on the workshop resource group. Either ask the
+   administrator to grant it to the participants, or create the alert yourself
+   during [lab step 6](../labs/03-observe-operate/lab.md#6-create-an-alert) while
+   they watch. Send alert notifications only to people who agreed to receive them.
+3. **Run the lab yourself** with the test account: follow
+   [the Observe and Operate lab](../labs/03-observe-operate/lab.md) with your
+   `rehearsal` agent from Ship, or your baseline agent. Traces can take a few
+   minutes to appear after each request.
 
 ### Advanced (optional)
 
-Participants review a saved incident: the failure, its recovery and the test
-added so the same bug cannot be released again.
-
-1. **Cause a reversible failure** on a separate test agent, never on the shared
-   agent or production data.
-2. **Restore the previous working version** and add a test that catches the
-   same bug. Check that this test stops the faulty version from being released.
-3. **Package the results** as `agentops-advanced-review.zip`, with the contents below.
-
-<details>
-<summary>What the Advanced ZIP must contain</summary>
-
-Zip the files themselves, not a folder that contains them.
-
-- `before\` and `after\`: each run's `turns.jsonl`, `agentops.yaml`,
-  `report.md` and `results.json`.
-- `runbook.md`: the test agent, who may act, how the failure was caused, when
-  to stop, who to contact, the recovery steps and the expected response after
-  recovery.
-- `README.md` with **Trace**, **Trace ID**, **UTC time range**, **Blocked run**,
-  **Recovered run**, **Source revisions**, **Review process**, **Regression
-  request** and links to both reports.
-
-</details>
+Advanced continues in each participant's Ship branch and needs no extra setup.
+Run [the Advanced lab](../labs/04-advanced/lab.md) once on your `rehearsal`
+branch, after your Ship and Observe rehearsals.
 
 ## 5. Invite and rehearse
 
 Do this step once for the whole workshop, after step 4 is done for every module
-you will teach. One rehearsal covers all those modules, and one invitation
-reaches the participants.
+you will teach. One invitation reaches the participants, and one rehearsal
+checks it.
 
-### Publish the workshop files and invitation
+<a id="publish-the-workshop-files-and-invitation"></a>
+
+### Prepare the invitation
 
 Participants find everything they need in one calendar invitation: the links,
-the account to sign in with and the values the labs ask for. Prepare it in
-three steps.
+the account to sign in with and the values the labs ask for.
 
-**1. Share the module files.** Skip this if you teach only Evaluate:
-participants get its files by cloning the course repository.
-
-1. In [OneDrive](https://www.microsoft365.com/onedrive), create a folder named
-   `AgentOps workshop YYYY-MM-DD` with the session date.
-2. Upload the review ZIPs of the modules you teach.
-3. Select **Share**, add the participants and the test account you will use in
-   the rehearsal, choose **Can view**, and copy the link.
-
-**2. Draft the invitation.** In Outlook, select **Calendar > New event**, name
-it **AgentOps workshop** and add the participants. Paste the message below into
-the body. Delete every line that does not apply to your session, and any
-heading left empty, then replace the remaining `<...>` placeholders.
-Under **Your module and mode**, list only the modules participants will run;
-leave out modules you will only demonstrate. Keep the
-label wording unchanged: the participant pages refer to each label by name.
-
-**3. Test it before sending.** Keep the event as a draft and use it yourself in
-[the rehearsal below](#instructoradmin-shared-environment-and-permissions).
-Send it only after the rehearsal works.
+1. **Draft it.** In Outlook, select **Calendar > New event**, name it
+   **AgentOps workshop** and add the participants. Paste the message below into
+   the body. Delete the lines and headings for modules you do not teach, then
+   replace the remaining `<...>` placeholders. Keep the label wording unchanged:
+   the participant pages refer to each label by name.
+2. **Test it before sending.** Keep the event as a draft and use it yourself in
+   [the rehearsal below](#instructoradmin-shared-environment-and-permissions).
+   Send it only after the rehearsal works.
 
 <details open>
 <summary>Invitation message to copy</summary>
@@ -353,9 +416,9 @@ You are invited to the AgentOps workshop on <date>, <start time> to <end time> (
 
 Your module and mode
 - Evaluate: run the lab
-- Ship: review saved results
-- Observe and Operate: review saved results
-- Advanced (optional): review saved results
+- Ship: run the lab
+- Observe and Operate: run the lab
+- Advanced (optional): run the lab
 
 Before the session, complete the pre-work for the modules listed above:
 https://github.com/Azure/AzureAIGovernance/blob/main/agentops/workshop/pre-work/README.md
@@ -365,19 +428,24 @@ Access
 - Project name: <name shown on the project page>
 - Sign-in account: <account you must use>
 - Network access: <VPN instructions, or "Not needed">
-- Tenant ID: <tenant ID> (Evaluate only)
+- Tenant ID: <tenant ID>
 
-Evaluate settings (Evaluate hands-on only)
+Evaluate settings
 - Project endpoint: <https://RESOURCE.services.ai.azure.com/api/projects/PROJECT>
 - Baseline agent: <PROJECT ENDPOINT/agents/NAME/versions/NUMBER>
 - Candidate agent: <PROJECT ENDPOINT/agents/NAME/versions/NUMBER>
 - Scoring-model deployment: <deployment name, normally agentops-eval>
 
-Other modules
-- Workshop files: <OneDrive folder link> (Ship, Observe and Operate, Advanced)
+Ship settings
+- Class repository: <URL of the class repository>
 - Ship track: <GitHub Actions | Azure Pipelines>, <link to that track's page>
 
-Keep files until: <retention date>
+Observe settings
+- Project endpoint: <https://RESOURCE.services.ai.azure.com/api/projects/PROJECT>
+- Agent to observe if you skip Ship: <baseline agent name>
+- Application Insights resource: <resource name>
+
+Keep your work until: <retention date>
 Please do not share these links outside the class. If a link or sign-in does
 not work, reply to this invitation before the session.
 
@@ -393,74 +461,62 @@ not work, reply to this invitation before the session.
 - **Tenant ID:** the same step 5.
 - **Baseline agent** and **Candidate agent:** `versions.txt`, saved in
   [agent deployment step 6](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
+  **Agent to observe if you skip Ship** is the name inside the baseline URL.
 - **Scoring-model deployment:** **Build > Models** in the Foundry project.
 - **Sign-in account** and **Network access:** ask the Azure administrator.
-- **Workshop files:** the link you copied in step 1 above.
-- **Ship track:** the track page under [the Ship lab](../labs/02-ship/lab.md) on GitHub.
-- **Keep files until:** the date agreed with the workshop organizer.
+- **Class repository** and **Ship track:** the repository from
+  [Ship preparation](#ship), and the track page under [the Ship lab](../labs/02-ship/lab.md) on GitHub.
+- **Application Insights resource:** the resource connected in
+  [environment setup step 3](foundry-environment.md#3-connect-monitoring).
+- **Keep your work until:** the date agreed with the workshop organizer.
 
-The workshop organizer is the support contact. If OneDrive blocks sharing, ask
-the organization's file-sharing administrator before you send the invitation.
-Do not publish private results to GitHub.
+The workshop organizer is the support contact.
 
 <a id="instructoradmin-shared-environment-and-permissions"></a>
 
 ### Rehearse with participant access
 
-Use the draft invitation above.
 The administrator has already assigned access during [environment setup](foundry-environment.md#4-give-people-access).
 Now sign in with the test account the administrator created for you, which has
-exactly the participant roles, and check that the selected activity works with
-those permissions. Do not use your own instructor account: it has broader
-permissions and can hide access problems.
+exactly the participant roles, and follow the draft invitation as a participant
+would. Do not use your own instructor account: it has broader permissions and
+can hide access problems.
 
-The rehearsal shows that the lab works for one person. Whether the quota
+The rehearsal shows that the labs work for one person. Whether the quota
 supports the whole class at once comes from the
 [capacity check](#plan-model-capacity-for-simultaneous-runs).
 
-#### Open the project and files with the test account
+<a id="open-the-project-and-files-with-the-test-account"></a>
+<a id="try-one-evaluation-with-participant-permissions"></a>
 
-These actions open existing pages and files; they do not submit evaluations.
+1. **Open the project.** Open **Foundry project** from the invitation with the
+   test account and compare the displayed name with **Project name**.
+2. **Complete the pre-work** for your modules from the invitation's link, on a
+   machine like the ones participants will use. Use **Network access** first if
+   a VPN is required.
+3. **Evaluate:** run [lab step 3](../labs/01-evaluate/lab.md#3-run-the-supported-public-command)
+   once, baseline then candidate, and check with
+   [step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions)
+   that all eight requests have answers, both scores and no errors. Exit `2`
+   means a quality threshold failed, not that sign-in failed.
+4. **Ship, Observe and Operate, Advanced:** your runs from [step 4](#4-prepare-your-module)
+   already used participant access. Open the class repository with the test
+   account and check that you can see your `ship/rehearsal` branch and its runs.
 
-1. Open **Foundry project** with the test account.
-2. Compare the displayed project name with **Project name** in the draft invitation.
-3. For Ship, Observe and Operate, or Advanced, download the module ZIP
-   from **Workshop files**, select **Extract All**, and open its `README.md`, then the entries below.
+If a run times out, use the Evaluate lab's recovery procedure instead of
+resubmitting. For access denied, give the administrator the failing action,
+account or agent, and error. Do not grant broad access or disable network
+restrictions.
 
-| Module | Open | Access works when |
-| --- | --- | --- |
-| Ship | **Blocked run**, **Accepted run** and their job-log links | Run pages and logs open |
-| Observe and Operate | **Trace**, **Alert** and **Dashboard** | Trace details, alert and chart are visible |
-| Advanced | `runbook.md`, **Trace**, **Blocked run** and **Recovered run** | Procedure and saved records open |
+<a id="evaluate-readiness-checks"></a>
 
-If a trace opens as a list, use
-[the trace lookup steps](../labs/03-observe-operate/lab.md#find-the-supplied-trace).
+### Readiness checks
 
-#### Try one evaluation with participant permissions
-
-**Evaluate only. This is a billable rehearsal, not participant homework.**
-Use the invitation's **Network access** instructions first if a VPN is required.
-
-1. Complete [Evaluate pre-work](README.md#evaluate) with the test account, on a machine like the ones participants will use.
-2. Run [Evaluate step 3](../labs/01-evaluate/lab.md#3-run-the-supported-public-command) once: baseline, then candidate.
-3. Review the report and Foundry page using [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions).
-4. Find all eight requests, with actual answers, both scores and no agent-call or scoring errors.
-
-**Expected:** the test account can submit and read results; the agent can answer.
-Exit `2` means a quality threshold failed, not that authentication failed.
-Do not require the deliberately faulty candidate to pass before teaching.
-
-If the run times out, use the lab's recovery procedure instead of resubmitting.
-For access denied, give the administrator the failing action, account or agent,
-and error. Do not grant broad access or disable network restrictions.
-
-### Evaluate readiness checks
-
-- [ ] A person with participant permissions can start the lab and complete an evaluation.
-- [ ] Both runs use the versions named in the invitation; all eight requests were reviewed.
-- [ ] Your rehearsal results, tool traces and extra checks are ready to demonstrate; any missing checks are listed.
-- [ ] Rehearsal fits the lab time and approved spending limit, with a capacity plan for simultaneous runs.
-- [ ] With the test account, you can clone the repository and open your own report links.
+- [ ] A person with participant permissions completed the pre-work and started each hands-on lab.
+- [ ] Evaluate uses the versions named in the invitation; all eight requests were reviewed.
+- [ ] Ship: the class repository has its settings and environments, and your `rehearsal` branch has one rejected and one released run.
+- [ ] Observe and Operate: your agent's traces appear, and you know who creates the alert.
+- [ ] Each rehearsal fits the lab time, with a capacity plan for simultaneous runs.
 
 <a id="readiness-gate"></a>
 
@@ -471,8 +527,8 @@ will run it:
 
 - **As a hands-on lab**, if you completed that module's checklist in
   [step 4](#4-prepare-your-module) and ran the lab yourself from start to finish.
-- **As a demo**, if anything in that checklist is missing, such as lab
-  files, agent versions or results you produced. Present the module with the
+- **As a demo**, if anything in that checklist is missing, such as the
+agent versions, the class repository or a rehearsal run. Present the module with the
   slides and explain the steps, but do not ask participants to run it.
 
 Tell participants which format each module will use, in the invitation or in a

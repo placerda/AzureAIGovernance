@@ -11,27 +11,24 @@ selected in your invitation.** Teaching the workshop? Start with the
 | Order | Open this lab | What you will work on |
 | --- | --- | --- |
 | 1 | [Evaluate](01-evaluate/lab.md) | Compare agent versions using responses, tool actions and evaluation results |
-| 2 | [Ship](02-ship/lab.md) | Connect evaluation findings to a release decision and deployment evidence |
-| 3 | [Observe and Operate](03-observe-operate/lab.md) | Connect a runtime problem to its trace, an appropriate response and future tests |
-| Optional | [Advanced](04-advanced/lab.md) | Explore a cross-module exercise beyond the three core modules |
+| 2 | [Ship](02-ship/lab.md) | Build a release pipeline that evaluates, waits for approval and releases your own agent |
+| 3 | [Observe and Operate](03-observe-operate/lab.md) | Investigate a complaint with traces, a query and an alert, then decide the response |
+| Optional | [Advanced](04-advanced/lab.md) | Add a regression test and an automatic gate to your pipeline, then recover from a bad release |
 
 The folder numbers show the sequence for the full workshop. You can also
-attend a single module: complete only its pre-work, and use the earlier
-results supplied by the instructor.
+attend a single module: complete the common pre-work and that module's section.
+Each lab's scenario explains what came before. Advanced continues your Ship work.
 
 **Choose one Ship path:** [GitHub Actions](02-ship/github-actions/README.md)
 or [Azure Pipelines](02-ship/azure-pipelines/README.md). They are alternatives
 within module 2, not two consecutive labs.
 
-Each lab identifies the activity available today. Ship, Observe and Operate,
-and Advanced currently review instructor-supplied results; their full
-hands-on outlines are not instructions to execute.
-
 ## Where is the agent built?
 
 The instructor/admin prepares or reuses the Foundry environment and deploys
 the help desk agent **before the workshop**. Participants do not create a
-separate environment or deploy an agent to begin Evaluate.
+separate environment. In Ship, each participant's pipeline deploys their own
+copy of the agent to the same project.
 The [technical setup](../pre-work/technical-setup.md) links to
 environment setup and agent deployment.
 

@@ -24,7 +24,7 @@ The administrator needs permission to create resources and assign roles in the
 workshop resource group, such as **Owner** on that group. Do not give participants
 Owner access.
 
-**Before spending:** the workshop organizer approves the subscription, resource group,
+**Before you start:** the workshop organizer confirms the subscription, resource group,
 region, model capacity and retention date. Use only the supplied fictional data.
 This portal route uses basic project settings; if policy requires a private
 network, have the administrator supply a compliant project and connection
@@ -198,6 +198,7 @@ created or connected in step 3.
 | Person deploying the models, if not already authorized | Contributor | Parent Foundry resource |
 | Instructor and attendees inspecting traces | Monitoring Reader | Connected Application Insights |
 | Instructor and attendees querying trace logs | Log Analytics Reader | Its Log Analytics workspace |
+| Attendees creating their own alert in Observe and Operate (optional) | Monitoring Contributor | Workshop resource group |
 
 For each required assignment:
 

@@ -154,8 +154,6 @@ Do not mix them with the AgentOps Accelerator CLI's Python packages.
 
 ## 4. Deploy and test the baseline
 
-**Deployment and test requests can incur charges. Obtain the workshop organizer's approval first.**
-
 1. Open `azure.yaml` in the deployment folder.
 2. In the agent service's `env`, set the three values below.
 3. Open or create `.agentignore` in the service folder. Add `.env`, `.env.*`,
@@ -223,7 +221,7 @@ azd ai agent invoke $ServiceName --version $BaselineVersion `
 if ($LASTEXITCODE -ne 0) { throw 'Deployed invocation failed. Keep the version and error.' }
 ```
 
-Then test the ticket tool. This is a second billable request, not another deployment.
+Then test the ticket tool. This is a second request, not another deployment.
 
 **What this block does:** tests the baseline with a VPN problem that should use its tools.
 
@@ -390,7 +388,7 @@ The server listens on `http://localhost:8088`. For visual inspection, install
 in VS Code, then choose **Foundry Toolkit: Open Agent Inspector** from **Ctrl+Shift+P**.
 Connect to port 8088 and use the requests in step 4.
 
-Model calls remain billable. Stop your server with **Ctrl+C**.
+Stop your server with **Ctrl+C** when you finish.
 If installation fails, contact the package administrator rather than change
 the required versions or use an unapproved download source.
 
@@ -400,6 +398,6 @@ the required versions or use an unapproved download source.
 
 Return to [evaluation workspace setup](../../../pre-work/technical-setup.md#instructoradmin-prepare-the-evaluation-workspace)
 with both agent URLs. Evaluate calls the versions running in Foundry, not the
-server on your computer. Ship reuses their code and deployment files;
-Observe and Operate uses the traces from their requests.
+server on your computer. The Ship class repository reuses this agent's code,
+and participants who skip Ship observe the baseline in Observe and Operate.
 Follow [owner-approved cleanup](../../../pre-work/technical-setup.md#retention-and-cleanup).
