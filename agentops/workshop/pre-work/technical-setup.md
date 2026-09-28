@@ -204,9 +204,7 @@ fallback you show if a participant's run fails.
 1. **Run lab steps 1 to 4.** Use the four values saved at
    [the end of agent deployment](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references)
    and follow [the Evaluate lab](../labs/01-evaluate/lab.md) from step 1 to 4.
-   The evaluations call models in Azure and are charged, so get the workshop
-   organizer's approval first. At the end, all eight requests must have an
-   answer and both scores, and the traces for `password-basic` and `vpn-ticket`
+   At the end, all eight requests must have an answer and both scores, and the traces for `password-basic` and `vpn-ticket`
    must open.
 2. **Optional: prepare the lab supplements.** Only if you will show lab steps
    5 and 6, follow [additional Foundry checks](native-evidence.md) once and keep
