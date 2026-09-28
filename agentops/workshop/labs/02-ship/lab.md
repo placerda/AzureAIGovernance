@@ -60,6 +60,8 @@ a separate branch and deploys two agents of their own to the shared Foundry proj
 | `helpdesk-ALIAS` | The released agent. Deployed only after approval, then smoke-tested |
 
 `ALIAS` is your alias, so your agents never overwrite anyone else's.
+In a real rollout, test and production agents usually live in separate Foundry
+projects. The workshop uses one project for both to keep the setup short.
 If you did not attend Evaluate, the scenario above is all you need.
 
 ## Tool roles

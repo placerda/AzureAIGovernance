@@ -365,9 +365,14 @@ passes an undefined `$(NAME)` through as literal text.
 
 #### 5. Create the approval environments
 
-The pipeline pauses before each release until a person approves it. `dev` and
-`production` are approval steps in GitHub or Azure DevOps, not separate Azure
-environments: both deploy to the same workshop Foundry project.
+The pipeline pauses before each release until a person approves it. In GitHub
+or Azure DevOps, `dev` and `production` are the two stages of the pipeline:
+`production` holds the approval rule.
+
+In Azure, both stages deploy to the same workshop Foundry project, to keep the
+setup short. They stay apart by agent name: `helpdesk-ALIAS-test` for `dev`,
+`helpdesk-ALIAS` for `production`. In a real rollout, each stage usually has
+its own Foundry project.
 
 - **GitHub Actions:** **Settings > Environments**, create `dev` with no rules,
   then `production` with **Required reviewers** set to a team that contains
