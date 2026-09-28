@@ -197,33 +197,23 @@ Do this for each module you will teach, a few days before class.
 <a id="3-run-both-evaluations-and-save-the-results"></a>
 <a id="plan-model-capacity-for-simultaneous-runs"></a>
 
-Do the lab yourself, exactly as participants will. Your results are what you
-show on screen in class, and your fallback if a participant's run fails.
+Run the lab yourself once, exactly as participants will. This proves that
+the environment, the CLI and tracing work together, and your results are the
+fallback you show if a participant's run fails.
 
-1. **Create your workspace.** Follow
-   [lab step 1](../labs/01-evaluate/lab.md#1-create-your-workspace-and-confirm-the-agent-versions)
-   and enter the four values saved at
-   [the end of agent deployment](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
-2. **Run both evaluations.** Follow
-   [lab step 3](../labs/01-evaluate/lab.md#3-evaluate-the-baseline-and-the-candidate)
-   in the same PowerShell window: run its first block to evaluate the baseline,
-   wait for it to finish, then run its second block to evaluate the candidate
-   and compare the two. Each block takes a few minutes and prints its results
-   folder. These runs call the models in Azure and are charged, so get the
-   workshop organizer's approval first.
-3. **Review the results.** Follow
-   [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions)
-   to open the report and the same run in Foundry. Check that all eight
-   requests have an answer and both scores, and that the traces for
-   `password-basic` and `vpn-ticket` open. If a trace is missing, fix tracing
-   before class: participants need it in that step.
-4. **Prepare the extra Foundry results.** Follow
-   [additional Foundry checks](native-evidence.md) once and keep the links.
-   You show them on screen during lab steps 5 and 6.
-5. **Check model capacity.** All participants share the same model quota.
-   Multiply the tokens your run used by the number of people running at once.
-   If the total exceeds the quota, ask the Azure administrator to raise it, or
-   start runs in groups a few minutes apart.
+1. **Run lab steps 1 to 4.** Use the four values saved at
+   [the end of agent deployment](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references)
+   and follow [the Evaluate lab](../labs/01-evaluate/lab.md) from step 1 to 4.
+   The evaluations call models in Azure and are charged, so get the workshop
+   organizer's approval first. At the end, all eight requests must have an
+   answer and both scores, and the traces for `password-basic` and `vpn-ticket`
+   must open.
+2. **Optional: prepare the lab supplements.** Only if you will show lab steps
+   5 and 6, follow [additional Foundry checks](native-evidence.md) once and keep
+   the links.
+3. **Large classes: check model capacity.** Multiply the tokens your run used
+   by the number of people running at once. If that exceeds the model quota,
+   ask the Azure administrator to raise it or start runs in groups.
 
 Keep your results folder until class. If a run times out, follow the lab's
 [recovery section](../labs/01-evaluate/lab.md#recovery-after-timeout-or-failure)
