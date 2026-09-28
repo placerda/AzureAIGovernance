@@ -22,16 +22,16 @@ At the end: [Final check before the workshop](#final-check-before-the-workshop) 
 **Project and agent versions already deployed?** Reuse them. Start with [access and rehearsal](#instructoradmin-shared-environment-and-permissions).
 Do not redeploy agents just to teach again.
 
-For standalone Ship, Observe and Operate, or Advanced, still complete steps 1 to 3,
-then use that module's section in [step 4](#4-prepare-your-module).
-
 Two other people may be involved: the **Azure administrator** grants project
 permissions, and the **workshop organizer** approves the use and spending.
 You may cover these roles yourself.
 
 <a id="common-preparation"></a>
 
-Steps 1 to 3 apply to every module. Complete them before creating a new environment or changing the agent.
+Do steps 1 to 3 **once for the whole workshop**: every module uses the same
+files, Foundry project and agent versions. Then do step 4 once for each module
+you teach, and step 5 once. This also applies when you teach only Ship, Observe
+and Operate, or Advanced.
 Azure resources and model calls can incur charges; obtain the workshop organizer's
 approval before the cloud steps.
 
