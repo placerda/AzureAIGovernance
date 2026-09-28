@@ -26,7 +26,8 @@ for your session; Advanced is optional.
 
 ### Open the invitation
 
-1. Open the **AgentOps workshop** calendar invitation. Read **Your module and mode**.
+1. Open the **AgentOps workshop** calendar invitation. Its settings sections
+   show which modules you will take.
 2. Open the invitation's **Foundry project** link and sign in with the account it names.
    Follow **Network access** if a VPN connection is required.
 

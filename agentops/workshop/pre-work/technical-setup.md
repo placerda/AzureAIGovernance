@@ -414,13 +414,7 @@ Hi everyone,
 
 You are invited to the AgentOps workshop on <date>, <start time> to <end time> (<time zone>).
 
-Your module and mode
-- Evaluate: run the lab
-- Ship: run the lab
-- Observe and Operate: run the lab
-- Advanced (optional): run the lab
-
-Before the session, complete the pre-work for the modules listed above:
+Before the session, complete the pre-work for the modules whose settings appear below:
 https://github.com/Azure/AzureAIGovernance/blob/main/agentops/workshop/pre-work/README.md
 
 Access
