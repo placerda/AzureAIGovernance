@@ -417,10 +417,9 @@ exactly the participant roles, and check that the selected activity works with
 those permissions. Do not use your own instructor account: it has broader
 permissions and can hide access problems.
 
-Before the rehearsal, get the workshop organizer's approval for the spending
-limit. Remember that the rehearsal shows the lab works for one person; whether
-the quota supports the whole class running at once comes from the
-[capacity plan](#plan-model-capacity-for-simultaneous-runs).
+The rehearsal shows that the lab works for one person. Whether the quota
+supports the whole class at once comes from the
+[capacity check](#plan-model-capacity-for-simultaneous-runs).
 
 #### Open the project and files with the test account
 
