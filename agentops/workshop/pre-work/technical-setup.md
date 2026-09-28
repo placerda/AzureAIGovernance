@@ -188,268 +188,144 @@ visible. A successful local installation is not a deployed agent.
 
 ## 4. Prepare your module
 
-Complete the section below for each module you will teach, before the workshop
-day. If you teach several modules in a row, prepare all of them in advance.
+Do this for each module you will teach, a few days before class.
 
 ### Evaluate
 
-**Start here after environment setup and agent deployment.** You prepare the
-same workspace participants will create, run both evaluations yourself, and
-keep those results to demonstrate the checks participants cannot run alone.
-
 <a id="instructoradmin-prepare-the-evaluation-workspace"></a>
-
-#### Create your evaluation workspace
-
-Use the project, scoring-model and versioned agent references from
-[the end of agent deployment](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
-A versioned agent URL includes `/agents/NAME/versions/VERSION`;
-it must identify the exact version, not a moving "latest" version.
-
-Run [lab step 1](../labs/01-evaluate/lab.md#1-start-the-workspace-and-confirm-the-exact-candidate)
-in the same way as participants, with those four values, and follow its checks.
-Participants will enter the same values from the invitation.
-
-Then, in the same PowerShell window, check the configuration locally:
-
-**What this block does:** validates the workspace locally, without calling Foundry.
-
-```powershell
-agentops eval analyze --dir . --format text
-if ($LASTEXITCODE -ne 0) { throw 'Local configuration analysis failed.' }
-```
-
-This checks the settings on your computer only; it does not prove Azure access.
-
 <a id="3-instructoradmin-rehearse-the-public-cli-and-retain-the-baseline"></a>
-
 <a id="3-run-both-evaluations-and-save-the-results"></a>
+<a id="plan-model-capacity-for-simultaneous-runs"></a>
 
-#### Run both evaluations and save the results
+Do the lab yourself, exactly as participants will. Your results are what you
+show on screen in class, and your fallback if a participant's run fails.
 
-![Ready to press Run? One run is enough to start. Cloud runs cost money; check the results before trying again.](../assets/banners/ready-to-run.png)
+1. **Create your workspace.** Follow
+   [lab step 1](../labs/01-evaluate/lab.md#1-create-your-workspace-and-confirm-the-agent-versions)
+   and enter the four values saved at
+   [the end of agent deployment](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
+2. **Run both evaluations.** Follow
+   [lab step 3](../labs/01-evaluate/lab.md#3-evaluate-the-baseline-and-the-candidate)
+   in the same PowerShell window: run its first block to evaluate the baseline,
+   wait for it to finish, then run its second block to evaluate the candidate
+   and compare the two. Each block takes a few minutes and prints its results
+   folder. These runs call the models in Azure and are charged, so get the
+   workshop organizer's approval first.
+3. **Review the results.** Follow
+   [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions)
+   to open the report and the same run in Foundry. Check that all eight
+   requests have an answer and both scores.
+4. **Save the two tool traces.** In lab step 4, under *Inspect executed tools*,
+   you open the traces for `password-basic` and `vpn-ticket`. Paste both links
+   into a `tool-traces.md` file in your results folder. If a trace is missing,
+   write that down: you will have nothing to show for that request.
+5. **Prepare the extra Foundry results.** Follow
+   [additional Foundry checks](native-evidence.md) once and keep the links.
+   You show them on screen during lab steps 5 and 6.
+6. **Check model capacity.** All participants share the same model quota.
+   Multiply the tokens your run used by the number of people running at once.
+   If the total exceeds the quota, ask the Azure administrator to raise it, or
+   start runs in groups a few minutes apart.
 
-These runs call the models in Azure and are charged, so get the workshop
-organizer's approval before you start. Run the blocks below: they evaluate both
-versions and create the review report you will show in class.
-
-**Why two runs:** the baseline gives you a reference for judging the candidate.
-Using the same requests and scoring rules makes the comparison meaningful.
-
-Run the baseline once:
-
-**What this block does:** evaluates the baseline version and saves its scores. Uses model calls.
-
-```powershell
-$Rehearsal = Join-Path $LocalRoot ('rehearsals\' + [guid]::NewGuid().ToString('N'))
-$BaselineRun = Join-Path $Rehearsal 'baseline'
-$CandidateRun = Join-Path $Rehearsal 'candidate'
-New-Item -ItemType Directory -Path $Rehearsal | Out-Null
-Set-Location $Workspace
-Start-Transcript -Path (Join-Path $Rehearsal 'baseline-terminal.txt') | Out-Null
-agentops eval run --config agentops.yaml --agent $BaselineAgent --output $BaselineRun
-$baselineExit = $LASTEXITCODE
-Stop-Transcript | Out-Null
-if ($baselineExit -notin @(0,2)) { throw 'Baseline error. Inspect the existing Foundry run before retrying.' }
-```
-
-Then run the candidate with the same dataset, configuration and scoring model:
-
-**What this block does:** evaluates the candidate and compares it with the baseline. Uses model calls.
-
-```powershell
-Start-Transcript -Path (Join-Path $Rehearsal 'candidate-terminal.txt') | Out-Null
-agentops eval run --config agentops.yaml --output $CandidateRun `
-  --baseline (Join-Path $BaselineRun 'results.json')
-$candidateExit = $LASTEXITCODE
-Stop-Transcript | Out-Null
-if ($candidateExit -notin @(0,2)) { throw 'Candidate error. Inspect the existing Foundry run before retrying.' }
-agentops report generate --in (Join-Path $CandidateRun 'results.json') `
-  --out (Join-Path $CandidateRun 'review-report.md')
-if ($LASTEXITCODE -ne 0) { throw 'Report rendering failed. Keep original results and error.' }
-```
-
-Review both runs using [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions):
-eight different requests, both scores for every request, errors and the actual
-tool results. Review every request marked `critical: yes` individually.
-Exit `2` means a score missed its required minimum; keep that result for discussion.
-
-##### Record the tool traces you will demonstrate
-
-**Why keep these:** the score report does not prove which tool ran. If a
-participant cannot open a trace from their own run, you show these on screen.
-
-1. Run `$BaselineRun`, then `$CandidateRun`, to display the two results folders.
-2. For each run, open its `cloud_evaluation.json` and follow `report_url`.
-3. Find `password-basic` and `vpn-ticket` by their request text.
-4. Open each request's trace using [the trace lookup procedure](../labs/shared/helpdesk-agent/README.md#find-the-tool-results).
-5. Save a `tool-traces.md` file beside that run's `report.md`, using the fields below.
-
-| Record for each request | Copy from |
-| --- | --- |
-| Request text and agent version | The selected evaluation result |
-| Trace link, Trace ID and UTC time range | The matching trace |
-| Tool name, arguments and returned source/queue | The tool operation's details |
-
-Use these evaluation requests, not the earlier deployment smoke tests.
-If no matching trace or stored tool output is available, record the gap.
-Do not invent a link or replace actual output with `tools.py` or a model's claim.
-Resolve the missing evidence before delivering the tool-inspection activity.
-
-Keep your rehearsal folder, with the model and evaluator versions actually used:
-it is your fallback when a participant's run fails. Passing averages alone do not approve a release.
-
-**Timeout or error:** open the existing run in Foundry and check its status
-before submitting again. The CLI has no command to resume it or download a
-previous run later.
-
-<a id="4-instructoradmin-prepare-native-foundry-supplementary-evidence"></a>
-
-<a id="4-prepare-the-additional-foundry-results-you-will-demonstrate"></a>
-
-#### Prepare the additional Foundry results you will demonstrate
-
-Steps 5 and 6 of the lab cover rubric calibration, safety, conversations and
-adversarial tests. Participants read the test material in the lab's `assets`
-folder; you show the matching Foundry results on screen. These are extra
-reviews; they do not change the CLI's pass/fail result.
-
-Run them once in the same project by following
-[the guide to additional Foundry checks](native-evidence.md), and keep the
-links to open during class. Label missing results **Not assessed** and say what is missing.
-
-<a id="instructoradmin-package-and-rehearse-the-learner-bundle"></a>
-
-#### Plan model capacity for simultaneous runs
-
-Every participant runs two evaluations of eight requests, and each request
-calls the agent's model and the scoring model. In a shared project these calls
-count against the same **tokens-per-minute (TPM)** quota, so a full class
-starting at once can exceed it and cause throttling or timeouts.
-
-1. Note how many tokens one rehearsal used: in Foundry, open your run's model
-   deployment metrics, or estimate from the requests and responses.
-2. Multiply by the number of participants expected to run at the same time.
-3. If the result exceeds the deployments' TPM quota, ask the Azure administrator
-   to raise it, or plan to start runs in groups a few minutes apart. The
-   workshop organizer approves the extra spending.
+Keep your results folder until class. If a run times out, follow the lab's
+[recovery section](../labs/01-evaluate/lab.md#recovery-after-timeout-or-failure)
+instead of running it again.
 
 ### Ship
 
-For each class, choose GitHub Actions or Azure Pipelines. Check that participants
-can open the saved blocked and accepted runs. Give them the Evaluate reports
-even if they did not attend that module.
+Participants compare two saved pipeline runs: a release that was blocked and
+one that was approved. The course does not include a runnable pipeline yet, so
+you create these runs yourself.
 
-#### Authoring requirements (not an executable pipeline setup)
+1. **Choose the track:** GitHub Actions or Azure Pipelines.
+2. **Run the pipeline twice** for the help desk agent: once so that evaluation
+   or approval stops the release, and once so that it deploys and the test
+   requests after deployment succeed.
+3. **Package the results** as `agentops-ship-review.zip`, with the contents below.
+   Remove secrets, `.azure` folders and virtual environments first.
 
-The repository does not yet supply runnable track YAML. Authors must complete
-evaluation, human approval, `azd deploy`, test requests after deployment and recovery
-in the chosen track before teaching live pipeline practice.
+<details>
+<summary>What the Ship ZIP must contain</summary>
 
-Starting references: [GitHub workload identity](https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect),
+Zip the files themselves, not a folder that contains them.
+
+- `blocked\` and `accepted\`: the `report.md` and `results.json` from each run.
+  Download them from GitHub **Actions > run > Artifacts** or Azure Pipelines
+  **Pipelines > run > Summary**.
+- `deployment\`: the `azure.yaml` used and the code folders it names.
+- `README.md` with these fields: **Blocked run**, **Accepted run** and links to
+  their job logs; **Pipeline steps**, naming the actual evaluation, approval and
+  deployment steps; **Deployment source**, **Evaluated source revision**,
+  **Deployed agent version** and **Approval**; **Smoke-test evidence**, the
+  responses to the test requests after deployment; and **Recovery
+  instructions**, how to restore the previous version if those requests fail.
+
+</details>
+
+<details>
+<summary>References for building the pipeline</summary>
+
+[GitHub workload identity](https://learn.microsoft.com/azure/developer/github/connect-from-azure-openid-connect),
 [azd GitHub pipeline](https://learn.microsoft.com/azure/developer/azure-developer-cli/pipeline-github-actions),
 [Azure Pipelines workload identity](https://learn.microsoft.com/azure/devops/pipelines/release/configure-workload-identity?view=azure-devops)
 and [approvals](https://learn.microsoft.com/azure/devops/pipelines/process/approvals?view=azure-devops).
-Do not provision unrelated tutorial resources.
 
-#### Package the read-only Ship review
-
-**Used for:** comparing a release that was blocked with one that was approved,
-without starting another pipeline.
-
-Create `.local\staging\ship` under Evaluate's folder, with these contents:
-
-| Entry | Content |
-| --- | --- |
-| `blocked`, `accepted` | Real `report.md` and `results.json` from each corresponding pipeline run |
-| `deployment` | Reviewed `azure.yaml` and the code folders named in it |
-| `README.md` | **Blocked run**, **Accepted run**, direct job-log links, **Deployment source**, **Evaluated source revision**, **Deployed agent version**, **Approval**, **Smoke-test evidence**, **Recovery instructions** |
-
-In the README's **Pipeline steps** section, write the actual evaluation,
-review/approval and deployment job/step names shown in those runs. Identify
-the check or review that stopped the blocked run. Learners use these names
-to find the logs and determine whether deployment ran.
-
-Download artifacts from GitHub **Actions > run > Artifacts** or Azure Pipelines
-**Pipelines > run > Summary > published artifacts**. The track author names the
-actual artifact; there is no configured pipeline artifact here yet.
-
-Zip the contents, without the `ship` wrapper, as `agentops-ship-review.zip`.
-Remove secrets, `.azure` and virtual environments before distribution.
-
-**Smoke-test evidence** means the responses to a few test requests after
-deployment. **Recovery instructions** explain how to restore the previous
-working version if those requests fail.
+</details>
 
 ### Observe and Operate
 
-For each class, open the supplied trace and alert and check that they refer to
-the same request and time. Participants only read the results; they do not
-configure monitoring or respond to a live incident.
+Participants follow one saved request from its trace to the alert it caused,
+then choose a response. They do not configure monitoring or change the service.
 
-#### Authoring requirements (not an executable monitoring setup)
+1. **Send a fictional test request** to the help desk agent that triggers an alert.
+   Use [Foundry tracing](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup)
+   and a [log alert](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-create-log-alert-rule)
+   on the workshop's Application Insights resource. Send notifications only to
+   people who agreed to receive them.
+2. **Check that the trace and the alert** refer to the same request and time.
+3. **Package the results** as `agentops-observe-review.zip`, with the contents below.
+   Remove sensitive information first.
 
-Authors must run a fictional test request and save its real execution trace,
-the alert it caused and a response procedure they have tested.
-Use [Foundry tracing](https://learn.microsoft.com/azure/foundry/observability/how-to/trace-agent-setup)
-and [log alert guidance](https://learn.microsoft.com/azure/azure-monitor/alerts/alerts-create-log-alert-rule)
-with the workshop's Application Insights/Log Analytics resource. Send test
-notifications only to people who agreed to receive them.
+<details>
+<summary>What the Observe and Operate ZIP must contain</summary>
 
-#### Package the read-only Observe and Operate review
+Zip the files themselves, not a folder that contains them.
 
-**Used for:** following one real test request from trace to alert and choosing
-an allowed response, without changing the running service.
+- `README.md` with **Trace** (from Foundry **Agents > Traces**), **Trace ID**,
+  **UTC time range**, **Agent version**, **Alert** (from Azure portal
+  **Monitor > Alerts**) and **Dashboard**. Mark any scheduled evaluation you
+  did not run as **Not assessed**.
+- `response-notes.md`: what went wrong, what action is allowed, who acts, who
+  to call for help, when to stop and what to retest.
 
-Under `agentops\workshop\labs\01-evaluate`, create `.local\staging\observe` with:
-
-| Entry | Content |
-| --- | --- |
-| `README.md` | **Trace**, **UTC time range**, **Trace ID**, **Agent version**, **Alert**, **Dashboard** and any recurring-evaluation result |
-| `response-notes.md` | What went wrong, what action is allowed, who acts, who to call for help, when to stop and what to retest |
-
-Copy the trace URL from Foundry **Agents > Traces** and fired-alert URL from
-Azure portal **Monitor > Alerts**. Include the trace ID/time range if its URL
-opens only the list. If no automatic or scheduled evaluation ran, mark that
-part **Not assessed**.
-
-Remove sensitive information and zip the files as `agentops-observe-review.zip`, without
-an `observe` wrapper.
+</details>
 
 ### Advanced (optional)
 
-For each class, read the incident procedure and check who is allowed to run it.
-The scripts for causing a test failure and the complete release pipeline are
-not supplied here yet.
+Participants review a saved incident: the failure, its recovery and the test
+added so the same bug cannot be released again.
 
-#### Authoring requirements (not an executable incident procedure)
+1. **Cause a reversible failure** on a separate test agent, never on the shared
+   agent or production data.
+2. **Restore the previous working version** and add a test that catches the
+   same bug. Check that this test stops the faulty version from being released.
+3. **Package the results** as `agentops-advanced-review.zip`, with the contents below.
 
-Authors must cause a reversible failure on a separate test agent, restore its
-previous working version, and add a test that catches the same bug.
-Verify that failing this test stops release. Record who may act, the time and
-spending limits, and when to stop.
-Do not use production data or disrupt other workloads.
+<details>
+<summary>What the Advanced ZIP must contain</summary>
 
-#### Package the read-only advanced review
+Zip the files themselves, not a folder that contains them.
 
-**Used for:** comparing the incident before and after recovery, then seeing
-which new test prevents the same bug from returning.
+- `before\` and `after\`: each run's `turns.jsonl`, `agentops.yaml`,
+  `report.md` and `results.json`.
+- `runbook.md`: the test agent, who may act, how the failure was caused, when
+  to stop, who to contact, the recovery steps and the expected response after
+  recovery.
+- `README.md` with **Trace**, **Trace ID**, **UTC time range**, **Blocked run**,
+  **Recovered run**, **Source revisions**, **Review process**, **Regression
+  request** and links to both reports.
 
-Under `agentops\workshop\labs\01-evaluate`, create `.local\staging\advanced` with:
-
-| Entry | Content |
-| --- | --- |
-| `before`, `after` | Each run's actual `turns.jsonl`, `agentops.yaml`, `report.md` and `results.json` |
-| `runbook.md` | Test agent, person allowed to act, exact failure command, when to stop, who to contact and tested recovery steps |
-| `README.md` | **Trace**, **Trace ID**, **UTC time range**, **Blocked run**, **Recovered run**, **Source revisions**, **Review process**, links to both reports |
-
-Add **Regression request** with the request text or a link to its dataset row.
-In `runbook.md`, state the expected response after recovery so learners can
-compare it with the saved result.
-
-Zip the contents as `agentops-advanced-review.zip`, without the `advanced` wrapper.
-For standalone delivery, create missing staging folders; running Evaluate is
-not required just to package evidence.
+</details>
 
 ## 5. Invite and rehearse
 
