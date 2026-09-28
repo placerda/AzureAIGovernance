@@ -106,7 +106,7 @@ $ErrorActionPreference = 'Stop'
 $EvaluateRoot = (Get-Location).Path
 $LocalRoot = Join-Path $EvaluateRoot '.local'
 $Workspace = Join-Path $LocalRoot 'workspace'
-$AgentOps = Join-Path $EvaluateRoot '.venv\Scripts\agentops.exe'
+$env:Path = (Join-Path $EvaluateRoot '.venv\Scripts') + ';' + $env:Path
 $ProjectEndpoint = (Read-Host 'Project endpoint').Trim()
 $BaselineAgent = (Read-Host 'Baseline agent').Trim()
 $CandidateAgent = (Read-Host 'Candidate agent').Trim()
@@ -116,7 +116,7 @@ $ScoringModel = (Read-Host 'Scoring-model deployment').Trim()
 if (-not (Test-Path $Workspace)) {
     New-Item -ItemType Directory -Force $Workspace | Out-Null
     Copy-Item (Join-Path $EvaluateRoot 'assets\turns.jsonl') $Workspace
-    & $AgentOps init --dir $Workspace --no-prompt `
+    agentops init --dir $Workspace --no-prompt `
       --project-endpoint $ProjectEndpoint --agent $CandidateAgent --dataset turns.jsonl
     if ($LASTEXITCODE -ne 0) { throw 'Workspace creation failed. Check the four values, then ask the instructor.' }
     (Get-Content (Join-Path $EvaluateRoot 'assets\agentops.yaml')) -replace '^agent: .*', "agent: $CandidateAgent" |
@@ -128,7 +128,7 @@ if (-not (Test-Path $Workspace)) {
     )
 }
 Set-Location $Workspace
-& $AgentOps init show
+agentops init show
 if ($LASTEXITCODE -ne 0) { throw 'Cannot read the workspace settings. Ask the instructor.' }
 Select-String -Path '.agentops\.env' -Pattern '^AZURE_OPENAI_DEPLOYMENT='
 ```
@@ -245,7 +245,7 @@ $RunRoot = Join-Path $RunsRoot 'candidate'
 New-Item -ItemType Directory -Path $RunsRoot | Out-Null
 Set-Location $Workspace
 Start-Transcript -Path (Join-Path $RunsRoot 'baseline-terminal.txt') | Out-Null
-& $AgentOps eval run --config agentops.yaml --agent $BaselineAgent --output $BaselineRun
+agentops eval run --config agentops.yaml --agent $BaselineAgent --output $BaselineRun
 $baselineExit = $LASTEXITCODE
 Stop-Transcript | Out-Null
 $baselineExit
@@ -266,7 +266,7 @@ Run this block **once**, after the baseline finishes:
 
 ```powershell
 Start-Transcript -Path (Join-Path $RunsRoot 'candidate-terminal.txt') | Out-Null
-& $AgentOps eval run --config agentops.yaml --output $RunRoot `
+agentops eval run --config agentops.yaml --output $RunRoot `
   --baseline (Join-Path $BaselineRun 'results.json')
 $evalExit = $LASTEXITCODE
 Stop-Transcript | Out-Null
@@ -432,7 +432,7 @@ report. Use the same PowerShell window:
 
 ```powershell
 $ReviewReport = Join-Path $RunRoot ('review-' + [guid]::NewGuid().ToString('N') + '.md')
-& $AgentOps report generate --in (Join-Path $RunRoot 'results.json') --out $ReviewReport
+agentops report generate --in (Join-Path $RunRoot 'results.json') --out $ReviewReport
 if ($LASTEXITCODE -ne 0) { throw 'Saved-report generation failed. Retain the original results and error.' }
 Get-Content $ReviewReport
 ```

@@ -155,10 +155,10 @@ class PublicCliTests(unittest.TestCase):
             (LAB / "lab.md").read_text(encoding="utf-8"), re.S,
         ).group(1)
         # Reuse the tested CLI installation, not a second package install.
-        executable = str(Path(sys.executable).with_name("agentops.exe")).replace("'", "''")
+        scripts = str(Path(sys.executable).parent).replace("'", "''")
         startup = startup.replace(
-            "$AgentOps = Join-Path $EvaluateRoot '.venv\\Scripts\\agentops.exe'",
-            f"$AgentOps = '{executable}'",
+            "$env:Path = (Join-Path $EvaluateRoot '.venv\\Scripts') + ';' + $env:Path",
+            f"$env:Path = '{scripts}' + ';' + $env:Path",
         )
         env = dict(self.env, AZURE_AI_FOUNDRY_PROJECT_ENDPOINT="https://stale.invalid")
         result = subprocess.run(

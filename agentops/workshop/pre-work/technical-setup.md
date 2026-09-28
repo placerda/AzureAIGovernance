@@ -118,11 +118,11 @@ Keep using the PowerShell window from step A.
 
 Start by setting the tool paths. Run this on every machine:
 
-**What this block does:** sets the tool paths and creates your `.local` work folder.
+**What this block does:** lets you type `agentops` in this PowerShell window and creates your `.local` work folder.
 
 ```powershell
 $EvalPython = Join-Path $EvaluateRoot '.venv\Scripts\python.exe'
-$AgentOps = Join-Path $EvaluateRoot '.venv\Scripts\agentops.exe'
+$env:Path = (Join-Path $EvaluateRoot '.venv\Scripts') + ';' + $env:Path
 New-Item -ItemType Directory -Force $LocalRoot | Out-Null
 ```
 
@@ -146,7 +146,7 @@ Then, on any machine, confirm that the installation works:
 ```powershell
 & $EvalPython -m pip check
 if ($LASTEXITCODE -ne 0) { throw 'Evaluation dependencies conflict. Contact the package administrator.' }
-& $AgentOps --version
+agentops --version
 if ($LASTEXITCODE -ne 0) { throw 'AgentOps Accelerator CLI unavailable.' }
 ```
 
@@ -215,7 +215,7 @@ Then, in the same PowerShell window, check the configuration locally:
 **What this block does:** validates the workspace locally, without calling Foundry.
 
 ```powershell
-& $AgentOps eval analyze --dir . --format text
+agentops eval analyze --dir . --format text
 if ($LASTEXITCODE -ne 0) { throw 'Local configuration analysis failed.' }
 ```
 
@@ -229,9 +229,9 @@ This checks the settings on your computer only; it does not prove Azure access.
 
 ![Ready to press Run? One run is enough to start. Cloud runs cost money; check the results before trying again.](../assets/banners/ready-to-run.png)
 
-**Billable.** Complete the workspace above and obtain the owner's approval first.
-Run [lab step 3](../labs/01-evaluate/lab.md#3-run-the-supported-public-command)
-as participants will, or use the blocks below, which also render a review report.
+These runs call the models in Azure and are charged, so get the workshop
+organizer's approval before you start. Run the blocks below: they evaluate both
+versions and create the review report you will show in class.
 
 **Why two runs:** the baseline gives you a reference for judging the candidate.
 Using the same requests and scoring rules makes the comparison meaningful.
@@ -247,7 +247,7 @@ $CandidateRun = Join-Path $Rehearsal 'candidate'
 New-Item -ItemType Directory -Path $Rehearsal | Out-Null
 Set-Location $Workspace
 Start-Transcript -Path (Join-Path $Rehearsal 'baseline-terminal.txt') | Out-Null
-& $AgentOps eval run --config agentops.yaml --agent $BaselineAgent --output $BaselineRun
+agentops eval run --config agentops.yaml --agent $BaselineAgent --output $BaselineRun
 $baselineExit = $LASTEXITCODE
 Stop-Transcript | Out-Null
 if ($baselineExit -notin @(0,2)) { throw 'Baseline error. Inspect the existing Foundry run before retrying.' }
@@ -259,12 +259,12 @@ Then run the candidate with the same dataset, configuration and scoring model:
 
 ```powershell
 Start-Transcript -Path (Join-Path $Rehearsal 'candidate-terminal.txt') | Out-Null
-& $AgentOps eval run --config agentops.yaml --output $CandidateRun `
+agentops eval run --config agentops.yaml --output $CandidateRun `
   --baseline (Join-Path $BaselineRun 'results.json')
 $candidateExit = $LASTEXITCODE
 Stop-Transcript | Out-Null
 if ($candidateExit -notin @(0,2)) { throw 'Candidate error. Inspect the existing Foundry run before retrying.' }
-& $AgentOps report generate --in (Join-Path $CandidateRun 'results.json') `
+agentops report generate --in (Join-Path $CandidateRun 'results.json') `
   --out (Join-Path $CandidateRun 'review-report.md')
 if ($LASTEXITCODE -ne 0) { throw 'Report rendering failed. Keep original results and error.' }
 ```
