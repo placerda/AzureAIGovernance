@@ -351,7 +351,9 @@ participants get its files by cloning the course repository.
 **2. Draft the invitation.** In Outlook, select **Calendar > New event**, name
 it **AgentOps workshop** and add the participants. Paste the message below into
 the body. Delete every line that does not apply to your session, and any
-heading left empty, then replace the remaining `<...>` placeholders. Keep the
+heading left empty, then replace the remaining `<...>` placeholders.
+Under **Your module and mode**, list only the modules participants will run;
+leave out modules you will only demonstrate. Keep the
 label wording unchanged: the participant pages refer to each label by name.
 
 **3. Test it before sending.** Keep the event as a draft and use it yourself in
@@ -367,22 +369,20 @@ Hi everyone,
 You are invited to the AgentOps workshop on <date>, <start time> to <end time> (<time zone>).
 
 Your module and mode
-- Evaluate: <run the lab | watch a demo>
-- Ship: <review saved results | watch a demo>
-- Observe and Operate: <review saved results | watch a demo>
-- Advanced (optional): <review saved results | watch a demo>
+- Evaluate: run the lab
+- Ship: review saved results
+- Observe and Operate: review saved results
+- Advanced (optional): review saved results
 
-Before the session, complete the pre-work for each module marked "run the lab"
-or "review saved results". Modules marked "watch a demo" need no pre-work.
-https://github.com/placerda/AzureAIGovernance/tree/main/agentops/workshop/pre-work
+Before the session, complete the pre-work for the modules listed above:
+https://github.com/Azure/AzureAIGovernance/blob/main/agentops/workshop/pre-work/README.md
 
 Access
 - Foundry project: <project link>
 - Project name: <name shown on the project page>
 - Sign-in account: <account you must use>
 - Network access: <VPN instructions, or "Not needed">
-- Tenant ID: <tenant ID> (Evaluate hands-on only)
-- Subscription ID: <subscription ID> (Evaluate hands-on only)
+- Tenant ID: <tenant ID> (Evaluate only)
 
 Evaluate settings (Evaluate hands-on only)
 - Project endpoint: <https://RESOURCE.services.ai.azure.com/api/projects/PROJECT>
@@ -393,9 +393,6 @@ Evaluate settings (Evaluate hands-on only)
 Other modules
 - Workshop files: <OneDrive folder link> (Ship, Observe and Operate, Advanced)
 - Ship track: <GitHub Actions | Azure Pipelines>, <link to that track's page>
-
-Prepared computers only
-- Local workshop folder: <repository path on the computer>
 
 Keep files until: <retention date>
 Please do not share these links outside the class. If a link or sign-in does
@@ -410,7 +407,7 @@ not work, reply to this invitation before the session.
 
 - **Foundry project, Project name** and **Project endpoint:** the project's
   **Home** page, as in [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in).
-- **Tenant ID** and **Subscription ID:** the same step 5.
+- **Tenant ID:** the same step 5.
 - **Baseline agent** and **Candidate agent:** `versions.txt`, saved in
   [agent deployment step 6](../labs/shared/helpdesk-agent/README.md#6-keep-the-two-versioned-references).
 - **Scoring-model deployment:** **Build > Models** in the Foundry project.

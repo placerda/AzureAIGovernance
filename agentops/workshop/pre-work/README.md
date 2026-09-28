@@ -99,38 +99,34 @@ This creates **Documents > AgentOps-workshop > AzureAIGovernance**. Instructions
 call this folder the **repository root**. If it already exists from an earlier
 attempt, keep it and continue.
 
-On a prepared machine, use the invitation's **Local workshop folder** instead.
+On a prepared machine, this folder is already in place; skip this block.
 ### Sign in to the assigned account
 
 **Why sign in here:** the AgentOps Accelerator CLI needs your permission to use the
 workshop's Azure project. Signing in to the browser alone does not sign in PowerShell.
 
 Open **Start > PowerShell** and run the block below.
-Paste **Tenant ID** and **Subscription ID** from the invitation when prompted.
-Azure CLI is the tool you use to sign in from PowerShell. The subscription
-identifies the Azure resources and billing account selected for this workshop.
+Paste **Tenant ID** from the invitation when prompted. Azure CLI is the tool
+you use to sign in from PowerShell; the tenant ID makes sure you sign in to the
+organization that owns the workshop project.
 
-**What this block does:** signs you in to Azure and selects the workshop subscription.
+**What this block does:** signs you in to the workshop's organization.
 
 ```powershell
 $TenantId = Read-Host 'Tenant ID from the invitation'
-$SubscriptionId = Read-Host 'Subscription ID from the invitation'
-az login --tenant $TenantId --output none
+az login --tenant $TenantId --allow-no-subscriptions --output none
 if ($LASTEXITCODE -ne 0) { throw 'Sign-in failed. Contact the instructor.' }
-az account set --subscription $SubscriptionId
-if ($LASTEXITCODE -ne 0) { throw 'Assigned subscription unavailable. Contact the instructor.' }
-az account show --query '{tenantId:tenantId,id:id,name:name}' --output table
+az account show --query '{tenantId:tenantId,user:user.name}' --output table
 if ($LASTEXITCODE -ne 0) { throw 'Cannot check the selected account.' }
 ```
 
 **Check the selected account:**
 
-1. Keep the invitation open beside PowerShell.
-2. Compare the output's `TenantId` with **Tenant ID** in the invitation.
-3. Compare the output's `Id` with **Subscription ID**. Do not compare it with the subscription's display name.
+1. Compare the output's `TenantId` with **Tenant ID** in the invitation.
+2. Check that `User` is the invitation's **Sign-in account**.
 
-Both IDs must match. If either differs, stop and give the instructor the
-error or mismatched ID; do not continue with another subscription.
+If either differs, stop and send the instructor the output; do not continue
+with another account.
 
 <a id="1-participant-install-the-public-cli"></a>
 
