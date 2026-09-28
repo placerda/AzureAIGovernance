@@ -214,15 +214,13 @@ show on screen in class, and your fallback if a participant's run fails.
 3. **Review the results.** Follow
    [lab step 4](../labs/01-evaluate/lab.md#4-inspect-the-report-and-actual-interactions)
    to open the report and the same run in Foundry. Check that all eight
-   requests have an answer and both scores.
-4. **Save the two tool traces.** In lab step 4, under *Inspect executed tools*,
-   you open the traces for `password-basic` and `vpn-ticket`. Paste both links
-   into a `tool-traces.md` file in your results folder. If a trace is missing,
-   write that down: you will have nothing to show for that request.
-5. **Prepare the extra Foundry results.** Follow
+   requests have an answer and both scores, and that the traces for
+   `password-basic` and `vpn-ticket` open. If a trace is missing, fix tracing
+   before class: participants need it in that step.
+4. **Prepare the extra Foundry results.** Follow
    [additional Foundry checks](native-evidence.md) once and keep the links.
    You show them on screen during lab steps 5 and 6.
-6. **Check model capacity.** All participants share the same model quota.
+5. **Check model capacity.** All participants share the same model quota.
    Multiply the tokens your run used by the number of people running at once.
    If the total exceeds the quota, ask the Azure administrator to raise it, or
    start runs in groups a few minutes apart.

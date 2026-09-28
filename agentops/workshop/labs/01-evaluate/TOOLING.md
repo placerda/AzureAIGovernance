@@ -268,9 +268,7 @@ The review found a missing first-time provisioning path and circular dependencie
 instructor installation pointed into participant instructions requiring an
 invitation, while early access checks required packages created later.
 The revised route separates these stages and places the participant rehearsal
-after packaging. Baseline/candidate `tool-traces.md` files now belong to the
-main evaluation evidence, independently of unfinished safety supplements.
-Moving azd endpoints are distinguished from the versioned references the
+after packaging. Moving azd endpoints are distinguished from the versioned references the
 AgentOps Accelerator CLI parses.
 
 The added environment guide covers portal project creation, two named model

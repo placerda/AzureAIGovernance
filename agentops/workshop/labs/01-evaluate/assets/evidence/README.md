@@ -30,10 +30,8 @@ that fixture only tests report rendering and is not a workshop result.
 ## Main evaluation results
 
 **INSTRUCTOR:** in rehearsal, run [both evaluations](../../../../pre-work/technical-setup.md#3-instructoradmin-rehearse-the-public-cli-and-retain-the-baseline)
-and keep the **unmodified** CLI output. Record in `tool-traces.md` beside each
-report the request text, agent version, trace link/ID and UTC time range for
-`password-basic` and `vpn-ticket`, with their actual tool arguments and outputs.
-The records must come from those evaluations, not separate deployment tests.
+and keep the **unmodified** CLI output. Confirm that the traces for
+`password-basic` and `vpn-ticket` open from those evaluations in Foundry.
 Keep these results on your computer; remove sensitive information before
 showing them and never include passwords or keys.
 
