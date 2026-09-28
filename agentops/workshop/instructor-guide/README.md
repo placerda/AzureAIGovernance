@@ -1,15 +1,20 @@
-# AgentOps workshop instructor guide
+# AgentOps workshop: instructor guide
 
 ![Set the stage. Let the learning happen. Prepare the essentials so the group can focus on the agent.](../assets/banners/instructor.png)
 
 Start here if you are teaching AgentOps for the first time. This guide explains
 the workshop and the overall preparation and teaching flow.
 
-**Read this guide through first.** You do not need to open the linked materials
-yet. Start by understanding the workshop, the preparation stages and the
-available formats. Afterward, use the module guides listed at the end of this
-page to prepare the modules you will teach. Each guide introduces its slides,
-lab and technical preparation in the order you need them.
+**Read this guide through first.** Materials are named in bold along the way;
+their links are collected at the end, so you do not need to leave this page yet.
+
+**On this page**
+
+1. [What the workshop is](#what-the-workshop-is): modules, practices and outcomes
+2. [Your route from first reading to the classroom](#your-route-from-first-reading-to-the-classroom): the four steps, with a timeline
+3. [Choose a format](#choose-a-format): hands-on or demo, and one module or several
+4. [What to open next](#what-to-open-next): the materials, in reading order
+5. [Find the material](#find-the-material): every material and where it is
 
 ## What the workshop is
 
@@ -25,89 +30,93 @@ and Operate. They are taught in three modules:
 
 Observe and Operate are distinct practices taught together.
 
-The [workshop labs page](../labs/README.md) is the starting point for
-participants. It brings together links to pre-work and each module's lab,
-including the two alternative Ship tracks. Share it before the workshop so
+The **AgentOps workshop labs** page is the starting point for
+participants. It brings together links to pre-work and each module's lab.
+For Ship, it links to two alternative tracks for the same exercise: one uses
+GitHub Actions and the other Azure Pipelines. Share it before the workshop so
 participants can prepare and find their selected activity.
 
 Lab folders are numbered in workshop order, but participants can attend a
 single module. The optional advanced lab is in `04-advanced`, outside the core
-workshop. The unnumbered `shared` folder contains reusable agent code,
-not another module.
+workshop. The unnumbered `shared` folder contains the sample help desk agent
+used throughout the workshop labs; it is not another module.
 
 The workshop teaches through sample scenarios. It does not implement AgentOps
 in participants' production environments. The separate
-[implementation guides](../../README.md#materials) help teams apply the
-practices after the workshop.
+**implementation guides** help teams apply the practices after the workshop.
 
 ## Your route from first reading to the classroom
 
-### 1. Understand what you will teach
+### 1. Understand what you will teach and align workshop scope
 
-After finishing this guide, begin preparation with the one-pager, a short
+After finishing this guide, begin preparation with the **one-pager**, a short
 overview of the workshop's purpose, audience and outcomes. Use it to introduce
 the workshop to participants, not as a teaching script.
 
-Then follow the guide for your selected module, listed at the end of this page.
-It points you to the slides, speaker notes and participant lab to study before
+Then read the module guide for your selected module, such as **Teaching
+Evaluate**. It points you to the slides, speaker notes and participant lab to study before
 running commands.
 
 You are ready to prepare when you can explain the scenario, what the group
-will do, and what decision or output they should leave with. Agree the
-selected modules and format with the workshop organizer, taking account of
-[the material's current readiness](#what-is-ready-to-use).
+will do, and what decision or output they should leave with. Agree the selected modules and format with the workshop organizer.
 For Ship, also choose GitHub Actions or Azure Pipelines. The Ship guide
 introduces these alternative tracks and links to each. Use one path throughout
 the session; they teach the same release decisions.
 
-### 2. Reuse or prepare the class materials
+### 2. Prepare the environment
 
-Ask the workshop organizer for the existing environment and participant
-package before creating anything. **A new instructor does not need a new
-environment.** Reuse resources and files when they match the module's
-agent versions, test requests and evaluation settings.
+Participants work in a shared **sandbox**: a Microsoft Foundry project where
+the sample help desk agent is deployed. They generate their own results there,
+as a team would in daily work; nothing is copied from an earlier delivery.
 
-**Updating an older checkout?** The lab folders now have numbered names.
-Preserve prepared settings and results from the previous folders, but follow
-[files and tools](../pre-work/instructor-setup.md#1-prepare-the-instructor-machine)
-at the new path rather than copying or moving a Python `.venv`.
-Reuse the prepared package only when it matches the selected activity.
+Ask the workshop organizer whether such a project already exists. You can reuse
+it if both agent versions used in the lab, the **baseline** and the
+**candidate**, are still deployed and participants can be given access to it.
+Otherwise, you create it.
 
-Follow your module guide's preparation route. It links to the relevant parts
-of [technical preparation](../pre-work/instructor-setup.md), including
-environment setup and agent deployment where needed. Keep these tasks outside
-workshop time and work with the administrator on access.
+Both cases are covered in the **Instructor technical setup**, which you open
+after the module guide (see [What to open next](#what-to-open-next)). It
+covers the Foundry environment, the agent deployment and the module's own
+preparation. Keep these tasks outside workshop time
+and work with the Azure administrator on participant access and model capacity.
 
-Creating the environment and deploying the initial agent belong here, not
-in a new participant "build an agent" lab. For Evaluate, participants use
-the class's prepared agent with their own accounts.
+Check model capacity before the class. In Evaluate, each participant runs two
+evaluations of eight test requests, and every request calls both the agent's
+model and the scoring model. All participants work in the same project, so
+their calls count against the same **tokens-per-minute (TPM)** quota, the
+maximum volume a model deployment accepts each minute.
 
-Continue when the selected activity has the files, access and real results
-it needs, including prepared results for a demo or an interrupted live run.
-If these have never been produced, agree their preparation with the material
-author before scheduling live practice. This is initial material preparation,
-not something every new instructor should reinvent.
+Your rehearsal is one person running alone, so it can pass even when the quota
+is too small for the class. If 20 participants start together, the project
+receives about 20 times as many calls in the same minutes. Above the quota,
+Foundry rejects or delays the excess requests, and participants' runs slow down
+or time out. The capacity plan in the **Instructor technical setup** shows how to multiply your rehearsal's usage by the class size, then raise the
+quota or start the runs in groups.
+
+You, the instructor, create the environment and deploy the baseline and
+candidate before the workshop. In Evaluate, participants do not deploy
+anything: they evaluate those versions with their own accounts. Deploying a
+new version is the subject of Ship, where participants run the release pipeline.
 
 ### 3. Rehearse and invite the participants
 
-Use a fresh copy of the participant files and an account with participant
-permissions. Follow [participant pre-work](../pre-work/README.md) and the
-selected lab, then practise explaining the results and the closing decision.
-Rehearse the saved-results alternative as well as the live activity.
+Do what participants will do, using a fresh clone of the repository and the
+test account the Azure administrator created with participant permissions. Follow the same
+**participant pre-work** and the selected lab, then practise explaining the results and the closing decision.
+Keep your own rehearsal results: you show them on screen if a participant's
+run fails or times out.
 
-The [participant-access rehearsal](../pre-work/instructor-setup.md#instructoradmin-shared-environment-and-permissions)
-explains which links and results to open. Finish when the activity works with
+Step 5 of the **Instructor technical setup** explains which links and
+results to open. Finish when the activity works with
 participant access, fits the selected time, and you can explain any missing
-checks. For Evaluate, agree simultaneous runs and spending with the project
-owner; one successful run does not establish capacity for the whole class.
+checks.
 
-Follow [file distribution and invitation](../pre-work/instructor-setup.md#publish-the-workshop-files-and-invitation)
-to publish the files and send the tested instructions. The invitation tells
-participants where to download the package, which account to use, which project
-to open and how to get help. Ask them to complete pre-work before the class.
-Include the [workshop labs page](../labs/README.md) and the selected numbered lab;
-for Ship, include the chosen track's entry page. Use a source archive that
-matches these paths and the prepared package, not a mix of older and current files.
+The same step includes the invitation checklist for sending the tested
+instructions. The invitation tells participants which
+account to use, which project and agent versions to open, and how to get help.
+Ask them to complete pre-work before the class.
+Include the **AgentOps workshop labs** page and the selected numbered lab;
+for Ship, include the chosen track's entry page.
 
 ### 4. Teach the module and discuss the decision
 
@@ -115,27 +124,22 @@ Follow **deck, lab or demo, then discussion**. Use the module guide for
 facilitation and the participant lab for execution steps. Focus on what the
 results mean, not just whether a command finished.
 
-When using prepared results, say that they come from an earlier run.
+When you show your own results instead of a participant's, say so.
 If a live activity is blocked, use the rehearsed alternative and explain the
-limitation. Leave participants with their findings and a clear next step for
-their own projects.
+limitation.
 
-## Find the material
+Close by asking what participants would apply first in their own projects.
+Capture their questions, takeaways and open gaps, and point them to the
+**AgentOps workshop labs** page for their next activity. For adopting
+the practices in their organization, point them to the corresponding
+implementation guide; it is not additional workshop homework.
 
-Use this table as a reference during preparation, not as a reading checklist.
-Your module guide will direct you to the materials needed for each stage.
-The links work in GitHub or a downloaded repository. Local paths below are
-relative to the repository's `agentops` folder.
+### The four steps at a glance
 
-| Material | Location and purpose |
-| --- | --- |
-| Overview for participants | [One-pager](../one-pager/agentops-vbd-one-pager.pdf), in `workshop/one-pager` |
-| Instructor starting point | This page, `workshop/instructor-guide/README.md`, and its module guides |
-| Slides and participant activities | `workshop/decks` and `workshop/labs`; open the direct links in each module guide |
-| Participant sequence and Ship alternatives | [Workshop labs page](../labs/README.md), in `workshop/labs/README.md`; links to pre-work, each lab and the two Ship tracks |
-| Participant preparation | [Pre-work](../pre-work/README.md), in `workshop/pre-work` |
-| Technical preparation | [Instructor setup](../pre-work/instructor-setup.md), [Foundry environment](../pre-work/foundry-environment.md), and [help desk deployment](../labs/shared/helpdesk-agent/README.md) |
-| Prepared settings and actual results | The session's **Workshop files** invitation link, published by the instructor; not a ready-made package in the source repository |
+This timeline summarizes the steps above: what you do at each stage, who you
+work with and what you finish with.
+
+![Instructor timeline: understand and align scope, prepare the environment, and rehearse and invite before the workshop; teach and discuss the decision on the workshop day](../assets/diagrams/instructor-timeline.png)
 
 ## Choose a format
 
@@ -154,56 +158,74 @@ Each module can be taught independently. Its deck includes the shared AgentOps
 foundation; use it to introduce a standalone module or as a short recap.
 Skip familiar foundation slides when the group does not need them.
 
-## What is ready to use
+When you teach more than one module, carry the Evaluate decision into Ship,
+then use Observe and Operate to show how runtime findings lead to the next
+evaluation. When you teach a module on its own, provide the earlier module's
+results as part of pre-work; participants do not need to have attended it.
 
-The material is still being developed. Use
-[instructor readiness](../pre-work/instructor-setup.md#readiness-gate) before
-committing to a live activity.
+The optional **Advanced AgentOps workshop lab** extends this cycle from
+incident to recovery and a test that catches the same defect. It sits outside the
+core workshop, at level 400: allow an additional two hours hands-on or one hour
+as a demo. Its preparation is in step 4 of the **Instructor technical setup**.
 
-| Module | Current material and delivery boundary |
-| --- | --- |
-| Evaluate | Detailed lab and preparation instructions exist. A live class still requires deployed agents, actual results and tool traces, a complete participant package, and rehearsal. See [tooling status](../labs/01-evaluate/TOOLING.md#authoring-validation-status). |
-| Ship | The current activity reviews instructor-supplied pipeline results. Full hands-on pipeline tracks are not ready. |
-| Observe and Operate | The current activity reviews supplied traces, alerts and response notes. Full hands-on monitoring and incident response are not ready. |
-| Optional advanced | The current activity reviews a supplied incident example. Failure-simulation scripts and the complete release pipeline are not supplied yet. |
+## What to open next
 
-Do not describe a review of saved results as a completed live exercise.
-If the required results are unavailable, agree a discussion-based session
-instead of improvising an incomplete lab. Agree this format with the workshop
-organizer and explain it to participants before the session.
+After this page, open the materials in this order. They follow the four stages
+of the instructor timeline. Stages 1 to 3 all happen before the workshop day,
+even if you teach several modules in a row; nothing needs to be set up between
+modules.
 
-## Connect the modules and close the session
+**1. Understand what you will teach and align workshop scope**
 
-Carry the Evaluate decision into Ship, then use Observe and Operate to show
-how runtime findings lead to the next evaluation. For standalone modules,
-provide the earlier results as part of pre-work; prior attendance is not required.
-Point participants back to the [workshop labs page](../labs/README.md) to find
-their next activity or revisit the preparation instructions.
-
-At the end, ask what participants would apply first in their projects.
-Capture questions, takeaways, unresolved gaps and useful follow-up resources.
-Use the corresponding implementation guide for organizational adoption,
-not as additional workshop homework.
-
-The [optional advanced lab](../labs/04-advanced/lab.md) extends this cycle from
-incident to recovery and a test that catches the same defect. Keep it outside the
-core workshop: allow an additional two hours hands-on or one hour demo at level
-400. Its [preparation requirements](../pre-work/instructor-setup.md#advanced-optional)
-explain the assets needed before teaching it.
-
-## Continue with your module guide
-
-After this first reading, review the workshop overview in the
-[one-pager](../one-pager/agentops-vbd-one-pager.pdf), then open the guide for the
-module you will teach. Each guide explains the learning focus, preparation,
-facilitation and closing discussion.
+- Read the [one-pager](../one-pager/agentops-vbd-one-pager.pdf) for the
+  workshop overview.
+- Read the module guide for the module you will teach, to learn the story and
+  what participants will do:
 
 | Module guide | What you will prepare to teach |
 | --- | --- |
-| [Evaluate](evaluate.md) | Assess agent responses and actions, then use the results to support a decision. |
-| [Ship](ship.md) | Connect automated testing and deployment through CI/CD pipelines, including release gates, approvals and recovery. |
-| [Observe and Operate](observe-operate.md) | Connect traces and monitoring to an operational response and a future evaluation. |
+| [Teaching Evaluate](evaluate.md) | Assess agent responses and actions, then use the results to support a decision. |
+| [Teaching Ship](ship.md) | Connect automated testing and deployment through CI/CD pipelines, including release gates, approvals and recovery. |
+| [Teaching Observe and Operate](observe-operate.md) | Connect traces and monitoring to an operational response and a future evaluation. |
 
-If you are teaching several modules, prepare one at a time. When a module guide
-sends you to a lab or technical page, complete the named task and return to that
-module guide to continue.
+**2. Prepare the environment**
+
+- Follow the [Instructor technical setup](../pre-work/technical-setup.md),
+  steps 1 to 3, once: your computer, the Foundry environment and the help desk
+  agent. Every module uses them; skip anything that already exists.
+- Then follow [step 4](../pre-work/technical-setup.md#4-prepare-your-module)
+  on the same page once for each module you will teach.
+
+**3. Rehearse and invite**
+
+- Follow [step 5](../pre-work/technical-setup.md#5-invite-and-rehearse) of the
+  Instructor technical setup once for the whole workshop: rehearse every module
+  you will teach with the test account, then send one invitation.
+
+**4. Teach and discuss the decision**
+
+- Go back to your module guide and teach the session.
+
+## Find the material
+
+Use this table as a reference during preparation, not as a reading checklist.
+Names match the page titles and are used the same way throughout the material.
+The links work in GitHub or a downloaded repository. Local paths below are
+relative to the repository's `agentops` folder.
+
+| Material | What it is | Location |
+| --- | --- | --- |
+| [One-pager](../one-pager/agentops-vbd-one-pager.pdf) | Workshop overview to share with participants | `workshop/one-pager` |
+| AgentOps workshop: instructor guide | This page | `workshop/instructor-guide` |
+| Module guides: [Teaching Evaluate](evaluate.md), [Teaching Ship](ship.md), [Teaching Observe and Operate](observe-operate.md) | How to prepare and teach each module | `workshop/instructor-guide` |
+| Decks: [Evaluate](../decks/evaluate/agentops-evaluate-workshop.pptx), [Ship](../decks/ship/agentops-ship-workshop.pptx), [Observe and Operate](../decks/observe-operate/agentops-observe-operate-workshop.pptx) | Slides and speaker notes | `workshop/decks` |
+| [AgentOps workshop labs](../labs/README.md) | Participants' starting page: pre-work, each lab and the two Ship tracks | `workshop/labs` |
+| Labs: [Evaluate](../labs/01-evaluate/lab.md), [Ship](../labs/02-ship/lab.md), [Observe and Operate](../labs/03-observe-operate/lab.md), [Advanced (optional)](../labs/04-advanced/lab.md) | Hands-on steps for participants | `workshop/labs` |
+| [Participant pre-work](../pre-work/README.md) | What participants install and check before class | `workshop/pre-work` |
+| [Instructor technical setup](../pre-work/technical-setup.md) | Your environment, agent, rehearsal runs and invitation | `workshop/pre-work` |
+| [Prepare the Foundry environment](../pre-work/foundry-environment.md) | Project, models and access; opened from step 2 of the Instructor technical setup | `workshop/pre-work` |
+| [Deploy the help desk agent](../labs/shared/helpdesk-agent/README.md) | Baseline and candidate versions; opened from step 3 of the Instructor technical setup | `workshop/labs/shared` |
+| [Evaluate lab assets](../labs/01-evaluate/assets) | Evaluation settings and test requests; participants generate their own results | `workshop/labs/01-evaluate/assets` |
+| **Implementation guides** | Applying the practices after the workshop, not workshop homework | [AgentOps materials](../../README.md#materials) |
+
+Local paths are relative to the repository's `agentops` folder.

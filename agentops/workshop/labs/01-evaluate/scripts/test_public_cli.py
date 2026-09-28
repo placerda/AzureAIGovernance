@@ -164,6 +164,7 @@ class PublicCliTests(unittest.TestCase):
         result = subprocess.run(
             ["pwsh", "-NoProfile", "-Command", startup],
             cwd=root, env=env, capture_output=True, text=True, encoding="utf-8",
+            input="https://prompted.example\nbaseline\ncandidate\nprompted-judge\n",
             timeout=90, check=False,
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
@@ -240,10 +241,13 @@ class TeachingAssetTests(unittest.TestCase):
     @unittest.skipUnless(shutil.which("pwsh"), "Documented Windows setup needs PowerShell")
     def test_instructor_source_setup_accepts_complete_and_rejects_missing_files(self):
         repo = LAB.parents[3]
-        guide = LAB.parents[1] / "pre-work" / "instructor-setup.md"
-        setup = re.search(
-            r"```powershell\n(.*?)\n```", guide.read_text(encoding="utf-8"), re.S,
-        ).group(1)
+        guide = LAB.parents[1] / "pre-work" / "technical-setup.md"
+        setup = next(
+            block for block in re.findall(
+                r"```powershell\n(.*?)\n```", guide.read_text(encoding="utf-8"), re.S,
+            )
+            if "Read-Host" in block and "Repository:" in block
+        )
         incomplete = LAB / ".local" / f"incomplete-source-{uuid.uuid4().hex}"
         incomplete.mkdir(parents=True)
         self.addCleanup(shutil.rmtree, incomplete)

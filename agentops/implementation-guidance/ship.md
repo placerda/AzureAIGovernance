@@ -14,6 +14,22 @@ promotion, operationalize releases, and transfer ownership.
 This is practical execution guidance. It is not a Statement of Work, a
 commercial scope, a Definition of Use, or a step-by-step product runbook.
 
+**On this page**
+
+- [Microsoft Foundry release boundary](#microsoft-foundry-release-boundary)
+- [Implementation outcomes](#implementation-outcomes)
+- [Implementation outline](#implementation-outline)
+- [Phase 1 - Discover release topology and controls](#phase-1---discover-release-topology-and-controls)
+- [Phase 2 - Select tools and the platform path](#phase-2---select-tools-and-the-platform-path)
+- [Phase 3 - Prepare source, versioning, and environments](#phase-3---prepare-source-versioning-and-environments)
+- [Phase 4 - Execute the pipeline and release gates](#phase-4---execute-the-pipeline-and-release-gates)
+- [Phase 5 - Operationalize release management after execution](#phase-5---operationalize-release-management-after-execution)
+- [Phase 6 - Project ending and knowledge transfer](#phase-6---project-ending-and-knowledge-transfer)
+- [Roles and responsibilities](#roles-and-responsibilities)
+- [Completion criteria](#completion-criteria)
+- [Knowledge transfer and handoff checklist](#knowledge-transfer-and-handoff-checklist)
+- [References](#references)
+
 ## Microsoft Foundry release boundary
 
 | Area | Guidance |

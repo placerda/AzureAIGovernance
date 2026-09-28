@@ -26,6 +26,20 @@ regression review. No internal-module integration or unpublished extension is
 required. Local synthetic knowledge and simulated tickets are teaching
 substitutes, not a production knowledge or ticketing architecture.
 
+**On this page**
+
+- [Implementation outcomes](#implementation-outcomes)
+- [Implementation outline](#implementation-outline)
+- [Phase 1 - Discover what to evaluate based on the use case](#phase-1---discover-what-to-evaluate-based-on-the-use-case)
+- [Phase 2 - Select the tooling to be used](#phase-2---select-the-tooling-to-be-used)
+- [Phase 3 - Prepare the dataset and execute evaluation](#phase-3---prepare-the-dataset-and-execute-evaluation)
+- [Phase 4 - Configure ongoing evaluation](#phase-4---configure-ongoing-evaluation)
+- [Phase 5 - Project ending and knowledge transfer](#phase-5---project-ending-and-knowledge-transfer)
+- [Roles and responsibilities](#roles-and-responsibilities)
+- [Completion criteria](#completion-criteria)
+- [Knowledge transfer and handoff checklist](#knowledge-transfer-and-handoff-checklist)
+- [References](#references)
+
 ## Implementation outcomes
 
 By the end of the workstream, the following outcomes should be in place:

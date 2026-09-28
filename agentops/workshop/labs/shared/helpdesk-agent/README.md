@@ -32,18 +32,31 @@ These deliberate bugs give learners something to investigate.
 
 Tickets are simulations; do not use employee data.
 
+**On this page**
+
+- [1. Start with the prepared project](#1-start-with-the-prepared-project)
+- [2. Create the deployment files](#2-create-the-deployment-files)
+- [3. Copy the help desk source](#3-copy-the-help-desk-source)
+- [4. Deploy and test the baseline](#4-deploy-and-test-the-baseline)
+- [5. Deploy and test the candidate](#5-deploy-and-test-the-candidate)
+- [6. Keep the two versioned references](#6-keep-the-two-versioned-references)
+- [Optional: debug locally](#optional-debug-locally)
+- [Use these versions in the workshop](#use-these-versions-in-the-workshop)
+
 ## 1. Start with the prepared project
 
-Complete [machine preparation](../../../pre-work/instructor-setup.md#1-prepare-the-instructor-machine)
+Complete [machine preparation](../../../pre-work/technical-setup.md#1-prepare-the-instructor-machine)
 and [Foundry environment setup](../../../pre-work/foundry-environment.md).
 Keep that PowerShell window open: it defines the source folder, project and models.
 
-Have the project owner approve an agent name, such as `agentops-helpdesk-YYYYMMDD-initials`,
+Have the workshop organizer approve an agent name, such as `agentops-helpdesk-YYYYMMDD-initials`,
 using the workshop date and your initials.
 Check **Build > Agents** to avoid reusing another team's name.
 
 **Why a separate deployment folder:** the original course code stays intact.
 You will deploy a copy, first with baseline behavior and then with the deliberate bugs.
+
+**What this block does:** sets the code and deployment folders and the agent name.
 
 ```powershell
 $HostSource = Join-Path $RepoRoot 'agentops\workshop\labs\shared\helpdesk-agent'
@@ -64,6 +77,8 @@ or deploy the agent yet.
 
 For this route, use `azd deploy` in step 4, not `azd up`: the project and models
 already exist. If you have no project, complete environment setup first.
+
+**What this block does:** creates the deployment folder from the official Foundry sample. Deploys nothing yet.
 
 ```powershell
 if (Test-Path $DeployRoot) { throw 'Deployment folder exists. Review its azure.yaml rather than initialize over it.' }
@@ -100,6 +115,8 @@ The **service key** is that component's name directly under `services`.
 Its `project:` value is the path to the code folder, relative to `azure.yaml`.
 Enter those two values below, not the Foundry project's display name:
 
+**What this block does:** finds the agent's code folder. Changes nothing.
+
 ```powershell
 $ServiceName = Read-Host 'Agent service key from azure.yaml'
 $ServiceRelativePath = Read-Host 'That service project path'
@@ -121,6 +138,8 @@ with the [source-deployment example](https://learn.microsoft.com/azure/foundry/a
 structure. These files give it the help desk behavior that the lab's test
 requests are written for.
 
+**What this block does:** replaces the sample's code with the help desk agent. Local only.
+
 ```powershell
 foreach ($file in @('main.py','tools.py','instructions.md','knowledge.json','requirements.txt')) {
     Copy-Item (Join-Path $HostSource $file) (Join-Path $ServiceRoot $file)
@@ -128,14 +147,14 @@ foreach ($file in @('main.py','tools.py','instructions.md','knowledge.json','req
 ```
 
 Foundry installs the packages listed in `requirements.txt` during deployment.
-Do not mix them with the evaluation tool's Python packages.
+Do not mix them with the AgentOps Accelerator CLI's Python packages.
 
 <a id="5-configure-the-deployment-and-retain-two-real-versions"></a>
 <a id="4-configure-the-deployment-and-retain-two-real-versions"></a>
 
 ## 4. Deploy and test the baseline
 
-**Deployment and test requests can incur charges. Obtain the project owner's approval first.**
+**Deployment and test requests can incur charges. Obtain the workshop organizer's approval first.**
 
 1. Open `azure.yaml` in the deployment folder.
 2. In the agent service's `env`, set the three values below.
@@ -161,6 +180,8 @@ agent; PowerShell variables apply only to local programs.
 
 Show which project and model azd will use:
 
+**What this block does:** shows the project and model the deployment will use. Changes nothing.
+
 ```powershell
 Set-Location $DeployRoot
 azd env get-value AZURE_AI_PROJECT_ID --environment $AzdEnvironment
@@ -173,6 +194,8 @@ Compare the first output with the full **Project resource ID** copied in step 1.
 Compare the second with the **model deployment name**, not the model family
 name. If either differs or is missing, stop before deployment.
 The next commands upload and start the agent, then show its status and version:
+
+**What this block does:** deploys the agent to Foundry as a new version.
 
 ```powershell
 azd deploy $ServiceName --environment $AzdEnvironment
@@ -190,6 +213,8 @@ is not ready for evaluation.
 **Why test now:** a completed deployment does not prove the agent can answer
 or use its tools. Catch those failures before preparing class evaluation results.
 
+**What this block does:** tests the baseline with a password question.
+
 ```powershell
 $BaselineVersion = Read-Host 'Baseline version number returned by show'
 azd ai agent invoke $ServiceName --version $BaselineVersion `
@@ -199,6 +224,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Deployed invocation failed. Keep the version a
 ```
 
 Then test the ticket tool. This is a second billable request, not another deployment.
+
+**What this block does:** tests the baseline with a VPN problem that should use its tools.
 
 ```powershell
 azd ai agent invoke $ServiceName --version $BaselineVersion `
@@ -248,6 +275,8 @@ one containing two controlled defects. Keep the baseline unchanged.
 3. In the original `azure.yaml`, change only `HELPDESK_VARIANT` to `candidate`.
 4. Run the following deployment and tests:
 
+**What this block does:** deploys the changed agent as the candidate version.
+
 ```powershell
 azd deploy $ServiceName --environment $AzdEnvironment
 if ($LASTEXITCODE -ne 0) { throw 'Candidate deployment failed. Inspect the operation before retrying.' }
@@ -256,6 +285,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect the candidate version.' }
 ```
 
 Wait for `active` or `deployed`, then enter that version below:
+
+**What this block does:** tests the candidate with the same two questions.
 
 ```powershell
 $CandidateVersion = Read-Host 'Candidate version number returned by show'
@@ -282,11 +313,13 @@ before preparing the class package.
 
 ## 6. Keep the two versioned references
 
-**Why these references:** the evaluation tool must test an exact version.
+**Why these references:** the AgentOps Accelerator CLI must test an exact version.
 The general endpoint shown by azd can follow the currently deployed version;
 do not paste that moving endpoint into the evaluation settings.
 
 Use the actual project URL, agent name and version numbers collected above:
+
+**What this block does:** gets the reference for each version, which the evaluation settings need. Changes nothing.
 
 ```powershell
 if (-not $BaselineVersion -or -not $CandidateVersion -or $BaselineVersion -eq $CandidateVersion) {
@@ -298,25 +331,27 @@ $CandidateEndpoint = "$($ProjectEndpoint.TrimEnd('/'))/agents/$AgentName/version
 "Candidate: $CandidateEndpoint"
 ```
 
-These are **versioned target references for the evaluation CLI**, not browser
+These are **versioned target references for the AgentOps Accelerator CLI**, not browser
 pages or standalone HTTP invocation URLs. The CLI extracts the agent name
 and version for Foundry evaluation.
 
 Save the two printed lines in `.local\deployment-records\versions.txt`.
 Copy the candidate `azure.yaml` into that folder as `candidate-azure.yaml`.
-Keep these records with the original course ZIP; do not put them in the
+Keep these records in your clone's `.local` folder; do not put them in the
 uploaded agent source folder.
 
 **Restarted PowerShell?** Follow step 1's **New terminal** instructions with
 the same agent name. Enter the retained version numbers below, then rerun the
 reference block above, not deployment:
 
+**What this block does:** reloads the two version numbers for the next blocks.
+
 ```powershell
 $BaselineVersion = Read-Host 'Baseline version number from versions.txt'
 $CandidateVersion = Read-Host 'Candidate version number from versions.txt'
 ```
 
-**Next:** [prepare the evaluation workspace and results](../../../pre-work/instructor-setup.md#evaluate).
+**Next:** [prepare the evaluation workspace and results](../../../pre-work/technical-setup.md#evaluate).
 Leave the local-debugging section below unless you need to investigate a failure.
 
 <a id="4-configure-and-start-locally"></a>
@@ -333,6 +368,8 @@ Install Python 3.13 using `pymanager install 3.13`.
 If `pymanager` is unavailable, install the
 [Python install manager for Windows](https://www.python.org/downloads/windows/) first.
 Then run:
+
+**What this block does:** runs the agent on your computer, connected to your Foundry project.
 
 ```powershell
 py -3.13 -m venv (Join-Path $ServiceRoot '.venv')
@@ -361,8 +398,8 @@ the required versions or use an unapproved download source.
 
 ## Use these versions in the workshop
 
-Return to [evaluation workspace setup](../../../pre-work/instructor-setup.md#instructoradmin-prepare-the-evaluation-workspace)
+Return to [evaluation workspace setup](../../../pre-work/technical-setup.md#instructoradmin-prepare-the-evaluation-workspace)
 with both agent URLs. Evaluate calls the versions running in Foundry, not the
 server on your computer. Ship reuses their code and deployment files;
 Observe and Operate uses the traces from their requests.
-Follow [owner-approved cleanup](../../../pre-work/instructor-setup.md#retention-and-cleanup).
+Follow [owner-approved cleanup](../../../pre-work/technical-setup.md#retention-and-cleanup).

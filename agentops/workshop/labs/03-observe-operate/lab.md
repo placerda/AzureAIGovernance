@@ -17,8 +17,7 @@ cover a selected subset.
 **Review output:** Notes connecting a problem to its trace, the response
 needed and a test that could catch it next time.
 
-**Current activity:** review results supplied by the instructor.
-The full hands-on monitoring and incident-response exercise is not ready yet.
+**Activity:** review results supplied by the instructor.
 Complete [Observe and Operate pre-work](../../pre-work/README.md#observe-and-operate).
 
 ## Available preparation review

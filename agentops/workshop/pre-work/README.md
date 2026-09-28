@@ -1,4 +1,4 @@
-# Before the AgentOps workshop
+# AgentOps workshop: participant pre-work
 
 ![A little setup. More time to explore. Get your files ready, sign in, and bring your curiosity.](../assets/banners/prework.png)
 
@@ -12,32 +12,42 @@ After preparation, return to the [numbered labs](../labs/README.md):
 Evaluate, Ship, then Observe and Operate. Complete only the modules selected
 for your session; Advanced is optional.
 
+**On this page**
+
+- [Common preparation](#common-preparation)
+- [Evaluate](#evaluate)
+- [Ship](#ship)
+- [Observe and Operate](#observe-and-operate)
+- [Advanced (optional)](#advanced-optional)
+- [Ready for the workshop?](#ready-for-the-workshop)
+- [Keep your files for the next activity](#keep-your-files-for-the-next-activity)
+
 ## Common preparation
 
 ### Get your workshop files
 
-**Why download now:** your module's ZIP contains the prepared files and saved
-results used in its activities. Having them ready avoids setup work during the workshop.
-
 1. Open the **AgentOps workshop** calendar invitation. Read **Your module and mode**.
-2. Open its **Workshop files** link and download your module's ZIP from the table below.
-3. Right-click the ZIP in Downloads, select **Extract All**, and open its `README.md`.
-4. Open the invitation's **Foundry project** link and sign in with the account it names.
+2. Open the invitation's **Foundry project** link and sign in with the account it names.
    Follow **Network access** if a VPN connection is required.
+3. For Ship, Observe and Operate, or Advanced, open the invitation's
+   **Workshop files** link and download your module's ZIP from the table below.
+   Right-click it in Downloads, select **Extract All**, and open its `README.md`.
 
-| Continue with | Download | What you will use it for |
+Evaluate needs no download from the invitation: you get the course files from
+GitHub and generate your own results during the lab.
+
+| Continue with | What you need | What you will use it for |
 | --- | --- | --- |
-| [Evaluate](#evaluate) | `agentops-evaluate-workspace.zip` | Ready-to-use settings and saved results for comparison |
+| [Evaluate](#evaluate) | The course repository and the invitation's **Evaluate settings** | Evaluate two agent versions in the shared project |
 | [Ship](#ship) | `agentops-ship-review.zip` | Compare a blocked release with an approved one |
 | [Observe and Operate](#observe-and-operate) | `agentops-observe-review.zip` | Follow a request from its trace to an alert and response |
 | [Advanced](#advanced-optional) | `agentops-advanced-review.zip` | Review an incident, its recovery and the test added afterward |
 
 **Can't open a file or link?** Reply to the invitation's organizer before the
 session. They will provide the correct files or arrange access.
-
 ### Use a prepared machine, or install only missing tools
 
-**Evaluate hands-on needs Python 3.11 and Azure CLI.**
+**Evaluate hands-on needs Git, Python 3.11 and Azure CLI.**
 Skip installation if the instructor provides a prepared machine.
 For the other modules, you will read saved results rather than run the agent.
 A browser and text editor are enough.
@@ -48,6 +58,7 @@ output is missing or whose command is not recognized.
 
 | Tool | Install if missing | Run and look for |
 | --- | --- | --- |
+| Git | Run the [Git for Windows installer](https://git-scm.com/download/win), then reopen PowerShell | `git --version` prints `git version` |
 | Python 3.11 | Install the [Python install manager for Windows](https://www.python.org/downloads/windows/), then run `pymanager install 3.11` | `py -3.11 --version` prints `Python 3.11.x` |
 | Azure CLI | Run the [official Windows installer](https://aka.ms/installazurecliwindowsx64), then reopen PowerShell | `az version` prints version details containing `azure-cli` |
 
@@ -60,8 +71,9 @@ If installation is blocked, contact the instructor for an approved machine.
 
 ## Evaluate
 
-You will use the class's shared Foundry project and agent. The instructor has
-prepared its settings and comparison results for you.
+You will use the class's shared Foundry project, where the instructor has
+deployed two versions of the sample agent. During the lab you evaluate both
+and compare the results.
 
 **You do not create your own environment or deploy an agent.** Those steps are
 in [instructor environment setup](foundry-environment.md) and
@@ -70,28 +82,35 @@ Your preparation installs only the local tool used to evaluate that deployment.
 
 ### Get the lab files
 
-**Why a second ZIP:** this one contains the lab instructions, example agent
-code and test requests. The earlier `agentops-evaluate-workspace.zip` contains
-your prepared settings and saved results. You need both for Evaluate.
+The course files are in the [placerda/AzureAIGovernance](https://github.com/placerda/AzureAIGovernance)
+repository on GitHub: lab instructions, the sample agent's code, test requests
+and evaluation settings. Open **Start > PowerShell** and run:
 
-1. From **Workshop files**, also download `agentops-workshop-source.zip`.
-2. Extract it to **Documents > AgentOps-workshop**.
-3. Open the extracted `AzureAIGovernance-main` folder. Instructions call this the
-   **repository root**, the folder containing all course files.
+**What this block does:** downloads the course repository to Documents\AgentOps-workshop.
+
+```powershell
+$Root = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'AgentOps-workshop'
+New-Item -ItemType Directory -Force $Root | Out-Null
+git clone https://github.com/placerda/AzureAIGovernance.git (Join-Path $Root 'AzureAIGovernance')
+if ($LASTEXITCODE -ne 0) { throw 'Download failed. Contact the instructor.' }
+```
+
+This creates **Documents > AgentOps-workshop > AzureAIGovernance**. Instructions
+call this folder the **repository root**. If it already exists from an earlier
+attempt, keep it and continue.
 
 On a prepared machine, use the invitation's **Local workshop folder** instead.
-The source comes from [placerda/AzureAIGovernance](https://github.com/placerda/AzureAIGovernance);
-use the instructor's copy for this session.
-
 ### Sign in to the assigned account
 
-**Why sign in here:** the evaluation tool needs your permission to use the
+**Why sign in here:** the AgentOps Accelerator CLI needs your permission to use the
 workshop's Azure project. Signing in to the browser alone does not sign in PowerShell.
 
 Open **Start > PowerShell** and run the block below.
 Paste **Tenant ID** and **Subscription ID** from the invitation when prompted.
 Azure CLI is the tool you use to sign in from PowerShell. The subscription
 identifies the Azure resources and billing account selected for this workshop.
+
+**What this block does:** signs you in to Azure and selects the workshop subscription.
 
 ```powershell
 $TenantId = Read-Host 'Tenant ID from the invitation'
@@ -115,7 +134,7 @@ error or mismatched ID; do not continue with another subscription.
 
 <a id="1-participant-install-the-public-cli"></a>
 
-### 1. Install the evaluation tool
+### 1. Install the AgentOps Accelerator CLI
 
 **What this gives you:** the `agentops` command submits test requests to Foundry
 and saves the evaluation reports. It does not deploy the agent.
@@ -125,13 +144,15 @@ Type `powershell` in its address bar and press Enter.
 On a prepared machine, run only `.\.venv\Scripts\agentops.exe --version`.
 Otherwise, run the complete block:
 
+**What this block does:** installs the AgentOps Accelerator CLI in its own Python environment.
+
 ```powershell
 py -3.11 -m venv .venv
 if ($LASTEXITCODE -ne 0) { throw 'Python environment creation failed. Contact the instructor.' }
 .\.venv\Scripts\python.exe -m pip install -r .\requirements.txt
 if ($LASTEXITCODE -ne 0) { throw 'Package installation failed. Contact the instructor.' }
 .\.venv\Scripts\agentops.exe --version
-if ($LASTEXITCODE -ne 0) { throw 'Evaluation CLI unavailable. Contact the instructor.' }
+if ($LASTEXITCODE -ne 0) { throw 'AgentOps Accelerator CLI unavailable. Contact the instructor.' }
 ```
 
 **Check:** installation finishes and `agentops` prints its version.
@@ -144,29 +165,21 @@ machine. Do not select an older version or change your package source.
 
 <a id="2-participant-initialize-the-supported-evaluation-workspace"></a>
 
-### 2. Open your prepared lab folder
+### 2. Create your workspace
 
-**Why copy these folders:** the lab commands expect settings in `.local\workspace`
-and comparison results in `.local\instructor`. This puts each file where the
-commands will look for it.
+Run [lab step 1](../labs/01-evaluate/lab.md#1-start-the-workspace-and-confirm-the-exact-candidate)
+now and follow its **Check the displayed values** instructions. It asks for the
+four values in the invitation's **Evaluate settings**. The lab calls the version
+under review the **candidate**, the earlier version the **baseline**, and the
+model deployment that grades the answers the **scoring model**. You do not
+deploy any of them.
 
-1. In `agentops\workshop\labs\01-evaluate`, create a folder named `.local`.
-2. Copy `README.md`, `workspace` and `instructor` from the extracted
-   `agentops-evaluate-workspace.zip` into `.local`.
-3. Read `.local\README.md` for the project, agent version and model that will score its answers.
-4. Run [lab step 1](../labs/01-evaluate/lab.md#1-start-the-workspace-and-confirm-the-exact-candidate)
-   and follow its **Check the three displayed values** instructions.
+Creating the workspace does not run an evaluation and incurs no cost.
+Report mismatched values to the instructor.
 
-The lab calls the version you will test the **candidate**. The **scoring model**
-is the model deployment assigned to grade its answers; you do not deploy it.
-
-If the files are already in place, start at item 3.
-Do not overwrite existing results. Report mismatches to the instructor.
-
-**Ready for the session:** once startup shows the settings in your README,
-your local setup is complete. Save the evaluation run for the workshop:
-it uses paid Azure services.
-
+**Ready for the session:** once the displayed values match the invitation,
+your local setup is complete. Save the evaluation runs for the workshop:
+they use paid Azure services.
 ## Ship
 
 1. Open `README.md` in the extracted `agentops-ship-review` folder.
@@ -200,8 +213,8 @@ recovery steps during pre-work.
 
 ## Ready for the workshop?
 
-You are ready when your files and links open and, for Evaluate hands-on, startup
-shows the settings in your README. Ship, Observe and Operate, and Advanced
+You are ready when your files and links open and, for Evaluate hands-on, your
+workspace shows the values from the invitation. Ship, Observe and Operate, and Advanced
 currently use saved examples; their full hands-on instructions are still being written.
 
 <a id="retention-and-cleanup"></a>
@@ -214,4 +227,4 @@ Participants do not delete cloud resources.
 <a id="instructoradmin-prepare-the-evaluation-workspace"></a>
 <a id="instructoradmin-package-and-rehearse-the-learner-bundle"></a>
 
-Instructor setup and package preparation are in the [instructor guide](instructor-setup.md).
+Instructors prepare the class with the [technical setup](technical-setup.md).

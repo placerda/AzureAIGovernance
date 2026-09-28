@@ -32,7 +32,7 @@ hands-on outlines are not instructions to execute.
 The instructor/admin prepares or reuses the Foundry environment and deploys
 the help desk agent **before the workshop**. Participants do not create a
 separate environment or deploy an agent to begin Evaluate.
-The [technical preparation guide](../pre-work/instructor-setup.md) links to
+The [technical setup](../pre-work/technical-setup.md) links to
 environment setup and agent deployment.
 
 The unnumbered [`shared`](shared/) folder holds reusable code and files.

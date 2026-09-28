@@ -19,16 +19,24 @@ will use the other to score those answers. A project alone does not deploy the
 help desk agent.
 
 Complete steps **A and B** of
-[instructor machine preparation](instructor-setup.md#1-prepare-the-instructor-machine) first.
+[instructor machine preparation](technical-setup.md#1-prepare-the-instructor-machine) first.
 The administrator needs permission to create resources and assign roles in the
 workshop resource group, such as **Owner** on that group. Do not give participants
 Owner access.
 
-**Before spending:** the project owner approves the subscription, resource group,
+**Before spending:** the workshop organizer approves the subscription, resource group,
 region, model capacity and retention date. Use only the supplied fictional data.
 This portal route uses basic project settings; if policy requires a private
 network, have the administrator supply a compliant project and connection
 instructions. Do not disable network restrictions to follow the course.
+
+**On this page**
+
+- [1. Create or reuse the project](#1-create-or-reuse-the-project)
+- [2. Deploy the two models](#2-deploy-the-two-models)
+- [3. Connect monitoring](#3-connect-monitoring)
+- [4. Give people access](#4-give-people-access)
+- [5. Copy the project values and sign in](#5-copy-the-project-values-and-sign-in)
 
 ## 1. Create or reuse the project
 
@@ -68,7 +76,7 @@ and [evaluation list](https://learn.microsoft.com/azure/foundry/concepts/evaluat
 For a failed creation, retain the error and ask the administrator to resolve it;
 do not create several replacement projects.
 
-### Reuse an existing AI Governance VBD project
+### Reuse an existing Foundry project
 
 1. Open its owner-approved browser link and compare the project name with the owner's assignment.
 2. Open **Home** and find the project endpoint.
@@ -77,8 +85,7 @@ do not create several replacement projects.
 The endpoint must have the form
 `https://RESOURCE.services.ai.azure.com/api/projects/PROJECT`.
 An Azure OpenAI endpoint or Azure Machine Learning workspace alone is not
-this project. Do not deploy the parent VBD's FinOps or Azure ML resources
-as a substitute.
+a Foundry project, so it cannot be used here.
 
 See [Create a Foundry project](https://learn.microsoft.com/azure/foundry/how-to/create-projects)
 for the portal creation reference.
@@ -171,6 +178,8 @@ does not automatically grant permission to read its telemetry.
 1. Open **Manage > Project details > Users > Add user**.
 2. Add the instructor with **Foundry Project Manager**.
 3. Add the attendees, or their approved class group, with **Foundry User**.
+   Also create a test account for the instructor with only the attendee roles
+   in this step, so the instructor can rehearse with participant permissions.
 4. Return to **Users** and confirm those names and roles appear.
 
 Some screens still show the previous **Azure AI** role names. Their role IDs
@@ -246,6 +255,8 @@ Collect these values from the existing screens, not from an example:
 
 In the PowerShell window from machine preparation, sign in:
 
+**What this block does:** signs you in to Azure and selects the subscription.
+
 ```powershell
 $TenantId = Read-Host 'Tenant ID from Microsoft Entra ID'
 $SubscriptionId = Read-Host 'Subscription ID from the Foundry resource'
@@ -260,13 +271,14 @@ if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect the selected account.' }
 Compare `TenantId` and `Id` with the two copied IDs. Stop if either differs.
 Then sign in to the deployment tool with the same account:
 
+**What this block does:** signs the Azure Developer CLI in with the same account.
+
 ```powershell
 azd auth login --tenant-id $TenantId
 if ($LASTEXITCODE -ne 0) { throw 'Azure Developer CLI sign-in failed.' }
 ```
 
-**Read-only lookup:** the next block retrieves the project's resource ID.
-It does not provision anything.
+**What this block does:** looks up the project's resource ID and endpoint. Read-only.
 
 ```powershell
 $ResourceGroup = Read-Host 'Resource group from the Foundry resource Overview'
@@ -290,12 +302,12 @@ The [resource lookup command](https://learn.microsoft.com/cli/azure/resource#az-
 must return the existing project; constructing its path is not proof that it exists.
 
 Keep the window open for deployment. If it closes, repeat the
-[machine guide's folder block](instructor-setup.md#a-download-the-workshop-source-and-open-powershell)
+[machine guide's folder block](technical-setup.md#a-download-the-workshop-source-and-open-powershell)
 and this section; neither recreates resources.
 Keep the project browser link, names and model versions with the instructor's files,
 not in the public repository.
 
 **Next:** [deploy and test the baseline and candidate](../labs/shared/helpdesk-agent/README.md).
 The environment is prepared, but the help desk agent is not installed yet.
-The later [participant rehearsal](instructor-setup.md#try-one-evaluation-with-participant-permissions)
+The later [participant rehearsal](technical-setup.md#try-one-evaluation-with-participant-permissions)
 must demonstrate that the deployed agent and scoring model work together.

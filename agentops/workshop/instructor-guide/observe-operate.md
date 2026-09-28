@@ -16,16 +16,14 @@ and carrying out the response, then improving the agent.
 
 Read the [Observe and Operate deck and speaker notes](../decks/observe-operate/agentops-observe-operate-workshop.pptx)
 and the [current lab](../labs/03-observe-operate/lab.md).
-Use [module preparation](../pre-work/instructor-setup.md#observe-and-operate)
+Use [module preparation](../pre-work/technical-setup.md#observe-and-operate)
 to supply a trace, related alert, dashboard and response notes with working
 links and a clear time range.
 
 For standalone delivery, introduce the agent and deployed version in the
 prepared example. Participants do not need to have completed Ship.
 
-**Current boundary:** the available activity reviews a saved example without
-changing the service. The full hands-on monitoring and incident-response
-exercise is still being developed.
+**Activity:** participants review a saved example without changing the service.
 
 ## Present and discuss
 

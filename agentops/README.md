@@ -76,14 +76,14 @@ Complete one, not both.
 | Workshop lab sequence | Participant starting page with links to pre-work, numbered labs and alternative Ship tracks | [Workshop labs](workshop/labs/README.md) |
 | Workshop deck | Evaluate | [`agentops-evaluate-workshop.pptx`](workshop/decks/evaluate/agentops-evaluate-workshop.pptx) |
 | Workshop lab | Evaluate participant actions and decision | [`lab.md`](workshop/labs/01-evaluate/lab.md) |
-| Workshop pre-work | Essential participant setup and technical class preparation | [Participants start here](workshop/pre-work/README.md), [instructor technical preparation](workshop/pre-work/instructor-setup.md) |
+| Workshop pre-work | Essential participant setup and technical class preparation | [Participants start here](workshop/pre-work/README.md), [technical setup](workshop/pre-work/technical-setup.md) |
 | Foundry environment setup | Create or reuse the project, deploy models and arrange access | [Instructor/admin environment steps](workshop/pre-work/foundry-environment.md) |
 | First-time material authoring | Extra Foundry checks and the Python packages they need | [Author guide](workshop/pre-work/native-evidence.md), [sample dependencies](workshop/pre-work/requirements-native.txt) |
 | Hosted agent setup | Create/update course versions; local debugging is optional | [Help desk deployment](workshop/labs/shared/helpdesk-agent/README.md) |
 | Evaluation tooling | Evaluate versions, rationale, capability boundaries and authoring status | [Tooling notes](workshop/labs/01-evaluate/TOOLING.md), [pinned dependencies](workshop/labs/01-evaluate/requirements.txt) |
 | Evaluation workflow | Evaluate | [Public Accelerator CLI config](workshop/labs/01-evaluate/assets/agentops.yaml), [offline public CLI tests](workshop/labs/01-evaluate/scripts/test_public_cli.py) |
 | Evaluation inputs | Evaluate | [Turn cases](workshop/labs/01-evaluate/assets/turns.jsonl), [conversation](workshop/labs/01-evaluate/assets/conversations.jsonl), [rubric](workshop/labs/01-evaluate/assets/rubric.json), [calibration cases](workshop/labs/01-evaluate/assets/calibration.json) |
-| Evaluation assignment and evidence | Evaluate | [Receive the prepared workspace](workshop/pre-work/README.md#2-participant-initialize-the-supported-evaluation-workspace), [instructor preparation](workshop/pre-work/instructor-setup.md#instructoradmin-prepare-the-evaluation-workspace), [closing discussion](workshop/labs/01-evaluate/lab.md#7-decide-and-hand-off-to-ship), [required instructor evidence](workshop/labs/01-evaluate/assets/evidence/README.md) |
+| Evaluation assignment and evidence | Evaluate | [Receive the prepared workspace](workshop/pre-work/README.md#2-participant-initialize-the-supported-evaluation-workspace), [technical setup](workshop/pre-work/technical-setup.md#instructoradmin-prepare-the-evaluation-workspace), [closing discussion](workshop/labs/01-evaluate/lab.md#7-decide-and-hand-off-to-ship), [required instructor evidence](workshop/labs/01-evaluate/assets/evidence/README.md) |
 | Workshop deck | Ship | [`agentops-ship-workshop.pptx`](workshop/decks/ship/agentops-ship-workshop.pptx) |
 | Workshop lab | Ship | [`lab.md`](workshop/labs/02-ship/lab.md) |
 | Ship track choices | Choose one alternative | [GitHub Actions](workshop/labs/02-ship/github-actions/README.md), [Azure Pipelines](workshop/labs/02-ship/azure-pipelines/README.md) |
@@ -96,33 +96,29 @@ Complete one, not both.
 | Implementation guidance | Observe and Operate | [`implementation-guidance/observe-operate.md`](implementation-guidance/observe-operate.md) |
 
 The source is [placerda/AzureAIGovernance](https://github.com/placerda/AzureAIGovernance).
-Instructors follow [source download](workshop/pre-work/instructor-setup.md#a-download-the-workshop-source-and-open-powershell)
-and [session distribution](workshop/pre-work/instructor-setup.md#publish-the-workshop-files-and-invitation).
-Participants receive their module's package through **Workshop files** in the
-**AgentOps workshop** invitation. Evaluate hands-on also uses
-`agentops-workshop-source.zip`. The instructor publishes these session files;
-they are not public evidence downloads.
+Instructors follow [source download](workshop/pre-work/technical-setup.md#a-download-the-workshop-source-and-open-powershell)
+and [session distribution](workshop/pre-work/technical-setup.md#publish-the-workshop-files-and-invitation).
+Evaluate participants clone this repository and run both evaluations
+themselves in a shared Foundry project, using the **Evaluate settings** from the
+**AgentOps workshop** invitation. Ship, Observe and Operate, and Advanced
+currently use review ZIPs shared through **Workshop files** in the same invitation.
 
 In Evaluate, participants test an agent running in Microsoft Foundry and read
 its answers, tool results and scores. The Accelerator CLI submits the requests
 and checks average scores. Additional Foundry results cover support-quality
 rules, safety, conversations and adversarial tests.
-Use [instructor readiness](workshop/pre-work/instructor-setup.md#readiness-gate)
-before teaching; see [TOOLING](workshop/labs/01-evaluate/TOOLING.md#authoring-validation-status)
-for service checks and source publication still outstanding.
+Use [instructor readiness](workshop/pre-work/technical-setup.md#readiness-gate)
+before teaching.
 
 The Ship outline defines equivalent GitHub Actions and Azure Pipelines tracks.
 Evaluate uses Foundry evaluation and evaluators, with the Accelerator CLI
 submitting runs against an already deployed help desk agent; learners do not
 use azd in Evaluate. Ship's agreed scope exercises
 code deployment with azd and test requests with `azd ai agent`, using the same
-agent code and Evaluate results. The detailed pipeline tracks remain under
-development. Creating Azure resources stays outside workshop time.
-Observe and Operate and the optional advanced lab are also outlines, not
-ready-to-run exercises. Their pre-work explains which files the instructor
-must provide for a review of saved results. Advanced connects an incident to
-recovery and a test that catches the same bug. Its failure-simulation scripts
-and complete release pipeline are not supplied yet.
+agent code and Evaluate results. Creating Azure resources stays outside workshop time.
+In Observe and Operate and the optional advanced lab, participants review saved
+results; their pre-work explains which files the instructor provides. Advanced
+connects an incident to recovery and a test that catches the same bug.
 
 ## Delivery sequence
 

@@ -17,11 +17,8 @@ cover a selected subset.
 **Review output:** Notes connecting the saved incident, recovery, regression
 test and evidence that the test blocks the faulty release.
 
-**Current activity:** review the instructor's saved incident example.
-The scripts for causing and recovering from a test failure, and the complete
-release pipeline, are not supplied yet. Complete
-[advanced pre-work](../../pre-work/README.md#advanced-optional); the instructor
-must prepare and rehearse those assets before live practice is possible.
+**Activity:** review the instructor's saved incident example.
+Complete [advanced pre-work](../../pre-work/README.md#advanced-optional) first.
 
 ## Available preparation review
 

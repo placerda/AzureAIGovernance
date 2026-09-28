@@ -38,6 +38,8 @@ materials.
 - Use current Microsoft Foundry terminology and capabilities.
 - Ground product claims in current first-party Microsoft documentation.
 - Use descriptive links that identify their destination.
+- Give pages of about 200 lines or more an **On this page** index after the
+  introduction, linking each `##` section. An existing step table may serve as the index.
 - Present AgentOps Accelerator as a practical reference implementation alongside
   native Microsoft Foundry capabilities.
 - Lead workshop explanations with Microsoft Foundry and the learning activity.
@@ -273,16 +275,34 @@ Decks must:
 - Before a non-obvious download, command block, configuration change or review,
   briefly explain its purpose and where the output will be used next. Use a
   short note such as "Why this step" or "What this does", not line-by-line
-  narration. Explain what each ZIP contains and distinguish course source from
-  prepared settings/results. Learners should understand the task, not merely
-  copy commands. Prefer adding the missing reason to existing prose over
-  repeating the instruction.
+  narration. Learners should understand the task, not merely copy commands.
+  Prefer adding the missing reason to existing prose over repeating the
+  instruction.
+- Labs mirror daily practice: participants clone the repository and generate
+  their own results by running the steps in the shared sandbox project. Do not
+  distribute ZIPs of prepared settings or someone else's results for learners to
+  review in place of running the activity. The instructor's own rehearsal
+  results are only an on-screen fallback, labelled **instructor demonstration**.
+  Use a ZIP for convenience only with the VBD owner's (Paulo's) prior approval,
+  and explain what it contains.
 - Explain the reader's goal before the implementation mechanics: why the step
   is needed, what it enables next and what result the reader will use.
   Describing variable assignments or translating commands into prose is not
   a substitute for that purpose. When implementation detail is useful, describe
   it accurately; do not say a script "remembers", "understands" or "takes care of"
   an unspecified task.
+- Put one short sentence immediately before every command or code block saying
+  its purpose. Mention side effects only when they matter: it deploys to Azure,
+  makes billable model calls or could be mistaken for doing so. Do not narrate
+  each step, and keep the surrounding text to what the reader must act on.
+- Keep section headings aligned with any order table or step list that links
+  to them: same wording, same numbering and same order.
+- Refer to each material by its page title every time (for example
+  "Instructor technical setup", "participant pre-work", "Teaching Evaluate"),
+  never by alternate names. In reading-flow pages, name materials in bold and
+  collect their links in a final reference table or "what to open next" list.
+- Do not add readiness, status or "not yet available" sections to published
+  material; the material is released only when complete.
 - Do not use "check", "confirm", "verify" or "make sure" as a substitute for a
   procedure. Give the reader a short path to the file or screen, the action to
   perform, the value or status to look for and what to do on failure. Link to

@@ -21,15 +21,13 @@ session. Both tracks teach the same concepts and produce the same release
 checklist. They are alternatives within the module, not two labs to complete.
 Link the selected track in the invitation and use matching pipeline results.
 
-Use [Ship preparation](../pre-work/instructor-setup.md#ship) for the saved
+Use [Ship preparation](../pre-work/technical-setup.md#ship) for the saved
 blocked and accepted pipeline runs, evaluation reports, approval and
 post-deployment test results. For standalone delivery, supply the earlier
 Evaluate reports and the same help desk scenario rather than requiring
 participants to attend Evaluate first.
 
-**Current boundary:** the available activity reviews supplied runs without
-deploying anything. The full hands-on pipeline tracks are still being developed.
-Do not teach the outline as an executable deployment procedure.
+**Activity:** participants review supplied runs without deploying anything.
 
 ## Present and discuss
 

@@ -21,6 +21,22 @@ and establish a continuous improvement loop.
 This is practical execution guidance. It is not a Statement of Work, a
 commercial scope, a Definition of Use, or a detailed product runbook.
 
+**On this page**
+
+- [Microsoft Foundry observability boundary](#microsoft-foundry-observability-boundary)
+- [Implementation outcomes](#implementation-outcomes)
+- [Implementation outline](#implementation-outline)
+- [Phase 1 - Discover operational outcomes and signals](#phase-1---discover-operational-outcomes-and-signals)
+- [Phase 2 - Select observability and operations tooling](#phase-2---select-observability-and-operations-tooling)
+- [Phase 3 - Prepare telemetry, alerts, and runbooks](#phase-3---prepare-telemetry-alerts-and-runbooks)
+- [Phase 4 - Execute observability and operational readiness](#phase-4---execute-observability-and-operational-readiness)
+- [Phase 5 - Continuously improve after execution](#phase-5---continuously-improve-after-execution)
+- [Phase 6 - Project ending and knowledge transfer](#phase-6---project-ending-and-knowledge-transfer)
+- [Roles and responsibilities](#roles-and-responsibilities)
+- [Completion criteria](#completion-criteria)
+- [Knowledge transfer and handoff checklist](#knowledge-transfer-and-handoff-checklist)
+- [References](#references)
+
 ## Microsoft Foundry observability boundary
 
 | Area | Guidance |

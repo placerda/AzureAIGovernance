@@ -6,7 +6,7 @@
 Help learners look beyond a good-looking average. Prepare examples that test
 the scoring rules, support answers, whole conversations and responses to attacks.
 Instructors reuse the finished results; participants only review them.
-These checks do not change the evaluation CLI's pass/fail result.
+These checks do not change the AgentOps Accelerator CLI's pass/fail result.
 
 The workshop-specific scripts and real results are not supplied yet. This page
 guides the author adapting the linked samples; it is not a finished course exercise.
@@ -15,12 +15,14 @@ Do not ask each instructor to implement these workflows before a class.
 
 ## 1. Create a folder for the extra checks
 
-Start from [first-time evaluation setup](instructor-setup.md#instructoradmin-prepare-the-evaluation-workspace).
+Start from [first-time evaluation setup](technical-setup.md#instructoradmin-prepare-the-evaluation-workspace).
 Keep its PowerShell window open; it defines `$RepoRoot`, `$EvaluateRoot`, `$LocalRoot`,
 `$ProjectEndpoint` and `$JudgeDeployment`.
 
-Get the project owner's approval for the models, agent versions and spending
+Get the workshop organizer's approval for the models, agent versions and spending
 limit before making any service calls. This block only installs local tools:
+
+**What this block does:** installs the Foundry samples' packages in their own Python environment. Local only.
 
 ```powershell
 $NativeRoot = Join-Path $LocalRoot 'native-preparation'
@@ -39,6 +41,8 @@ Inputs remain in `agentops\workshop\labs\01-evaluate\assets`.
 This folder has its own Python packages, separate from the main lab and the agent.
 
 For the manual rubric sample's [client setup](https://learn.microsoft.com/azure/foundry/observability/how-to/cloud-evaluation#set-up-the-sdk-client):
+
+**What this block does:** sets the project endpoint and scoring model the samples use.
 
 ```powershell
 $env:FOUNDRY_PROJECT_ENDPOINT = $ProjectEndpoint
@@ -112,7 +116,7 @@ Scoring each answer separately does not check whether the whole conversation hel
 
 A **red-team scan** tries prompts designed to make the agent behave unsafely.
 
-1. Ask the project owner to approve the agent version, kinds of attacks,
+1. Ask the workshop organizer to approve the agent version, kinds of attacks,
    maximum attempts, spending limit and conditions for stopping.
 2. Adapt [native cloud red teaming](https://learn.microsoft.com/azure/foundry/how-to/develop/run-ai-red-teaming-cloud)
    into `native-preparation\redteam.py`, selecting **Foundry Agent**, not a model-only target.
@@ -123,9 +127,9 @@ A **red-team scan** tries prompts designed to make the agent behave unsafely.
 When reporting a success percentage, state how many attempts Foundry counted
 and how it treated failed attempts. Another version's scan does not test this candidate.
 
-## 6. Retrieve, inspect and distribute the outputs
+## 6. Retrieve and inspect the outputs
 
-**Why keep these files:** learners need the actual scores and explanations,
+**Why keep these files:** you show participants the actual scores and explanations,
 and a way to see which agent and requests produced them. A screenshot of an
 overall pass cannot answer those questions.
 
@@ -134,7 +138,7 @@ overall pass cannot answer those questions.
 2. Retrieve every page of `output_items.list`.
 3. Check that every submitted item has a result. Read scores, reasons and errors;
    do not treat failed or canceled runs as complete.
-4. Under `.local\instructor`, create `calibration`, `domain-safety`, `conversation` and `redteam`.
+4. In your rehearsal folder, create `calibration`, `domain-safety`, `conversation` and `redteam`.
 5. Save each check's files, as returned by Foundry, in its matching folder.
 
 | Filename | Content |
@@ -150,6 +154,5 @@ For scans returning different files, keep those names and list them in `review.m
 **Missing workflow:** create only `review.md` stating **Not assessed**, the
 missing check and the person who will prepare it. Do not invent JSON or scores.
 
-Before [packaging](instructor-setup.md#instructoradmin-package-and-rehearse-the-learner-bundle),
-remove sensitive information and check that participants can open the links.
-Keep project-specific results in the restricted workshop folder, not public GitHub.
+Before class, remove sensitive information and check that the links open with
+participant access. Keep project-specific results on your computer, not in public GitHub.

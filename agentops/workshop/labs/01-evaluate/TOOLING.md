@@ -9,10 +9,24 @@ It is not additional participant pre-work.
 Verified against the released **AgentOps Accelerator v0.15.0** docs, installed
 source and public CLI help on September 6, 2026.
 
+**On this page**
+
+- [Selected supported public workflow](#selected-supported-public-workflow)
+- [Tool roles and scenario design](#tool-roles-and-scenario-design)
+- [Exact evaluator and gate scope](#exact-evaluator-and-gate-scope)
+- [Deliberate boundaries](#deliberate-boundaries)
+- [Why not azd evaluation recipes?](#why-not-azd-evaluation-recipes)
+- [Reproducible offline validation](#reproducible-offline-validation)
+- [Host compatibility and installation](#host-compatibility-and-installation)
+- [Validation evidence](#validation-evidence)
+- [Versioned sources](#versioned-sources)
+
 ## Selected supported public workflow
 
 Use the [released hosted-agent tutorial](https://github.com/Azure/agentops/blob/v0.15.0/docs/tutorial-hosted-agent.md)
 and its documented server-side evaluation option:
+
+**What this block does:** shows the order of the lab's evaluation commands. Not a command to run.
 
 ```text
 agentops init -> agentops init show -> agentops eval analyze
@@ -42,7 +56,7 @@ Accelerator. The [native hosted-agent workflow](https://learn.microsoft.com/azur
 also uses core `azd` commands, including `azd deploy`; not every deployment
 step is an `azd ai agent` command. Evaluate uses an existing deployment; Ship
 practices deployment and verification with the same source, tools, dataset and
-criteria. Environment preparation belongs in [instructor setup](../../pre-work/instructor-setup.md).
+criteria. Environment preparation belongs in the [technical setup](../../pre-work/technical-setup.md).
 
 The shared help desk implementation follows the public Foundry Responses
 local-tools sample. Synthetic articles and simulated tickets keep the exercise
@@ -54,7 +68,7 @@ Native supplements broaden the release review without disguising CLI limits.
 
 ### Course preparation scope
 
-Evaluate participants need Python 3.11, Azure CLI and the evaluation CLI, or a
+Evaluate participants need Python 3.11, Azure CLI and the AgentOps Accelerator CLI, or a
 prepared machine. An existing text editor is sufficient. VS Code and Foundry
 Toolkit are not evaluation dependencies; no VS Code extension is required.
 
@@ -63,7 +77,7 @@ assignment, access and rehearsal. First-time workspace creation, hosted-agent
 deployment and native supplement authoring are separate paths, not tasks to
 repeat before every class. The former handoff JSON template is no longer used.
 
-The [first-time instructor route](../../pre-work/instructor-setup.md) now orders
+The [first-time instructor route](../../pre-work/technical-setup.md) now orders
 machine preparation, [Foundry environment setup](../../pre-work/foundry-environment.md),
 agent deployment, evaluation setup, packaging and participant rehearsal.
 The environment guide covers new and existing projects; local CLI installation
@@ -167,6 +181,8 @@ build of an unpublished extension would establish public availability.
 
 From the repository root, with the pinned environment installed:
 
+**What this block does:** runs the tool's automated tests locally, without calling Foundry.
+
 ```powershell
 agentops\workshop\labs\01-evaluate\.venv\Scripts\python.exe -m unittest discover `
   -s agentops\workshop\labs\01-evaluate\scripts -p test_public_cli.py -v
@@ -244,7 +260,7 @@ Native instructor sample dependencies have their own
 sample must be adapted and its automatic cleanup deferred before use.
 None of these samples is the learner's main evaluation path.
 
-## Authoring validation status
+## Validation evidence
 
 ### End-to-end setup review
 
@@ -255,7 +271,7 @@ The revised route separates these stages and places the participant rehearsal
 after packaging. Baseline/candidate `tool-traces.md` files now belong to the
 main evaluation evidence, independently of unfinished safety supplements.
 Moving azd endpoints are distinguished from the versioned references the
-evaluation CLI parses.
+AgentOps Accelerator CLI parses.
 
 The added environment guide covers portal project creation, two named model
 deployments, Application Insights, project/user permissions and separate az/azd
@@ -333,7 +349,7 @@ No cloud evaluation or deployment was performed.
 The final beginner walkthrough and pre-work split passed all 11 offline tests
 again, parsed 23 PowerShell blocks and resolved 117 relative links/anchors across
 17 Markdown files. Participant preparation is now a short landing page;
-technical preparation moved to `pre-work/instructor-setup.md`, with legacy
+technical preparation moved to `pre-work/technical-setup.md`, with legacy
 anchors retained. The walkthrough removes learner JSON-parsing commands and the missing-baseline bypass,
 prints the results folder, keeps the workshop instructions open during file
 review, and makes report regeneration optional. Instructor setup, native
@@ -397,7 +413,7 @@ Real baseline/candidate runs, native supplementary evidence, credentials,
 permissions, quota, service compatibility and timed rehearsal remain unverified.
 The repository includes authored teaching inputs and clearly labelled offline
 fixtures, not completed instructor cloud evidence or passing baselines.
-Complete the [instructor readiness gate](../../pre-work/instructor-setup.md#readiness-gate) before
+Complete the [instructor readiness gate](../../pre-work/technical-setup.md#readiness-gate) before
 advertising hands-on readiness.
 
 ## Versioned sources

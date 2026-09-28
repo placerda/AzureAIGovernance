@@ -3,64 +3,42 @@
 ![Every score has a story. Keep the right evidence. Open the files that show what was tested and what happened.](../../../../assets/banners/evidence.png)
 
 Use this guide to find the right report and understand where its results came
-from. Instructors prepare the package using [their setup guide](../../../../pre-work/instructor-setup.md).
-Authors track unfinished work in [TOOLING.md](../../TOOLING.md#authoring-validation-status).
+from. The repository supplies the instructions and test inputs, not evaluation
+results: every result comes from a run in the shared Foundry project.
+Authors track unfinished work in [TOOLING.md](../../TOOLING.md#validation-evidence).
 
-## Where to open the supplied evidence
+## Who produces which results
 
-Follow [participant extraction](../../../../pre-work/README.md#2-participant-initialize-the-supported-evaluation-workspace)
-for `agentops-evaluate-workspace.zip` from the invitation's **Workshop files**.
 All paths below are relative to `agentops\workshop\labs\01-evaluate`.
 
-The repository supplies these instructions and teaching inputs, not a finished
-package of actual evaluation results.
+| Results | Produced by | Where |
+| --- | --- | --- |
+| Baseline and candidate evaluations | Each participant, in [lab step 3](../../lab.md#3-run-the-supported-public-command) | `.local\runs\<timestamp>\baseline` and `candidate` |
+| Tool traces for `password-basic` and `vpn-ticket` | Each participant, from their own run in lab step 4 | Foundry **Traces** |
+| The same evaluations and traces, as a fallback | The instructor, in [rehearsal](../../../../pre-work/technical-setup.md#3-instructoradmin-rehearse-the-public-cli-and-retain-the-baseline) | Shown on screen, labelled **instructor demonstration** |
+| Additional Foundry checks | The instructor, using [the additional checks guide](../../../../pre-work/native-evidence.md) | Shown on screen in lab steps 5 and 6 |
 
-After extraction, the same ZIP provides `.local\README.md` with a short
-description of your lab and `.local\workspace` with prepared evaluation settings. Follow
-[bundle preparation and rehearsal](../../../../pre-work/instructor-setup.md#instructoradmin-package-and-rehearse-the-learner-bundle)
-for the files that belong in the ZIP. Participants open the supplied files;
-they do not fill in configuration or audit forms.
+Each run folder contains the CLI's `results.json`, `report.md`,
+`cloud_evaluation.json` and `cloud_output_items.json`. Additional Foundry
+checks normally save `definition.json`, `run.json` and `output-items.json`
+without changing Foundry's format. Red-team filenames may differ; follow `review.md`.
 
-In your editor, expand `.local\instructor`:
-
-| Open | Purpose |
-| --- | --- |
-| `baseline\report.md` | Results from the earlier version, for comparison |
-| `candidate\report.md` | Saved candidate results to use if your run cannot finish |
-| `baseline\tool-traces.md` and `candidate\tool-traces.md` | Actual tool records for the password and VPN cases in those evaluations |
-| Each extra check's `review.md` | Which run and files to read, and what was not tested |
-
-The JSON beside a report contains its details. Additional Foundry checks normally
-save `definition.json`, `run.json` and `output-items.json` without changing
-Foundry's format. Red-team filenames may differ; follow `review.md`.
-
-If a file or report link is unavailable, ask the instructor for the missing file
-or permission. Do not replace it with `scripts/fixtures/offline-results.json`;
+If a report link is unavailable, ask the instructor for the missing
+permission. Do not replace it with `scripts/fixtures/offline-results.json`;
 that fixture only tests report rendering and is not a workshop result.
 
 ## Main evaluation results
 
-**MATERIAL AUTHOR:** Run [both evaluations](../../../../pre-work/instructor-setup.md#3-instructoradmin-rehearse-the-public-cli-and-retain-the-baseline),
-then [package their saved folders](../../../../pre-work/instructor-setup.md#instructoradmin-package-and-rehearse-the-learner-bundle)
-as `instructor/baseline/` and `instructor/candidate/`.
-Each must contain the **unmodified** Accelerator-produced `results.json`,
-`report.md`, `cloud_evaluation.json` and `cloud_output_items.json`.
-Keep the code, settings, test requests, agent version, evaluator and model versions,
-and terminal logs used for these runs together. Remove sensitive information
-before sharing; never include passwords or keys.
+**INSTRUCTOR:** in rehearsal, run [both evaluations](../../../../pre-work/technical-setup.md#3-instructoradmin-rehearse-the-public-cli-and-retain-the-baseline)
+and keep the **unmodified** CLI output. Record in `tool-traces.md` beside each
+report the request text, agent version, trace link/ID and UTC time range for
+`password-basic` and `vpn-ticket`, with their actual tool arguments and outputs.
+The records must come from those evaluations, not separate deployment tests.
+Keep these results on your computer; remove sensitive information before
+showing them and never include passwords or keys.
 
-Each folder also contains `tool-traces.md`: the request text, agent version,
-trace link/ID and UTC time range for `password-basic` and `vpn-ticket`, with
-their actual tool arguments and outputs. The records must come from those
-evaluations, not separate deployment tests. They remain part of the main
-evidence even when supplementary safety scoring is **Not assessed**.
-
-**INSTRUCTOR:** reuse this package for the same assignment. Regenerate changed
-evidence; do not repeat first-time authoring for every class.
-
-**PARTICIPANT:** Use the supplied baseline and review the candidate bundle only
-when directed. Label pre-completed outputs **instructor evidence review**, not a
-live learner result. Keep participant outputs separate from the instructor's files.
+**PARTICIPANT:** your own runs are the results you review. When the instructor
+shows theirs instead, label them **instructor demonstration**, not your result.
 
 Check all eight requests have two valid scores each. A good average or exit
 code `0` does not prove that every result is present.
@@ -70,7 +48,7 @@ Participants report differences rather than edit settings to make them match.
 
 ## Additional Foundry checks
 
-Keep these in separate `.local/instructor/` subfolders. They do not change
+The instructor keeps these in separate subfolders of their rehearsal folder. They do not change
 the main `results.json` or the CLI's pass/fail decision:
 
 | Folder | What the files must show | Author reference |
@@ -99,6 +77,5 @@ version's scan as proof that this candidate passed.
 
 If evidence is unavailable, mark it **not assessed** in the decision and name
 the person who will provide it. Missing results are not a pass.
-Remove sensitive information before
-[publishing the named ZIP and invitation](../../../../pre-work/instructor-setup.md#publish-the-workshop-files-and-invitation);
-do not commit tenant-specific output or production data.
+Remove sensitive information before showing results; do not commit
+tenant-specific output or production data.

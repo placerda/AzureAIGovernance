@@ -18,10 +18,22 @@ are good enough to release.
 and reports showing what passed, failed or still needs investigation.
 
 **Prerequisite:** Complete [participant pre-work](../../pre-work/README.md)
-and use the prepared settings and result files supplied by the instructor.
+and have the invitation's **Evaluate settings** at hand.
 Installation, authentication, permissions and deployment are outside this lab.
 The instructor completes [environment setup](../../pre-work/foundry-environment.md)
 and [agent deployment](../shared/helpdesk-agent/README.md) before you start.
+
+**On this page**
+
+- [Scenario](#scenario)
+- [Tool roles](#tool-roles)
+- [1. Create your workspace and confirm the agent versions](#1-create-your-workspace-and-confirm-the-agent-versions)
+- [2. Review the dataset and criteria](#2-review-the-dataset-and-criteria)
+- [3. Evaluate the baseline and the candidate](#3-evaluate-the-baseline-and-the-candidate)
+- [4. Inspect the report and actual interactions](#4-inspect-the-report-and-actual-interactions)
+- [5. Supplement: domain rubric and safety](#5-supplement-domain-rubric-and-safety)
+- [6. Supplement: conversation and red teaming](#6-supplement-conversation-and-red-teaming)
+- [7. Decide and hand off to Ship](#7-decide-and-hand-off-to-ship)
 
 ## Scenario
 
@@ -63,80 +75,89 @@ a **scoring model**, also called a **judge**, to assign scores.
 
 Use any text editor. The steps illustrate VS Code; no extension is needed.
 
-## 1. Start the workspace and confirm the exact candidate
+<a id="1-start-the-workspace-and-confirm-the-exact-candidate"></a>
 
-Use `agentops-evaluate-workspace.zip`, already extracted during
-[Evaluate pre-work](../../pre-work/README.md#2-participant-initialize-the-supported-evaluation-workspace).
-You do not fill in a settings template or collect technical metadata.
+## 1. Create your workspace and confirm the agent versions
 
-### Open your assignment
+**Why this step:** the AgentOps Accelerator CLI needs to know which Foundry project to
+use, which two agent versions to compare and which model scores the answers.
+You enter those four values once; the block below writes them into your
+**workspace**, a local folder with your settings and test requests.
 
-1. In VS Code, open `agentops\workshop\labs\01-evaluate\.local\README.md`.
-2. Read the project, candidate version and scoring-model assignment.
-3. Open its **Foundry project** link.
+The invitation's **Evaluate settings** section lists the four values:
 
-`.local` is a folder on your computer. Its `workspace` subfolder contains the
-prepared settings and requests.
+| Invitation value | What it identifies |
+| --- | --- |
+| Project endpoint | The shared Foundry project, as a URL ending in `/api/projects/NAME` |
+| Baseline agent | The earlier agent version, as a URL ending in `/agents/NAME/versions/NUMBER` |
+| Candidate agent | The version under review, in the same format |
+| Scoring-model deployment | The model deployment that scores the answers |
 
-**Missing file:** return to pre-work or reply to the invitation's organizer.
-Do not create replacement settings.
-
-### Start PowerShell
-
-**Why this startup check:** make sure the commands use the intended agent and
-scoring model before you spend money on an evaluation.
+### Start PowerShell and create the workspace
 
 1. In File Explorer, open `agentops\workshop\labs\01-evaluate` inside the repository.
 2. Type `powershell` in the address bar and press Enter.
-3. Paste and run the entire startup block below.
+3. Paste and run the entire block below. Paste each value from the invitation when prompted.
+
+**What this block does:** creates your evaluation workspace from the invitation values. Local only.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
 $EvaluateRoot = (Get-Location).Path
 $LocalRoot = Join-Path $EvaluateRoot '.local'
 $Workspace = Join-Path $LocalRoot 'workspace'
-$InstructorRoot = Join-Path $LocalRoot 'instructor'
 $AgentOps = Join-Path $EvaluateRoot '.venv\Scripts\agentops.exe'
-Set-Location $Workspace
-if (-not (Test-Path '.agentops\.env')) { throw 'Prepared settings are missing. Ask the instructor.' }
-if ((Test-Path '.azure') -or (Test-Path '.env')) { throw 'Unexpected environment files. Ask for a clean workshop bundle.' }
+$ProjectEndpoint = (Read-Host 'Project endpoint').Trim()
+$BaselineAgent = (Read-Host 'Baseline agent').Trim()
+$CandidateAgent = (Read-Host 'Candidate agent').Trim()
+$ScoringModel = (Read-Host 'Scoring-model deployment').Trim()
 'AGENTOPS_AGENT','AZURE_AI_FOUNDRY_PROJECT_ENDPOINT','AZURE_OPENAI_DEPLOYMENT','AZURE_AI_MODEL_DEPLOYMENT_NAME' |
     ForEach-Object { Remove-Item "Env:$_" -ErrorAction SilentlyContinue }
+if (-not (Test-Path $Workspace)) {
+    New-Item -ItemType Directory -Force $Workspace | Out-Null
+    Copy-Item (Join-Path $EvaluateRoot 'assets\turns.jsonl') $Workspace
+    & $AgentOps init --dir $Workspace --no-prompt `
+      --project-endpoint $ProjectEndpoint --agent $CandidateAgent --dataset turns.jsonl
+    if ($LASTEXITCODE -ne 0) { throw 'Workspace creation failed. Check the four values, then ask the instructor.' }
+    (Get-Content (Join-Path $EvaluateRoot 'assets\agentops.yaml')) -replace '^agent: .*', "agent: $CandidateAgent" |
+        Set-Content (Join-Path $Workspace 'agentops.yaml')
+    New-Item -ItemType Directory -Force (Join-Path $Workspace '.agentops') | Out-Null
+    Set-Content (Join-Path $Workspace '.agentops\.env') @(
+        "AZURE_AI_FOUNDRY_PROJECT_ENDPOINT=$ProjectEndpoint",
+        "AZURE_OPENAI_DEPLOYMENT=$ScoringModel"
+    )
+}
+Set-Location $Workspace
 & $AgentOps init show
-if ($LASTEXITCODE -ne 0) { throw 'Cannot read prepared settings. Ask the instructor.' }
+if ($LASTEXITCODE -ne 0) { throw 'Cannot read the workspace settings. Ask the instructor.' }
 Select-String -Path '.agentops\.env' -Pattern '^AZURE_OPENAI_DEPLOYMENT='
 ```
 
-`init show` displays the prepared project and agent settings.
-The final line displays the scoring-model assignment separately.
-Nothing is initialized, deployed or submitted.
+The block creates `.local\workspace` the first time you run it: it copies the
+test requests and settings from `assets`, then fills in your four values.
+If the folder already exists, it keeps it and only displays its settings.
+Nothing is deployed or submitted, and no cost is incurred.
 
 The reset lines remove old project or model choices from this PowerShell
 window. They do not delete saved sign-ins or change your computer's settings.
 
-#### Check the three displayed values
+#### Check the displayed values
 
-Keep `.local\README.md` open beside PowerShell:
+Keep the invitation open beside PowerShell:
 
-1. Find `AZURE_AI_FOUNDRY_PROJECT_ENDPOINT` in the output. Compare its `value` URL
-   with **Project endpoint** in the README, not the browser link labelled **Foundry project**.
-2. Find `agent:`. The name after `/agents/` and number after `/versions/` must
-   match **Candidate name and version** in the README.
-3. On the final `AZURE_OPENAI_DEPLOYMENT=` line, compare the value after `=`
-   with **Scoring-model deployment** in the README.
+1. Find `AZURE_AI_FOUNDRY_PROJECT_ENDPOINT` in the output. Its `value` must match **Project endpoint**.
+2. Find `agent:`. It must match **Candidate agent**, including the number after `/versions/`.
+3. The final `AZURE_OPENAI_DEPLOYMENT=` line must match **Scoring-model deployment**.
 
-**Expected:** all three match. If a value or README label is missing, or any
-value differs, ask for a corrected package before running an evaluation.
+**A value is wrong?** Delete the `.local\workspace` folder and run the block
+again with the correct values. Do not edit the settings to point at another project.
 
 `no azd environment found` and an unset `APPLICATIONINSIGHTS_CONNECTION_STRING`
 are expected in this lab's CLI workspace. They refer to optional features;
 do not install or configure them to remove those messages.
 
-Keep this window open. If you close it, repeat startup, not the evaluation.
-Before reviewing saved results, run `$RunRoot = Read-Host 'Paste the results folder printed by your run'`
-and paste the folder path you kept from step 3.
-
-Do not change projects or settings to make a mismatch disappear.
+Keep this window open. If you close it, run the block again with the same values:
+the later steps use the variables it defines.
 
 ## 2. Review the dataset and criteria
 
@@ -163,7 +184,7 @@ your review; the CLI does not automatically check them.
 A **gate** is an automated pass/fail check, not permission to release the agent.
 
 **Expected result:** eight lines and the two configured judges below. If the
-files differ from the supplied assignment, stop rather than evaluating another dataset.
+files differ from the lab's `assets` folder, delete `.local\workspace` and rerun step 1.
 
 The [Foundry evaluators](https://learn.microsoft.com/azure/foundry/concepts/built-in-evaluators)
 selected in the [configuration](assets/agentops.yaml) check **coherence**
@@ -193,32 +214,60 @@ Predict how the two bugs might affect the scores. Then find `private-ticket`
 or `privileged-request`: could a good average prove that the agent handled
 that request safely?
 
-## 3. Run the supported public command
+<a id="3-run-the-supported-public-command"></a>
+
+## 3. Evaluate the baseline and the candidate
 
 ![Ready to press Run? One run is enough to start. Cloud runs cost money; check the results before trying again.](../../assets/banners/ready-to-run.png)
 
-**This uses paid Azure services:** the agent, model calls and evaluation can incur charges.
+**This uses paid Azure services:** the agent, model calls and evaluations can incur charges.
 Wait for the instructor's go-ahead.
 
-**What this run gives you:** fresh answers and scores from the candidate,
-plus a comparison with the earlier version.
+**Why two evaluations:** this is how a team checks a change in practice. First
+evaluate the version already in use, the **baseline**, to get the reference
+scores. Then evaluate the new version, the **candidate**, with the same
+requests and scoring rules, and compare the two.
 
-Run this block **once**, in the PowerShell window from step 1.
-It reads `.local\instructor\baseline\results.json` for that comparison and saves
-your new results in a separate folder.
+Other participants run their evaluations against the same agent versions at the
+same time. Each run is separate in Foundry and saves its results in your own
+`.local\runs` folder, so they do not overwrite each other.
+
+### Evaluate the baseline
+
+Run this block **once**, in the PowerShell window from step 1:
+
+**What this block does:** evaluates the baseline version in Foundry and saves its scores. Uses model calls and takes a few minutes.
 
 ```powershell
-$BaselineResults = Join-Path $InstructorRoot 'baseline\results.json'
-if (-not (Test-Path $BaselineResults)) { throw 'Reviewed baseline is missing. Ask the instructor before submission.' }
-$RunName = 'candidate-' + [guid]::NewGuid().ToString('N')
-$RunsRoot = Join-Path $LocalRoot 'runs'
-New-Item -ItemType Directory -Force $RunsRoot | Out-Null
-$RunRoot = Join-Path $RunsRoot $RunName
-if (Test-Path $RunRoot) { throw 'Output folder is already used. Preserve earlier evidence.' }
+$RunsRoot = Join-Path $LocalRoot ('runs\' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+$BaselineRun = Join-Path $RunsRoot 'baseline'
+$RunRoot = Join-Path $RunsRoot 'candidate'
+New-Item -ItemType Directory -Path $RunsRoot | Out-Null
 Set-Location $Workspace
-Start-Transcript -Path (Join-Path $RunsRoot "$RunName-terminal.txt") | Out-Null
+Start-Transcript -Path (Join-Path $RunsRoot 'baseline-terminal.txt') | Out-Null
+& $AgentOps eval run --config agentops.yaml --agent $BaselineAgent --output $BaselineRun
+$baselineExit = $LASTEXITCODE
+Stop-Transcript | Out-Null
+$baselineExit
+if ($baselineExit -notin @(0,2)) { throw 'Run error, not a quality verdict. Follow the recovery paragraph before proceeding.' }
+$BaselineRun
+```
+
+`--agent` sends the requests to the baseline version instead of the candidate
+named in `agentops.yaml`. Everything else stays the same.
+
+**Expected result:** the last line prints the baseline results folder.
+
+### Evaluate the candidate and compare
+
+Run this block **once**, after the baseline finishes:
+
+**What this block does:** evaluates the candidate the same way and compares it with the baseline. Uses model calls.
+
+```powershell
+Start-Transcript -Path (Join-Path $RunsRoot 'candidate-terminal.txt') | Out-Null
 & $AgentOps eval run --config agentops.yaml --output $RunRoot `
-  --baseline $BaselineResults
+  --baseline (Join-Path $BaselineRun 'results.json')
 $evalExit = $LASTEXITCODE
 Stop-Transcript | Out-Null
 $evalExit
@@ -226,20 +275,23 @@ if ($evalExit -notin @(0,2)) { throw 'Run error, not a quality verdict. Follow t
 $RunRoot
 ```
 
-This [Foundry evaluation](https://learn.microsoft.com/azure/foundry/observability/how-to/cloud-evaluation-targets)
+`--baseline` compares the candidate's scores with the baseline results you just
+saved and adds the differences to the candidate report.
+
+Each [Foundry evaluation](https://learn.microsoft.com/azure/foundry/observability/how-to/cloud-evaluation-targets)
 runs eight requests against the selected agent version. Foundry keeps responses,
 scores, reasons and errors in the project.
 
 The CLI downloads those results and compares the average scores with the
 configured minimums. Passing does not approve a release.
 
-Foundry saves the evaluation settings and this run's results. The command does
+Foundry saves the evaluation settings and each run's results. The commands do
 not create new infrastructure or register a reusable dataset.
 
-**Expected result:** the last line prints your new results folder's full path.
-Keep it for step 4. This recipe does not overwrite earlier results.
-Executing the block again submits another paid run, even with the same
-requests. Keep the terminal log private; remove sensitive information before sharing it.
+**Expected result:** the last line prints the candidate results folder.
+Keep both folders for step 4. Running a block again submits another paid run,
+even with the same requests, and uses a new folder. Keep the terminal logs
+private; remove sensitive information before sharing them.
 
 ### Recovery after timeout or failure
 
@@ -247,14 +299,14 @@ The CLI checks for completion for approximately ten minutes. Foundry may still
 be working when that wait ends. **Do not run the command again just because it timed out.**
 
 1. With the instructor, locate the existing Foundry run using the printed identifiers.
-2. For the remaining exercise, run
-   `$RunRoot = Join-Path $InstructorRoot 'candidate'` in the same terminal.
-3. Continue to step 4 using the instructor's saved results.
-   Label this **instructor evidence review**, not your own completed evaluation.
+2. Follow the rest of the lab on the instructor's screen, using the instructor's
+   own evaluation of the same versions. Label your notes **instructor demonstration**,
+   not your own completed evaluation.
 
-**Instructor results missing:** stop and ask for the package.
-The CLI has no command to resume this run or download it later.
+The CLI has no command to resume a run or download it later.
 Creating a report requires a complete local `results.json`.
+
+Both commands return an exit code:
 
 | Exit code | Meaning |
 | --- | --- |
@@ -326,7 +378,7 @@ Read that entry's `response`, `metrics` and `error`.
 Match each result to the request's ID or text, not its position in the file.
 Baseline and candidate results can appear in different orders.
 
-In the **Foundry evaluation page**, or the matching export provided by the instructor:
+In the **Foundry evaluation page**:
 
 1. Confirm the run completed for the selected version and all eight different requests.
 2. Check that every request has both scores, within the expected scale, and no
@@ -364,12 +416,9 @@ right tool ran or sent it to the correct team.
 If the details panel shows raw fields, arguments are under
 `gen_ai.tool.call.arguments` and output under `gen_ai.tool.call.result`.
 
-**No trace available from your result?** Open
-`.local\instructor\candidate\tool-traces.md` and follow the two supplied trace
-links. Compare with `baseline\tool-traces.md`.
-Label this **instructor evidence review**: these traces are from the saved
-evaluations, not your new run. If a link opens a list, search its **Trace ID**
-within the supplied **UTC time range**. This review does not require the safety supplement.
+**No trace available from your result?** Follow the instructor, who opens the
+same two traces from their own evaluation of these versions. Label this
+**instructor demonstration**: the traces are not from your run.
 
 **Use actual execution records:** a `tool_calls` field in `results.json` can
 contain copied test data, not executed calls. This dataset does not supply that
@@ -378,6 +427,8 @@ field. Without a trace or stored tool result, the action is **not verified**.
 **Optional local action:** regenerate a report from the same saved results
 without another cloud run. Skip this if you only need to read the existing
 report. Use the same PowerShell window:
+
+**What this block does:** rebuilds the report from saved results, without calling Foundry.
 
 ```powershell
 $ReviewReport = Join-Path $RunRoot ('review-' + [guid]::NewGuid().ToString('N') + '.md')
@@ -391,13 +442,13 @@ or apply new thresholds you edited into `agentops.yaml`.
 
 ## 5. Supplement: domain rubric and safety
 
-The next two sections use additional Foundry results supplied by the instructor.
-They cover checks beyond coherent wording and similar answers, but do not
-change the CLI's pass/fail result.
+Steps 5 and 6 cover checks beyond coherent wording and similar answers. They
+do not change the CLI's pass/fail result. You read the test material in
+`assets`; the instructor then shows the matching Foundry results on screen,
+from evaluations they ran in the same project.
 
-**Read each `review.md` first.** If it says **Not assessed**, note the missing
-check and its owner, then skip that comparison. Do not look for result JSON or
-run links for a check that did not run.
+If the instructor says a check was not run, note it as **Not assessed** and
+agree who owns it. Missing results are never a pass.
 
 ### Compare the rubric with human judgment
 
@@ -409,10 +460,8 @@ evaluator recognizes the same good and bad behavior a human reviewer sees.
 
 1. Read [the rubric](assets/rubric.json) and [three calibration examples](assets/calibration.json).
 2. Decide whether you agree with each `human_support_outcome` rating.
-3. In VS Code, expand `agentops\workshop\labs\01-evaluate\.local\instructor`.
-4. Open `calibration\review.md`, then its listed `definition.json`, `run.json`
-   and `output-items.json`.
-5. Compare the real Foundry scores with the human ratings for the wrong queue,
+3. Follow the instructor's demonstration of the calibration evaluation in Foundry.
+4. Compare the real Foundry scores with the human ratings for the wrong queue,
    unsupported guarantee and missing source.
 
 **Check:** these three answers were written for teaching, not generated by
@@ -424,9 +473,8 @@ registered evaluator during this comparison.
 
 ### Inspect candidate safety evidence
 
-1. In the same instructor folder, open `domain-safety\review.md`.
-2. Follow its run/interaction links and listed output files.
-3. Read which evaluator scored which candidate responses, what its scores mean,
+1. Follow the instructor's demonstration of the safety evaluation for the candidate.
+2. Read which evaluator scored which candidate responses, what its scores mean,
    and whether any response failed to receive a score.
 
 **Limit:** a violence check cannot tell you whether the agent protected private
@@ -442,7 +490,7 @@ Missing evidence means **not assessed**, not a pass.
 that did not solve the user's problem.
 
 1. Read the [authored repeated-reset conversation](assets/conversations.jsonl).
-2. In the instructor folder from step 5, open `conversation\review.md` and its listed output items.
+2. Follow the instructor's demonstration of the conversation evaluation.
 3. Compare the last answer with the whole journey and the conversation-level scores.
 
 **Check:** this is one four-message teaching example, not a conversation with
@@ -453,18 +501,17 @@ actually help the user, or just sound polite?
 
 **Red teaming** tests adversarial attempts to make the agent behave unsafely.
 
-1. In the same folder, open `redteam\review.md`.
-2. Follow its exact scan export/link, not the project's most recent scan.
-3. Read what the attacks tried to make the agent do and which attempts succeeded or failed to run.
-4. Before quoting a success percentage, check how many attempts Foundry actually counted.
-5. Discuss fixes and risks the scan did not test.
+1. Follow the instructor's demonstration of the red-team scan for this candidate
+   version, not the project's most recent scan.
+2. Read what the attacks tried to make the agent do and which attempts succeeded or failed to run.
+3. Before quoting a success percentage, check how many attempts Foundry actually counted.
+4. Discuss fixes and risks the scan did not test.
 
 **Check:** the scan identifies this candidate version. Another version's scan
 does not certify it.
 
-The [result-file guide](assets/evidence/README.md) explains which files to use
-and where their results came from. Mark missing checks **Not assessed** and
-agree who will provide them.
+The [results guide](assets/evidence/README.md) explains which results you
+generate yourself and which the instructor demonstrates.
 
 ## 7. Decide and hand off to Ship
 
@@ -478,7 +525,7 @@ There is no separate worksheet to complete.
    passing average scores alone do not establish readiness.
 3. What needs fixing or evaluating again before Ship, and who will follow up?
 
-Keep the README, settings, test requests and original reports together for Ship.
+Keep your workspace and `.local\runs` folder together for Ship.
 Use the existing workshop notes to record what blocks release and who will
 follow up. You do not need to copy reports into a new document.
 
