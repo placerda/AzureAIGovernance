@@ -9,15 +9,13 @@ How to teach each module is in the [instructor guide](../instructor-guide/README
 
 **On this page**
 
-| Order | Action | You finish with |
-| --- | --- | --- |
-| 1 | [Get the files and tools](#1-get-the-files-and-tools) | A clone of the course repository and a prepared computer |
-| 2 | [Create or reuse the Foundry environment](#2-create-or-reuse-the-foundry-environment) | Project, models, monitoring connection and access |
-| 3 | [Deploy the help desk agent](#3-deploy-the-help-desk-agent) | Working baseline and candidate versions |
-| 4 | [Prepare your module](#4-prepare-your-module) | The results and files your module needs; for Evaluate, also a model-capacity plan |
-| 5 | [Invite and rehearse](#5-invite-and-rehearse) | A participant-tested invitation |
-
-At the end: [Final check before the workshop](#final-check-before-the-workshop) and [Retention and cleanup](#retention-and-cleanup).
+1. [Get the files and tools](#1-get-the-files-and-tools): clone the course repository and prepare your computer
+2. [Create or reuse the Foundry environment](#2-create-or-reuse-the-foundry-environment): project, models, monitoring and access
+3. [Deploy the help desk agent](#3-deploy-the-help-desk-agent): working baseline and candidate versions
+4. [Prepare your module](#4-prepare-your-module): the results and files each module needs
+5. [Invite and rehearse](#5-invite-and-rehearse): a participant-tested invitation
+6. [Final check before the workshop](#final-check-before-the-workshop): decide whether each module runs as a lab or a discussion
+7. [Retention and cleanup](#retention-and-cleanup): remove workshop resources after the retention date
 
 **Project and agent already deployed for an earlier workshop?** Reuse them. Start with [access and rehearsal](#instructoradmin-shared-environment-and-permissions).
 Do not redeploy agents just to teach again.

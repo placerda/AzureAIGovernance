@@ -39,7 +39,8 @@ materials.
 - Ground product claims in current first-party Microsoft documentation.
 - Use descriptive links that identify their destination.
 - Give pages of about 200 lines or more an **On this page** index after the
-  introduction, linking each `##` section. An existing step table may serve as the index.
+  introduction, linking each `##` section. Use a light numbered list with a short
+  description per item, not a table.
 - Present AgentOps Accelerator as a practical reference implementation alongside
   native Microsoft Foundry capabilities.
 - Lead workshop explanations with Microsoft Foundry and the learning activity.
