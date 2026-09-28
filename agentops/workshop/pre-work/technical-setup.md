@@ -239,30 +239,45 @@ Use the PowerShell window from [step 1](#1-get-the-files-and-tools) in which
 you also ran [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in).
 If it closed, repeat both.
 
-**What this block does:** clones the empty class repository to `agentops-ship-class` in your user folder, copies the Ship starting files, the help desk agent code and the Evaluate test requests into it, sets the project endpoint and pushes it to `main`.
+**a) Clone the empty repository.**
+
+**What this block does:** asks for the empty class repository's URL and clones it to `agentops-ship-class` in your user folder.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
 if (-not $RepoRoot -or -not $ProjectEndpoint) { throw 'Run step 1 and environment setup step 5 in this window first.' }
-$ClassUrl = (Read-Host 'Empty class repository URL').Trim()
 $Class = Join-Path $HOME 'agentops-ship-class'
-git clone $ClassUrl $Class
-if ($LASTEXITCODE -ne 0) { throw 'Clone failed. Check the URL and your sign-in.' }
+git clone (Read-Host 'Empty class repository URL').Trim() $Class
+```
+
+**Expected result:** Git warns that you cloned an empty repository. That is
+correct.
+
+**b) Add the starting files.**
+
+**What this block does:** copies the Ship starting files, the help desk agent code and the Evaluate test requests into the clone, then writes your project endpoint in `agentops.yaml`.
+
+```powershell
 $Labs = Join-Path $RepoRoot 'agentops\workshop\labs'
-Get-ChildItem -Force (Join-Path $Labs '02-ship\class-repo') |
-    Where-Object Name -ne 'README.md' | Copy-Item -Destination $Class -Recurse -Force
-foreach ($file in 'main.py','tools.py','instructions.md','knowledge.json','requirements.txt') {
-    Copy-Item (Join-Path $Labs "shared\helpdesk-agent\$file") (Join-Path $Class "src\helpdesk\$file")
-}
-Copy-Item (Join-Path $Labs '01-evaluate\assets\turns.jsonl') $Class
-$Config = Join-Path $Class 'agentops.yaml'
-(Get-Content $Config) -replace 'FOUNDRY_ENDPOINT', $ProjectEndpoint | Set-Content $Config
+Get-ChildItem -Force "$Labs\02-ship\class-repo" | Where-Object Name -ne 'README.md' |
+    Copy-Item -Destination $Class -Recurse -Force
+Copy-Item "$Labs\shared\helpdesk-agent\*" "$Class\src\helpdesk" `
+    -Include main.py, tools.py, instructions.md, knowledge.json, requirements.txt
+Copy-Item "$Labs\01-evaluate\assets\turns.jsonl" $Class
+(Get-Content "$Class\agentops.yaml") -replace 'FOUNDRY_ENDPOINT', $ProjectEndpoint |
+    Set-Content "$Class\agentops.yaml"
+```
+
+**c) Push to `main`.**
+
+**What this block does:** commits the files and pushes them to the class repository's `main` branch.
+
+```powershell
 Set-Location $Class
 git add -A
 git commit -m 'Prepare the Ship class repository'
 git branch -M main
 git push -u origin main
-if ($LASTEXITCODE -ne 0) { throw 'Push failed. Check your write access to the class repository.' }
 ```
 
 **Expected result:** the class repository shows `azure.yaml`, `agentops.yaml`,
@@ -291,33 +306,50 @@ Foundry project, using the same **Access control (IAM)** steps as
 #### 4. Add the class settings
 
 Every pipeline reads the same settings: which project to deploy to, which
-models to use and where to send traces.
+models to use and where to send traces. You enter them once, in the class
+repository.
 
-**What this block does:** collects the class settings from your sign-in session and prints them. Read-only.
+**a) Print the values you already have.**
+
+**What this block does:** prints the project values from [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in). Read-only.
 
 ```powershell
-$AppInsights = (Read-Host 'Application Insights connection string (Overview page)').Trim()
-$ClientId = (Read-Host 'Pipeline app client ID (GitHub only; press Enter for Azure Pipelines)').Trim()
-$Settings = [ordered]@{
-    AZURE_CLIENT_ID = $ClientId
+[ordered]@{
     AZURE_TENANT_ID = $TenantId
     AZURE_SUBSCRIPTION_ID = $SubscriptionId
-    AZURE_LOCATION = az resource show --ids $ProjectId --query location --output tsv
     AZURE_RESOURCE_GROUP = $ResourceGroup
     AZURE_AI_PROJECT_ID = $ProjectId
     FOUNDRY_PROJECT_ENDPOINT = $ProjectEndpoint
     AZURE_AI_FOUNDRY_PROJECT_ENDPOINT = $ProjectEndpoint
     AZURE_AI_MODEL_DEPLOYMENT_NAME = $ModelDeployment
     AZURE_OPENAI_DEPLOYMENT = $JudgeDeployment
-    AZURE_OPENAI_ENDPOINT = az cognitiveservices account show --name $FoundryResource `
-        --resource-group $ResourceGroup --query properties.endpoint --output tsv
-    AZURE_OPENAI_MODEL_NAME = az cognitiveservices account deployment show --name $FoundryResource `
-        --resource-group $ResourceGroup --deployment-name $JudgeDeployment --query properties.model.name --output tsv
 }
-$Settings.GetEnumerator() | Format-Table -AutoSize
 ```
 
-Enter each printed value, with its exact name, in the class repository's settings:
+**b) Look up three more values.**
+
+**What this block does:** reads the Foundry resource's region and endpoint and the judge model's name from Azure. Read-only.
+
+```powershell
+$Account = az cognitiveservices account show --name $FoundryResource --resource-group $ResourceGroup |
+    ConvertFrom-Json
+$Judge = az cognitiveservices account deployment show --name $FoundryResource `
+    --resource-group $ResourceGroup --deployment-name $JudgeDeployment | ConvertFrom-Json
+[ordered]@{
+    AZURE_LOCATION = $Account.location
+    AZURE_OPENAI_ENDPOINT = $Account.properties.endpoint
+    AZURE_OPENAI_MODEL_NAME = $Judge.properties.model.name
+}
+```
+
+**c) Copy two values from the portal.**
+
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: the **Connection String** on the
+  Application Insights resource's **Overview** page.
+- `AZURE_CLIENT_ID`, GitHub Actions only: the **Application (client) ID** from
+  step 3.
+
+Enter each value, with its exact name, in the class repository's settings:
 
 - **GitHub Actions:** **Settings > Secrets and variables > Actions > Variables >
   New repository variable**. Add the connection string on the **Secrets** tab
@@ -333,7 +365,9 @@ passes an undefined `$(NAME)` through as literal text.
 
 #### 5. Create the approval environments
 
-The pipeline pauses before each release until a person approves it.
+The pipeline pauses before each release until a person approves it. `dev` and
+`production` are approval steps in GitHub or Azure DevOps, not separate Azure
+environments: both deploy to the same workshop Foundry project.
 
 - **GitHub Actions:** **Settings > Environments**, create `dev` with no rules,
   then `production` with **Required reviewers** set to a team that contains
