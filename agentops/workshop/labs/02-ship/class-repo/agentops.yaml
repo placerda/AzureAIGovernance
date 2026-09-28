@@ -1,5 +1,5 @@
 # Ship class repository. The instructor replaces FOUNDRY_ENDPOINT once when
-# assembling the repository; each participant replaces ALIAS on their branch.
+# copying the seed; each participant replaces ALIAS on their branch.
 # The pipeline sets AGENTOPS_AGENT to the version number it just deployed, and
 # the AgentOps Accelerator CLI puts that number in place of the 1 below.
 version: 1

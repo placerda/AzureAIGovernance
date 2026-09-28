@@ -321,6 +321,16 @@ class TeachingAssetTests(unittest.TestCase):
             text = path.read_text(encoding="utf-8")
             self.assertNotRegex(text, r"(?m)^\s*(?:from|import)\s+agentops(?:\.|\s)")
 
+    def test_ship_seed_copies_match_their_originals(self):
+        labs = LAB.parent
+        seed = labs / "02-ship" / "class-repo"
+        pairs = [(ASSETS / "turns.jsonl", seed / "turns.jsonl")]
+        for name in ("main.py", "tools.py", "instructions.md", "knowledge.json", "requirements.txt"):
+            pairs.append((labs / "shared" / "helpdesk-agent" / name, seed / "src" / "helpdesk" / name))
+        for original, copy in pairs:
+            self.assertEqual(original.read_bytes().replace(b"\r\n", b"\n"),
+                             copy.read_bytes().replace(b"\r\n", b"\n"), copy)
+
 
 if __name__ == "__main__":
     unittest.main()

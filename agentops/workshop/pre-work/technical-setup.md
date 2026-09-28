@@ -233,56 +233,44 @@ README, `.gitignore` or license:
 Give the participants write access: the **Write** role on GitHub, or the
 project's **Contributors** group on Azure DevOps, which can also create pipelines.
 
-#### 2. Assemble and push the class repository
+#### 2. Push the starting files
 
 Use the PowerShell window from [step 1](#1-get-the-files-and-tools) in which
 you also ran [environment setup step 5](foundry-environment.md#5-copy-the-project-values-and-sign-in).
 If it closed, repeat both.
 
-**a) Clone the empty repository.**
+The starting files are already in the workshop files you downloaded in
+step 1, in the [class repository seed](../labs/02-ship/class-repo/README.md).
+You only copy that folder and push it.
 
-**What this block does:** asks for the empty class repository's URL and clones it to `agentops-ship-class` in your user folder.
+**a) Copy the starting files.**
+
+**What this block does:** copies the seed folder to `agentops-ship-class` in your user folder and writes your project endpoint in `agentops.yaml`.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
 if (-not $RepoRoot -or -not $ProjectEndpoint) { throw 'Run step 1 and environment setup step 5 in this window first.' }
 $Class = Join-Path $HOME 'agentops-ship-class'
-git clone (Read-Host 'Empty class repository URL').Trim() $Class
-```
-
-**Expected result:** Git warns that you cloned an empty repository. That is
-correct.
-
-**b) Add the starting files.**
-
-**What this block does:** copies the Ship starting files, the help desk agent code and the Evaluate test requests into the clone, then writes your project endpoint in `agentops.yaml`.
-
-```powershell
-$Labs = Join-Path $RepoRoot 'agentops\workshop\labs'
-Get-ChildItem -Force "$Labs\02-ship\class-repo" | Where-Object Name -ne 'README.md' |
-    Copy-Item -Destination $Class -Recurse -Force
-Copy-Item "$Labs\shared\helpdesk-agent\*" "$Class\src\helpdesk" `
-    -Include main.py, tools.py, instructions.md, knowledge.json, requirements.txt
-Copy-Item "$Labs\01-evaluate\assets\turns.jsonl" $Class
+Copy-Item "$RepoRoot\agentops\workshop\labs\02-ship\class-repo" $Class -Recurse
+Remove-Item "$Class\README.md"
 (Get-Content "$Class\agentops.yaml") -replace 'FOUNDRY_ENDPOINT', $ProjectEndpoint |
     Set-Content "$Class\agentops.yaml"
 ```
 
-**c) Push to `main`.**
+**b) Push to the class repository.**
 
-**What this block does:** commits the files and pushes them to the class repository's `main` branch.
+**What this block does:** asks for the empty class repository's URL, then commits the files and pushes them to its `main` branch.
 
 ```powershell
 Set-Location $Class
+git init -b main
 git add -A
 git commit -m 'Prepare the Ship class repository'
-git branch -M main
+git remote add origin (Read-Host 'Empty class repository URL').Trim()
 git push -u origin main
 ```
-
 **Expected result:** the class repository shows `azure.yaml`, `agentops.yaml`,
-`turns.jsonl`, `scripts` and `src` on `main`. What each file does is in the
-[class repository seed](../labs/02-ship/class-repo/README.md).
+`turns.jsonl`, `scripts` and `src` on `main`.
 
 #### 3. Let the pipelines sign in to Azure
 

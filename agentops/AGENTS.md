@@ -72,6 +72,11 @@ GitHub Actions and Azure Pipelines. Call them pipeline tools, not tracks.
 Select one before delivery and keep their learning objectives and expected
 artifact aligned.
 
+Keep the Ship class repository seed (`02-ship/class-repo`) complete, so the
+instructor only copies that folder and pushes it. Its `src/helpdesk/` and
+`turns.jsonl` are copies of the shared agent and the Evaluate test requests;
+update them together, and keep the lab test that compares them passing.
+
 Make the learning order visible in the lab folders: `01-evaluate`, `02-ship`,
 `03-observe-operate`, and optional `04-advanced`. Keep `shared` unnumbered:
 it contains reusable agent code and assets, not an extra module.
