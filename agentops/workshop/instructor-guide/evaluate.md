@@ -29,8 +29,7 @@ These examples let participants see why scores and tool results must be
 reviewed together.
 
 The lab also discusses scoring rules, safety, conversations and adversarial
-tests. Use the prepared supplementary results where available and identify
-any areas not yet assessed.
+tests as concepts in the deck; the lab does not run those checks.
 
 You are ready to move on when you can explain why the candidate might sound
 helpful but still be unsuitable for release, and how the class will
@@ -103,6 +102,6 @@ Ask which findings would block release even if average scores passed.
 Participants should retain their evaluation criteria, results and decision,
 including anything not assessed.
 
-Use the lab's [closing discussion](../labs/01-evaluate/lab.md#7-decide-and-hand-off-to-ship)
+Use the lab's [closing discussion](../labs/01-evaluate/lab.md#5-decide-and-hand-off-to-ship)
 to connect that decision to Ship: which checks should be automated, and which
 still need a person to review them?

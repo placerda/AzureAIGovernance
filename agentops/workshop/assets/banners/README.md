@@ -16,7 +16,6 @@ handwritten typography follow the evaluation-plan illustration in
 | `observe-operate` | Telemetry heartbeat, alert and magnifier |
 | `advanced` | Bug, wrench, repair loop and regression test |
 | `host-setup` | Two numbered agent hosts and a cloud |
-| `native-evidence` | Rubric and a questioning judge's balance |
 | `evidence` | Open evidence folder, records and a magnifier |
 | `tooling` | Toolbox, wrench, screwdriver, ruler and command card |
 | `criteria` | Clipboard, ruler, target and dart |

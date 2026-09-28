@@ -332,9 +332,9 @@ Decks must:
   package, then rehearse with participant permissions. Local CLI installation
   does not satisfy cloud setup. Name the guide for each stage and its completion
   condition; do not send readers back to prerequisites that depend on a later step.
-- Keep main-lab evidence independent of optional supplements. If the exercise
-  inspects executed tools, prepare their real records as part of the main run.
-  A missing safety-scoring workflow must not also hide the only tool-trace links.
+- If the exercise inspects executed tools, prepare their real records as part
+  of the main run. Do not add optional lab supplements that participants only
+  watch.
 - Write preparation and execution steps for someone opening the workshop for
   the first time: identify the responsible role, starting folder, required
   files/inputs and where to obtain them, exact commands or UI clicks, observable

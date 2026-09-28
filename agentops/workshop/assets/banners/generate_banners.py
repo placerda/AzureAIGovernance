@@ -103,12 +103,6 @@ BANNERS = (
         "The robot welcomes two numbered, connected agent hosts under a cloud.",
     ),
     Banner(
-        "native-evidence",
-        ("Teach the judge.", "Then question the scores."),
-        "Build extra checks for support quality, safety and conversations.",
-        "The robot holds a rubric beside a judge's balance with a check and a question.",
-    ),
-    Banner(
         "evidence",
         ("Every score has a story.", "Keep the right evidence."),
         "Open the files that show what was tested and what happened.",
@@ -686,26 +680,6 @@ def host_setup(s: Scene):
     sparkle(s, 254, 66, 7, ORANGE)
 
 
-def native_evidence(s: Scene):
-    robot(s)
-    paper(s, 222, 191, .61, -10, PURPLE, True)
-    with s.group("question-the-judge"):
-        s.path("M 332 112 L 331 235 M 312 237 Q 332 231 356 237", width=3.7)
-        s.path("M 283 119 Q 331 108 383 119", width=3.2)
-        s.ellipse(332, 113, 5, fill=LIGHT_BLUE, width=2.4)
-        s.path("M 287 119 L 272 163 M 287 119 L 307 163 M 379 120 L 360 163 M 379 120 L 397 163", color=BLUE, width=2.3)
-        s.path("M 269 164 L 310 164 Q 306 183 290 185 Q 272 182 269 164 Z", fill=LIGHT_GREEN, width=2.7)
-        s.path("M 357 164 L 399 164 Q 397 183 379 185 Q 362 182 357 164 Z", fill=LIGHT_PURPLE, width=2.7)
-        s.ellipse(289, 150, 12, fill=WHITE, color=GREEN, width=2)
-        tick(s, 289, 150, 13, GREEN, 2.7)
-        s.text("?", 372, 154, 23, "bold")
-        s.path("M 299 209 Q 319 219 347 211", color=PURPLE, width=2.3)
-    with s.group("rubric"):
-        paper(s, 262, 70, .59, -8, PURPLE, False)
-        s.path("M 314 75 L 320 81 M 323 64 L 326 72", color=ORANGE, width=2.5)
-    sparkle(s, 382, 79, 8, ORANGE)
-
-
 def evidence(s: Scene):
     robot(s)
     folder(s, 279, 151, 1, -3, evidence=True)
@@ -821,7 +795,6 @@ ILLUSTRATORS = {
     "observe-operate": observe_operate,
     "advanced": advanced,
     "host-setup": host_setup,
-    "native-evidence": native_evidence,
     "evidence": evidence,
     "tooling": tooling,
     "criteria": criteria,

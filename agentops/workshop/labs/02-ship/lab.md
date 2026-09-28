@@ -82,7 +82,7 @@ Evaluate uses Microsoft Foundry to test an already deployed agent. Ship's
 planned hands-on exercise releases the
 [same help desk agent](../shared/helpdesk-agent/README.md), using its code,
 settings, test requests, scoring rules, baseline and
-[reviewed reports and closing findings](../01-evaluate/lab.md#7-decide-and-hand-off-to-ship).
+[reviewed reports and closing findings](../01-evaluate/lab.md#5-decide-and-hand-off-to-ship).
 
 For standalone Ship delivery, the instructor supplies those same reviewed
 reports and assignment in pre-work;

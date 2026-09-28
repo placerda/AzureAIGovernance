@@ -64,7 +64,6 @@ focused on observable tool defects without real tickets, employee records,
 Search services, Blob knowledge sources or Foundry IQ provisioning.
 The public CLI is the learner interface: no custom lab runner, internal imports,
 result importer, execution backend or unpublished azd evaluation extension.
-Native supplements broaden the release review without disguising CLI limits.
 
 ### Course preparation scope
 
@@ -73,8 +72,8 @@ prepared machine. An existing text editor is sufficient. VS Code and Foundry
 Toolkit are not evaluation dependencies; no VS Code extension is required.
 
 Routine instructor preparation reuses course assets and checks the class's
-assignment, access and rehearsal. First-time workspace creation, hosted-agent
-deployment and native supplement authoring are separate paths, not tasks to
+assignment, access and rehearsal. First-time workspace creation and hosted-agent
+deployment are separate paths, not tasks to
 repeat before every class. The former handoff JSON template is no longer used.
 
 The [first-time instructor route](../../pre-work/technical-setup.md) now orders
@@ -136,7 +135,7 @@ remains the target; domain/tool correctness also requires interaction review.
 
 - Custom rubric and safety evaluators are not in this release's cloud mapping
   for our suite. They are **not selected**, and no skipped evaluator is
-  described as executed. Native Foundry supplements remain separate.
+  described as executed.
 - The cloud runner excludes client-side latency. Do not add latency/cost
   thresholds that it cannot measure.
 - Available numeric scores are averaged. Missing or errored rows can leave
@@ -146,10 +145,10 @@ remains the target; domain/tool correctness also requires interaction review.
 - `--baseline` reports score differences. It does not automatically block a
   worse score, check that requests and evaluators match, or confirm which code
   was deployed. Review these in the
-  [closing discussion](lab.md#7-decide-and-hand-off-to-ship) using the saved evidence.
+  [closing discussion](lab.md#5-decide-and-hand-off-to-ship) using the saved evidence.
 - Exit codes are `0` for passing configured thresholds, `2` for a failed gate
   and `1` for configuration/runtime failure. They are not final release
-  approval and do not establish supplementary safety coverage.
+  approval and do not establish safety coverage.
 - No public resume/collect command exists here. After an interrupted or timed
   out submission, check the existing Foundry run's status before retrying. A fresh
   invocation can incur another billable run. Keep successful rehearsal output.
@@ -158,7 +157,7 @@ remains the target; domain/tool correctness also requires interaction review.
 - This release derives string-typed cloud properties from the first row.
   All eight rows use the same string columns, including `critical` as
   `"yes"`/`"no"` rather than a boolean. Do not add structured conversation or
-  tool payloads to this main dataset; those belong in native supplements.
+  tool payloads to this dataset.
 
 The former native SDK runner, internal-module bridge, separate gate JSON and
 bridge tests were removed. Do not reintroduce a wrapper, importer, patched
@@ -194,7 +193,7 @@ errors and report rendering. Clearly marked
 [offline report fixtures](scripts/fixtures/offline-results.json) exercise
 rendering of already recorded pass/fail/error states, not cloud execution or
 the live gate computation. No Accelerator internal imports or SDK mocks remain.
-Other checks cover dataset shape, authored supplements and deterministic tools.
+Other checks cover dataset shape and deterministic tools.
 Scratch output stays under ignored `.local/` and is removed after tests.
 
 ## Host compatibility and installation
@@ -253,12 +252,6 @@ It stays unchanged. Sources:
 [hosted telemetry configuration](https://learn.microsoft.com/azure/foundry/agents/how-to/configure-hosted-agent-telemetry),
 [Responses adapter](https://github.com/microsoft/agent-framework/blob/main/python/packages/foundry_hosting/agent_framework_foundry_hosting/_responses.py)
 and [Responses adapter tests](https://github.com/microsoft/agent-framework/blob/main/python/packages/foundry_hosting/tests/test_responses.py).
-
-Native instructor sample dependencies have their own
-[requirements file](../../pre-work/requirements-native.txt) and
-[adaptation guide](../../pre-work/native-evidence.md). The public manual rubric
-sample must be adapted and its automatic cleanup deferred before use.
-None of these samples is the learner's main evaluation path.
 
 ## Validation evidence
 
@@ -407,7 +400,7 @@ The separate hosted framework requirements could not be resolved in the
 authoring environment. Local host setup remains unverified and optional.
 Remote build, deployed startup/tools and all cloud runs also remain unverified.
 No assigned project was available and no cloud operations or billing were initiated.
-Real baseline/candidate runs, native supplementary evidence, credentials,
+Real baseline/candidate runs, credentials,
 permissions, quota, service compatibility and timed rehearsal remain unverified.
 The repository includes authored teaching inputs and clearly labelled offline
 fixtures, not completed instructor cloud evidence or passing baselines.
@@ -422,4 +415,4 @@ advertising hands-on readiness.
 - [Public evaluator names and mappings](https://github.com/Azure/agentops/blob/v0.15.0/docs/foundry-evaluation-sdk-built-in-evaluators.md)
 - [Release source verification: cloud criteria](https://github.com/Azure/agentops/blob/v0.15.0/src/agentops/pipeline/cloud_runner.py)
 - [Release source verification: cloud results and artifacts](https://github.com/Azure/agentops/blob/v0.15.0/src/agentops/pipeline/orchestrator.py)
-- [Native Foundry supplementary workflows](assets/evidence/README.md)
+- [Instructor result files](assets/evidence/README.md)

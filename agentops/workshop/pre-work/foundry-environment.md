@@ -233,10 +233,6 @@ Its own agent identity receives the default access for that path; do not
 create an application registration or give it Owner.
 See [hosted-agent permissions](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agent-permissions).
 
-**Only for supplementary evaluation of stored traces:** give the project
-managed identity **Log Analytics Data Reader** on the connected workspace,
-using the same IAM procedure. This is separate from model access.
-
 ## 5. Copy the project values and sign in
 
 **INSTRUCTOR. Why this step:** deployment needs the Azure resource identifier;

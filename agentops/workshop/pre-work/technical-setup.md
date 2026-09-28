@@ -206,10 +206,7 @@ fallback you show if a participant's run fails.
    and follow [the Evaluate lab](../labs/01-evaluate/lab.md) from step 1 to 4.
    At the end, all eight requests must have an answer and both scores, and the traces for `password-basic` and `vpn-ticket`
    must open.
-2. **Optional: prepare the lab supplements.** Only if you will show lab steps
-   5 and 6, follow [additional Foundry checks](native-evidence.md) once and keep
-   the links.
-3. **Large classes: check model capacity.** Multiply the tokens your run used
+2. **Large classes: check model capacity.** Multiply the tokens your run used
    by the number of people running at once. If that exceeds the model quota,
    ask the Azure administrator to raise it or start runs in groups.
 

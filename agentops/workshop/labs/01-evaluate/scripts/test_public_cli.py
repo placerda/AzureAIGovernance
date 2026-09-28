@@ -294,15 +294,6 @@ class TeachingAssetTests(unittest.TestCase):
         self.assertNotIn("response_source: dataset", config)
         self.assertNotIn("input_mapping", config)
 
-    def test_supplementary_inputs_are_not_claimed_agent_observations(self):
-        cases = json.loads((ASSETS / "calibration.json").read_text(encoding="utf-8"))
-        self.assertEqual({case["human_support_outcome"] for case in cases}, {1, 3, 5})
-        conversation = json.loads(
-            (ASSETS / "conversations.jsonl").read_text(encoding="utf-8")
-        )
-        self.assertIn("not an observed agent run", conversation["provenance"])
-        self.assertEqual(len(conversation["messages"]), 4)
-
     def test_controlled_tools_preserve_teaching_defects(self):
         path = LAB.parent / "shared" / "helpdesk-agent" / "tools.py"
         spec = importlib.util.spec_from_file_location("helpdesk_tools_test", path)
