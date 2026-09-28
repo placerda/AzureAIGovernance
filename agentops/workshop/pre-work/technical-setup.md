@@ -19,7 +19,7 @@ How to teach each module is in the [instructor guide](../instructor-guide/README
 
 At the end: [Final check before the workshop](#final-check-before-the-workshop) and [Retention and cleanup](#retention-and-cleanup).
 
-**Project and agent versions already deployed?** Reuse them. Start with [access and rehearsal](#instructoradmin-shared-environment-and-permissions).
+**Project and agent already deployed for an earlier workshop?** Reuse them. Start with [access and rehearsal](#instructoradmin-shared-environment-and-permissions).
 Do not redeploy agents just to teach again.
 
 Two other people may be involved: the **Azure administrator** grants project
@@ -178,12 +178,12 @@ resources.
 The **baseline** is the earlier version used for comparison. The **candidate**
 is the version participants will test.
 
-**Already deployed and reviewed?** Keep both versions' URLs and the code and
-settings used to deploy them. No new deployment is needed.
-
-**No versions yet?** Follow [help desk deployment, steps 1-6](../labs/shared/helpdesk-agent/README.md).
+**Agent not deployed yet?** Follow [help desk deployment, steps 1-6](../labs/shared/helpdesk-agent/README.md).
 That guide uploads the supplied Python code, lets Foundry install its packages,
-deploys both versions and sends test requests.
+deploys the baseline and the candidate, and sends test requests.
+
+**Agent already deployed for an earlier workshop?** Skip the deployment. Keep
+the URLs of both versions and the code and settings used to deploy them.
 
 Continue below only after both versions answer and their tool results are
 visible. A successful local installation is not a deployed agent.
