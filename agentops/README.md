@@ -107,7 +107,7 @@ In Evaluate, participants test an agent running in Microsoft Foundry and read
 its answers, tool results and scores. The Accelerator CLI submits the requests
 and checks average scores. Additional Foundry results cover support-quality
 rules, safety, conversations and adversarial tests.
-Use [instructor readiness](workshop/pre-work/technical-setup.md#readiness-gate)
+Use [final check before the workshop](workshop/pre-work/technical-setup.md#final-check-before-the-workshop)
 before teaching.
 
 The Ship outline defines equivalent GitHub Actions and Azure Pipelines tracks.

@@ -413,7 +413,7 @@ Real baseline/candidate runs, native supplementary evidence, credentials,
 permissions, quota, service compatibility and timed rehearsal remain unverified.
 The repository includes authored teaching inputs and clearly labelled offline
 fixtures, not completed instructor cloud evidence or passing baselines.
-Complete the [instructor readiness gate](../../pre-work/technical-setup.md#readiness-gate) before
+Complete the [final check before the workshop](../../pre-work/technical-setup.md#final-check-before-the-workshop) before
 advertising hands-on readiness.
 
 ## Versioned sources

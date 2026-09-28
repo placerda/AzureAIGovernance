@@ -17,7 +17,7 @@ How to teach each module is in the [instructor guide](../instructor-guide/README
 | 4 | [Prepare your module](#4-prepare-your-module) | The results and files your module needs; for Evaluate, also a model-capacity plan |
 | 5 | [Invite and rehearse](#5-invite-and-rehearse) | A participant-tested invitation |
 
-At the end: [Readiness gate](#readiness-gate) and [Retention and cleanup](#retention-and-cleanup).
+At the end: [Final check before the workshop](#final-check-before-the-workshop) and [Retention and cleanup](#retention-and-cleanup).
 
 **Project and agent versions already deployed?** Reuse them. Start with [access and rehearsal](#instructoradmin-shared-environment-and-permissions).
 Do not redeploy agents just to teach again.
@@ -558,15 +558,21 @@ and error. Do not grant broad access or disable network restrictions.
 - [ ] Rehearsal fits the lab time and approved spending limit, with a capacity plan for simultaneous runs.
 - [ ] With the test account, you can clone the repository and open your own report links.
 
-## Readiness gate
+<a id="readiness-gate"></a>
 
-Approve each selected module separately. Unfinished packages or missing real
-evidence cannot be presented as validated hands-on exercises.
-If the required files are missing, explain that the session is a design discussion,
-not a completed hands-on lab.
+## Final check before the workshop
 
-See [TOOLING](../labs/01-evaluate/TOOLING.md#validation-evidence) for scripts
-and service checks still missing. Completing them is the author's job, not participant pre-work.
+Before the workshop day, decide for **each module you will teach** how you
+will run it:
+
+- **As a hands-on lab**, if you completed that module's checklist in
+  [step 4](#4-prepare-your-module) and ran the lab yourself from start to finish.
+- **As a discussion**, if anything in that checklist is missing, such as lab
+  files, agent versions or results you produced. Present the module with the
+  slides and explain the steps, but do not ask participants to run it.
+
+Tell participants which format each module will use, in the invitation or in a
+follow-up message, so nobody prepares for a lab that will not run.
 
 ## Retention and cleanup
 
